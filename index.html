@@ -1657,11 +1657,45 @@
 
         @media (max-width: 768px) {
             nav {
-                padding: 1rem;
+                padding: 0.75rem 1rem;
+            }
+            
+            .logo {
+                gap: 0.5rem;
+            }
+
+            .logo img {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
+            .logo-text {
+                font-size: 0.9rem;
             }
             
             .nav-links {
+                display: flex;
+                gap: 0.3rem;
+            }
+
+            .nav-link {
                 display: none;
+            }
+
+            .lang-selector {
+                padding: 0.5rem 0.7rem;
+                font-size: 0.75rem;
+            }
+
+            .lang-selector svg {
+                width: 12px !important;
+                height: 12px !important;
+            }
+
+            .nav-cta {
+                padding: 0.5rem 0.9rem;
+                font-size: 0.75rem;
+                white-space: nowrap;
             }
             
             .hero {
@@ -1684,6 +1718,11 @@
             }
             
             .footer-text {
+                text-align: center;
+            }
+
+            .footer-logo {
+                font-size: 0.85rem;
                 text-align: center;
             }
         }
