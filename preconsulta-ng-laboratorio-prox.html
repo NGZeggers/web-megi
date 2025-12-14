@@ -1,0 +1,2831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEGI AI | Sistema de IA Clínica Local</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f5f3ee;
+            --cream-dark: #e8e4db;
+            --forest: #2d3b2d;
+            --forest-light: #3d4f3d;
+            --charcoal: #1a1a1a;
+            --olive: #4a5a4a;
+            --gold: #8b7355;
+            --accent: #2d3b2d;
+            --text-primary: #1a1a1a;
+            --text-secondary: #5a5a5a;
+            --text-muted: #8a8a8a;
+            --border-light: rgba(45, 59, 45, 0.15);
+            --border-medium: rgba(45, 59, 45, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--charcoal);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 3rem;
+            background: var(--cream);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--forest);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--cream);
+        }
+
+        .logo-text {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--charcoal);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-text span {
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--border-medium);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            background: transparent;
+        }
+
+        .nav-link:hover {
+            background: rgba(45, 59, 45, 0.05);
+            border-color: var(--forest);
+        }
+
+        .nav-cta {
+            padding: 0.6rem 1.2rem;
+            background: var(--forest);
+            color: var(--cream);
+            border: 1px solid var(--forest);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--forest-light);
+        }
+
+        .lang-selector {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--border-medium);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            background: transparent;
+            text-decoration: none;
+        }
+
+        .lang-selector:hover {
+            background: rgba(45, 59, 45, 0.05);
+            border-color: var(--forest);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            background: var(--cream);
+            border: 1px solid var(--border-medium);
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 1000;
+            min-width: 120px;
+        }
+
+        .lang-selector:hover .lang-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .lang-option:last-child {
+            border-bottom: none;
+        }
+
+        .lang-option:hover {
+            background: rgba(45, 59, 45, 0.05);
+        }
+
+        .lang-option.active {
+            background: rgba(45, 59, 45, 0.08);
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--cream);
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 6rem 3rem 4rem;
+        }
+
+        .hero-container {
+            max-width: 1800px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+        }
+
+        .hero-visual {
+            position: relative;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--cream);
+            border: 1px dashed var(--border-medium);
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .hero-content-overlay {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 700px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: rgba(45, 59, 45, 0.08);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--forest);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 500;
+            line-height: 1.1;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title em {
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 1rem 2rem;
+            background: var(--forest);
+            color: var(--cream);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--forest-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--charcoal);
+            border: 1px dashed var(--border-medium);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--forest);
+            background: rgba(45, 59, 45, 0.03);
+        }
+
+        .btn-secondary::before,
+        .btn-secondary::after {
+            content: '+';
+            font-size: 0.7rem;
+            opacity: 0.5;
+        }
+
+        /* Corner Decorations */
+        .corner-decoration {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: var(--border-medium);
+            border-style: solid;
+        }
+
+        .corner-tl {
+            top: 8px;
+            left: 8px;
+            border-width: 1px 0 0 1px;
+        }
+
+        .corner-tr {
+            top: 8px;
+            right: 8px;
+            border-width: 1px 1px 0 0;
+        }
+
+        .corner-bl {
+            bottom: 8px;
+            left: 8px;
+            border-width: 0 0 1px 1px;
+        }
+
+        .corner-br {
+            bottom: 8px;
+            right: 8px;
+            border-width: 0 1px 1px 0;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--cream);
+            padding: 4rem 3rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .stats-container {
+            max-width: 1800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            border-color: var(--forest);
+            background: rgba(45, 59, 45, 0.02);
+        }
+
+        .stat-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--forest);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: var(--cream);
+            padding: 6rem 3rem;
+        }
+
+        .section-container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: rgba(45, 59, 45, 0.08);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--forest);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--cream);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--forest);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--forest);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(45, 59, 45, 0.08);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: rgba(45, 59, 45, 0.03);
+        }
+
+        .feature-card h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Feature card highlight variation */
+        .feature-card.highlight-card {
+            background: linear-gradient(135deg, rgba(45, 59, 45, 0.03) 0%, rgba(139, 115, 85, 0.05) 100%);
+            border-color: var(--olive);
+        }
+
+        .feature-card.highlight-card .feature-icon {
+            background: rgba(45, 59, 45, 0.08);
+            border-color: var(--olive);
+        }
+
+        /* Architecture Section */
+        .architecture-section {
+            background: var(--forest);
+            padding: 6rem 3rem;
+            color: var(--cream);
+        }
+
+        .arch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .arch-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .layer-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .layer-card:hover,
+        .layer-card.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(8px);
+        }
+
+        .layer-number {
+            width: 44px;
+            height: 44px;
+            background: var(--cream);
+            color: var(--forest);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .layer-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--cream);
+        }
+
+        .layer-info p {
+            font-size: 0.85rem;
+            color: rgba(245, 243, 238, 0.6);
+        }
+
+        .arch-detail {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2.5rem;
+        }
+
+        .arch-detail h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--cream);
+        }
+
+        .arch-detail p {
+            font-size: 0.95rem;
+            color: rgba(245, 243, 238, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(245, 243, 238, 0.1);
+            border: 1px solid rgba(245, 243, 238, 0.2);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--cream);
+        }
+
+        /* Demo Section */
+        .demo-section {
+            background: var(--cream);
+            padding: 6rem 3rem;
+        }
+
+        .demo-container {
+            background: var(--charcoal);
+            border-radius: 20px;
+            padding: 3rem;
+            color: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--forest), var(--olive), var(--gold));
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .demo-input,
+        .demo-output {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .demo-input h3,
+        .demo-output h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .audio-visualizer {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+            gap: 4px;
+        }
+
+        .audio-bar {
+            width: 4px;
+            background: var(--cream);
+            border-radius: 2px;
+            animation: audioWave 1s ease-in-out infinite;
+        }
+
+        .audio-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
+        .audio-bar:nth-child(2) { height: 35px; animation-delay: 0.1s; }
+        .audio-bar:nth-child(3) { height: 25px; animation-delay: 0.2s; }
+        .audio-bar:nth-child(4) { height: 45px; animation-delay: 0.3s; }
+        .audio-bar:nth-child(5) { height: 30px; animation-delay: 0.4s; }
+        .audio-bar:nth-child(6) { height: 50px; animation-delay: 0.5s; }
+        .audio-bar:nth-child(7) { height: 35px; animation-delay: 0.6s; }
+        .audio-bar:nth-child(8) { height: 40px; animation-delay: 0.7s; }
+        .audio-bar:nth-child(9) { height: 25px; animation-delay: 0.8s; }
+        .audio-bar:nth-child(10) { height: 30px; animation-delay: 0.9s; }
+
+        @keyframes audioWave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.5); }
+        }
+
+        .record-btn {
+            padding: 1rem 2rem;
+            background: var(--cream);
+            color: var(--charcoal);
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .record-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(245, 243, 238, 0.2);
+        }
+
+        .record-btn.recording {
+            background: #c94c4c;
+            color: white;
+            animation: recordPulse 1s infinite;
+        }
+
+        @keyframes recordPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(201, 76, 76, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(201, 76, 76, 0); }
+        }
+
+        .output-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            min-height: 200px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: rgba(245, 243, 238, 0.8);
+        }
+
+        .output-box .highlight {
+            color: #90c695;
+            background: rgba(144, 198, 149, 0.15);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+        }
+
+        .output-box .command-highlight {
+            color: #e06c75;
+            background: rgba(224, 108, 117, 0.15);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+        }
+
+        .processing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--cream);
+            font-size: 0.9rem;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(245, 243, 238, 0.3);
+            border-top-color: var(--cream);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background: var(--cream-dark);
+            padding: 6rem 3rem;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .timeline-item {
+            background: var(--cream);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: -2rem;
+            width: 2rem;
+            height: 1px;
+            background: var(--border-medium);
+        }
+
+        .timeline-item:first-child::before {
+            display: none;
+        }
+
+        .timeline-item:hover {
+            border-color: var(--forest);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(45, 59, 45, 0.08);
+        }
+
+        .timeline-item h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 4rem 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: rgba(245, 243, 238, 0.6);
+            text-align: right;
+        }
+
+        .footer-bottom {
+            max-width: 1800px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(245, 243, 238, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: rgba(245, 243, 238, 0.4);
+        }
+
+        /* Lab Section Styles */
+        .lab-section {
+            background: var(--cream);
+            padding: 6rem 3rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .lab-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .lab-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 1.25rem 2rem;
+            background: transparent;
+            border: 1px solid var(--border-medium);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 180px;
+        }
+
+        .lab-tab svg {
+            width: 24px;
+            height: 24px;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .lab-tab span {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .lab-tab small {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .lab-tab:hover {
+            border-color: var(--forest);
+            background: rgba(45, 59, 45, 0.03);
+        }
+
+        .lab-tab.active {
+            background: var(--forest);
+            border-color: var(--forest);
+        }
+
+        .lab-tab.active svg {
+            color: var(--cream);
+        }
+
+        .lab-tab.active span,
+        .lab-tab.active small {
+            color: var(--cream);
+        }
+
+        .lab-panel {
+            display: none;
+            animation: fadeInPanel 0.4s ease;
+        }
+
+        .lab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeInPanel {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lab-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .lab-explanation {
+            padding: 2rem;
+            background: rgba(45, 59, 45, 0.03);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+        }
+
+        .lab-icon-badge {
+            width: 56px;
+            height: 56px;
+            background: var(--forest);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .lab-icon-badge svg {
+            width: 28px;
+            height: 28px;
+            color: var(--cream);
+        }
+
+        .lab-icon-badge.command-badge {
+            background: linear-gradient(135deg, #e06c75 0%, #c94c4c 100%);
+        }
+
+        .lab-icon-badge.mcp-badge {
+            background: linear-gradient(135deg, #7eb8da 0%, #5a9bc9 100%);
+        }
+
+        .lab-explanation h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .lab-explanation > p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .lab-how-it-works {
+            background: white;
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .lab-how-it-works h4 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .lab-how-it-works ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lab-how-it-works ol li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .lab-how-it-works ol li:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-num {
+            width: 22px;
+            height: 22px;
+            background: var(--forest);
+            color: var(--cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .command-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .command-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .command-list code {
+            background: rgba(224, 108, 117, 0.1);
+            color: #c94c4c;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        .tools-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tools-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .tool-icon {
+            font-size: 1.1rem;
+        }
+
+        .lab-message {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(45, 59, 45, 0.08) 0%, rgba(45, 59, 45, 0.03) 100%);
+            border-radius: 10px;
+            border-left: 3px solid var(--forest);
+        }
+
+        .lab-message svg {
+            width: 20px;
+            height: 20px;
+            color: var(--forest);
+            flex-shrink: 0;
+        }
+
+        .lab-message span {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--forest);
+            font-weight: 500;
+        }
+
+        .lab-message.command-message {
+            background: linear-gradient(135deg, rgba(224, 108, 117, 0.08) 0%, rgba(224, 108, 117, 0.03) 100%);
+            border-left-color: #c94c4c;
+        }
+
+        .lab-message.command-message svg,
+        .lab-message.command-message span {
+            color: #c94c4c;
+        }
+
+        .lab-message.mcp-message {
+            background: linear-gradient(135deg, rgba(126, 184, 218, 0.08) 0%, rgba(126, 184, 218, 0.03) 100%);
+            border-left-color: #5a9bc9;
+        }
+
+        .lab-message.mcp-message svg,
+        .lab-message.mcp-message span {
+            color: #5a9bc9;
+        }
+
+        .lab-demo-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lab-demo-box {
+            background: var(--charcoal);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .demo-audio-wave {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .demo-audio-wave svg {
+            width: 100%;
+            height: 40px;
+            opacity: 0.6;
+        }
+
+        .demo-audio-label {
+            display: block;
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: rgba(245, 243, 238, 0.5);
+        }
+
+        .comparison-boxes {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .comparison-box {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .comparison-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(245, 243, 238, 0.7);
+        }
+
+        .comparison-icon {
+            font-size: 1rem;
+        }
+
+        .comparison-box.error .comparison-header {
+            background: rgba(224, 108, 117, 0.1);
+            border-bottom-color: rgba(224, 108, 117, 0.2);
+        }
+
+        .comparison-box.error .comparison-icon {
+            color: #e06c75;
+        }
+
+        .comparison-box.success .comparison-header {
+            background: rgba(144, 198, 149, 0.1);
+            border-bottom-color: rgba(144, 198, 149, 0.2);
+        }
+
+        .comparison-box.success .comparison-icon {
+            color: #90c695;
+        }
+
+        .comparison-content {
+            padding: 1.25rem;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--cream);
+        }
+
+        .waiting-text {
+            color: rgba(245, 243, 238, 0.3);
+            font-style: italic;
+        }
+
+        .error-text {
+            color: #e06c75;
+            text-decoration: line-through;
+            text-decoration-color: rgba(224, 108, 117, 0.5);
+        }
+
+        .success-text {
+            color: #90c695;
+        }
+
+        .success-text strong {
+            background: rgba(144, 198, 149, 0.2);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+        }
+
+        .comparison-arrow {
+            flex-shrink: 0;
+        }
+
+        .comparison-arrow svg {
+            width: 24px;
+            height: 24px;
+            color: rgba(245, 243, 238, 0.3);
+        }
+
+        .lab-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--cream);
+            color: var(--charcoal);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 243, 238, 0.2);
+        }
+
+        .lab-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-icon {
+            font-size: 0.9rem;
+        }
+
+        .lab-btn.command-btn {
+            background: linear-gradient(135deg, #e06c75 0%, #c94c4c 100%);
+            color: white;
+        }
+
+        .lab-btn.mcp-btn {
+            background: linear-gradient(135deg, #7eb8da 0%, #5a9bc9 100%);
+            color: white;
+        }
+
+        /* Command Demo Styles */
+        .command-timeline {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .timeline-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .timeline-step.hidden {
+            display: none;
+        }
+
+        .timeline-step.fade-in {
+            animation: stepFadeIn 0.5s ease forwards;
+        }
+
+        @keyframes stepFadeIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .step-indicator {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--cream);
+            flex-shrink: 0;
+        }
+
+        .step-indicator.voice {
+            background: rgba(224, 108, 117, 0.2);
+            font-size: 1rem;
+        }
+
+        .step-indicator.action {
+            background: rgba(212, 165, 116, 0.2);
+        }
+
+        .step-indicator.success {
+            background: rgba(144, 198, 149, 0.2);
+            color: #90c695;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            color: rgba(245, 243, 238, 0.5);
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .step-text {
+            font-size: 0.9rem;
+            color: var(--cream);
+            line-height: 1.5;
+        }
+
+        .highlight-text {
+            background: rgba(144, 198, 149, 0.2);
+            color: #90c695;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+        }
+
+        .command-text {
+            color: #e06c75;
+            font-style: italic;
+        }
+
+        .action-badge {
+            display: inline-block;
+            background: rgba(144, 198, 149, 0.1);
+            color: #90c695;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .action-badge.action {
+            background: rgba(212, 165, 116, 0.1);
+            color: #d4a574;
+        }
+
+        .result-text {
+            color: rgba(245, 243, 238, 0.4);
+            font-style: italic;
+        }
+
+        .deleted-text {
+            animation: strikethrough 0.5s ease forwards;
+        }
+
+        @keyframes strikethrough {
+            from { 
+                text-decoration: none;
+                opacity: 1;
+                color: #90c695;
+            }
+            to { 
+                text-decoration: line-through;
+                opacity: 0.4;
+                color: #e06c75;
+            }
+        }
+
+        /* MCP Demo Styles */
+        .mcp-input-area {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+
+        .mcp-input-label {
+            font-size: 0.75rem;
+            color: rgba(245, 243, 238, 0.5);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .mcp-input-text {
+            font-size: 0.95rem;
+            color: var(--cream);
+            line-height: 1.6;
+        }
+
+        .mcp-input-text strong {
+            color: #90c695;
+            background: rgba(144, 198, 149, 0.15);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+        }
+
+        .mcp-output-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .mcp-output-area.hidden {
+            display: none;
+        }
+
+        .mcp-processing {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
+            color: rgba(245, 243, 238, 0.7);
+        }
+
+        .mcp-processing.hidden {
+            display: none;
+        }
+
+        .mcp-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(245, 243, 238, 0.2);
+            border-top-color: var(--cream);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .mcp-results {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .mcp-results.hidden {
+            display: none;
+        }
+
+        .mcp-result-header {
+            font-size: 0.8rem;
+            color: rgba(245, 243, 238, 0.6);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .mcp-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .mcp-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: badgeFadeIn 0.4s ease forwards;
+        }
+
+        @keyframes badgeFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mcp-badge.cie10 {
+            background: rgba(144, 198, 149, 0.1);
+            color: #90c695;
+            border: 1px solid rgba(144, 198, 149, 0.2);
+        }
+
+        .mcp-badge.pdf {
+            background: rgba(212, 165, 116, 0.1);
+            color: #d4a574;
+            border: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .mcp-badge.audit {
+            background: rgba(126, 184, 218, 0.1);
+            color: #7eb8da;
+            border: 1px solid rgba(126, 184, 218, 0.2);
+        }
+
+        .mcp-badge code {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        /* Responsive Lab Section */
+        @media (max-width: 1024px) {
+            .lab-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .lab-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .lab-tab {
+                min-width: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .lab-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .comparison-boxes {
+                flex-direction: column;
+            }
+            
+            .comparison-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .stats-container,
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .arch-grid,
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 5rem 1.5rem 3rem;
+            }
+            
+            .stats-container,
+            .features-grid,
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-image-container {
+                min-height: 60vh;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-text {
+                text-align: center;
+            }
+        }
+
+        /* Modal de Actualizaciones MEGI AI */
+        .update-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .update-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .update-modal {
+            background: var(--cream);
+            border-radius: 20px;
+            max-width: 580px;
+            width: 90%;
+            padding: 3rem;
+            position: relative;
+            transform: translateY(20px) scale(0.95);
+            transition: transform 0.3s ease;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .update-modal-overlay.active .update-modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .update-modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border-medium);
+            border-radius: 50%;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .update-modal-close:hover {
+            background: var(--forest);
+            border-color: var(--forest);
+            color: var(--cream);
+        }
+
+        .update-modal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, rgba(45, 59, 45, 0.1) 0%, rgba(139, 115, 85, 0.1) 100%);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--forest);
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .update-modal-badge::before {
+            content: '🚀';
+        }
+
+        .update-modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .update-modal-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .update-features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .update-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: rgba(45, 59, 45, 0.03);
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            transition: all 0.2s ease;
+        }
+
+        .update-feature-item:hover {
+            border-color: var(--forest);
+            background: rgba(45, 59, 45, 0.06);
+        }
+
+        .update-feature-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            background: var(--forest);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .update-feature-content h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 0.3rem;
+        }
+
+        .update-feature-content p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .update-feature-tag {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background: rgba(139, 115, 85, 0.15);
+            color: var(--gold);
+            font-size: 0.65rem;
+            font-weight: 700;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+        }
+
+        .update-modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.5rem;
+            border-top: 1px dashed var(--border-light);
+        }
+
+        .update-modal-footer p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .update-modal-cta {
+            padding: 0.8rem 1.5rem;
+            background: var(--forest);
+            color: var(--cream);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .update-modal-cta:hover {
+            background: var(--forest-light);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .update-modal {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .update-modal-title {
+                font-size: 1.6rem;
+            }
+
+            .update-modal-footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modal de Actualizaciones MEGI AI -->
+    <div class="update-modal-overlay" id="updateModal">
+        <div class="update-modal">
+            <button class="update-modal-close" onclick="closeUpdateModal()">✕</button>
+            
+            <span class="update-modal-badge">Próximamente</span>
+            
+            <h2 class="update-modal-title">Estamos trabajando en<br>grandes actualizaciones</h2>
+            <p class="update-modal-subtitle">MEGI AI evoluciona para transformar la experiencia médica.</p>
+            
+            <div class="update-features-list">
+                <div class="update-feature-item">
+                    <div class="update-feature-icon">🎙️</div>
+                    <div class="update-feature-content">
+                        <h4>Voz Ultra-Realista <span class="update-feature-tag">IA Generativa</span></h4>
+                        <p>Síntesis de voz indistinguible de la humana. Interacción natural y empática con pacientes.</p>
+                    </div>
+                </div>
+                
+                <div class="update-feature-item">
+                    <div class="update-feature-icon">💊</div>
+                    <div class="update-feature-content">
+                        <h4>Reconocimiento Visual de Medicamentos <span class="update-feature-tag">Visión IA</span></h4>
+                        <p>Identifica fármacos mediante la cámara. Detecta nombre, dosis y posibles interacciones al instante.</p>
+                    </div>
+                </div>
+                
+                <div class="update-feature-item">
+                    <div class="update-feature-icon">🖥️</div>
+                    <div class="update-feature-content">
+                        <h4>Pre-Consulta Interactiva <span class="update-feature-tag">UX Avanzada</span></h4>
+                        <p>Pantalla inteligente que guía al paciente antes de la consulta, recopilando síntomas e historial de forma conversacional.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="update-modal-footer">
+                <p>Mejorando la experiencia médica, un paso a la vez.</p>
+                <a href="#demo" class="update-modal-cta" onclick="closeUpdateModal()">Ver Demo Actual</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">
+                <img src="logo-megi.png" alt="MEGI AI Logo" style="width: 32px; height: 32px; object-fit: contain;">
+                <span class="logo-text">MEGI AI</span>
+            </a>
+            <div class="nav-links">
+                <a href="#arquitectura" class="nav-link">Arquitectura</a>
+                <a href="#caracteristicas" class="nav-link">Características</a>
+                <a href="#demo" class="nav-link">Demo</a>
+                <a href="#laboratorio" class="nav-link">Laboratorio</a>
+                <a href="#roadmap" class="nav-link">Roadmap</a>
+                <div class="lang-selector">
+                    <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span>ES</span>
+                    <span style="font-size: 0.7rem;">▾</span>
+                    <div class="lang-dropdown">
+                        <a href="#" class="lang-option active">
+                            <span>🇲🇽</span>
+                            <span>Español</span>
+                        </a>
+                        <a href="preconsulta-ng-laboratorio-en.html" class="lang-option">
+                            <span>🇺🇸</span>
+                            <span>Ingles</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="nav-cta" onclick="openUpdateModal(); return false;">Comenzar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-visual">
+                <div class="corner-decoration corner-tl"></div>
+                <div class="corner-decoration corner-tr"></div>
+                <div class="corner-decoration corner-bl"></div>
+                <div class="corner-decoration corner-br"></div>
+                
+                <div class="hero-image-container">
+                    <img src="fondo-pagina.jpg" alt="IA y Medicina" class="hero-bg-image">
+                    <div class="hero-content-overlay">
+                        <span class="hero-badge">AGENTE ESCRIBANO MÉDICO V2.0</span>
+                        <h1 class="hero-title">Conectando la <em>inteligencia artificial</em> con la práctica médica.</h1>
+                        <p class="hero-description">Transformamos la voz del médico en documentación clínica estructurada con latencia &lt;2s, procesamiento 100% local y un agente que entiende comandos como "borra eso" o "cambia la dosis".</p>
+                        <div class="hero-buttons">
+                            <a href="#demo" class="btn-primary">Ver Demostración</a>
+                            <a href="#arquitectura" class="btn-secondary">Documentación Técnica</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-value">&lt;2s</div>
+                <div class="stat-label">Latencia de Transcripción</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Procesamiento Local</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">400k+</div>
+                <div class="stat-label">Términos Médicos en Trie</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">Audit</div>
+                <div class="stat-label">Trazabilidad Forense (Audio vs Texto)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="caracteristicas">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">CAPACIDADES PRINCIPALES</span>
+                <h2 class="section-title">Arquitectura Neuro-Simbólica</h2>
+                <p class="section-description">Combinamos el poder de los modelos neuronales con la precisión del procesamiento simbólico para un agente médico que entiende, corrige y aprende.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
+                        </svg>
+                    </div>
+                    <h3>Whisper V3 + LoRA</h3>
+                    <p>Modelo de transcripción fine-tuned con adaptadores LoRA especializados en prosodia médica hispanohablante.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                            <path d="M12 3v18M8 7h8M6 11h12M8 15h8"/>
+                            <circle cx="12" cy="3" r="1" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>MedicalTrieLogitsProcessor</h3>
+                    <p>Validación determinista de terminología con Trie de +15,000 términos CIE-10, fármacos y procedimientos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                            <rect x="7" y="11" width="10" height="8" rx="1"/>
+                            <path d="M9 11V7a3 3 0 0 1 6 0v4"/>
+                            <circle cx="12" cy="15" r="1" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h3>Servidor MCP</h3>
+                    <p>Arquitectura de contexto de modelo que permite integración seamless con cualquier LLM compatible.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                            <path d="M9.5 2A2.5 2.5 0 0 0 7 4.5v15A2.5 2.5 0 0 0 9.5 22h5a2.5 2.5 0 0 0 2.5-2.5v-15A2.5 2.5 0 0 0 14.5 2h-5Z"/>
+                            <path d="M9 10h6M9 14h4"/>
+                        </svg>
+                    </div>
+                    <h3>Agente Activo (Comandos)</h3>
+                    <p>No solo transcribe: entiende intención. Detecta comandos como "borra eso", "corrección" y ejecuta acciones en tiempo real.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                            <rect x="3" y="11" width="18" height="11" rx="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3>Soberanía de Datos</h3>
+                    <p>Cero dependencia de cloud. Todo el procesamiento ocurre en tu infraestructura local con log inmutable.</p>
+                </div>
+                <div class="feature-card highlight-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                        </svg>
+                    </div>
+                    <h3>Data Flywheel (Aprendizaje)</h3>
+                    <p>El sistema "aprende" de tus correcciones. Si corriges manualmente una palabra, el modelo se re-entrena automáticamente para no cometer el mismo error.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="architecture-section" id="arquitectura">
+        <div class="section-container">
+            <div class="section-header" style="color: var(--cream);">
+                <span class="section-badge" style="background: rgba(245, 243, 238, 0.1); color: var(--cream);">DISEÑO DEL SISTEMA</span>
+                <h2 class="section-title" style="color: var(--cream);">Capas de la Arquitectura</h2>
+                <p class="section-description" style="color: rgba(245, 243, 238, 0.7);">Haz clic en cada capa para explorar los componentes técnicos.</p>
+            </div>
+            
+            <div class="arch-grid">
+                <div class="arch-visual">
+                    <div class="layer-card active" data-layer="1">
+                        <div class="layer-number">1</div>
+                        <div class="layer-info">
+                            <h4>Servidor MCP de ASR</h4>
+                            <p>Percepción acústica y transcripción</p>
+                        </div>
+                    </div>
+                    <div class="layer-card" data-layer="2">
+                        <div class="layer-number">2</div>
+                        <div class="layer-info">
+                            <h4>Agente Escribano</h4>
+                            <p>Detección de intención y comandos</p>
+                        </div>
+                    </div>
+                    <div class="layer-card" data-layer="3">
+                        <div class="layer-number">3</div>
+                        <div class="layer-info">
+                            <h4>Herramientas MCP</h4>
+                            <p>CIE-10, Recetas PDF, Auditoría</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="arch-detail" id="arch-detail">
+                    <h3>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
+                        </svg>
+                        Servidor MCP de ASR
+                    </h3>
+                    <p>El núcleo de percepción acústica. Aloja el modelo Whisper Large V3 con adaptadores LoRA para la prosodia médica y el MedicalTrieLogitsProcessor para validación léxica determinista. Carga el modelo una sola vez en memoria unificada (MPS) y expone la herramienta <code>transcribir_consulta_medica</code> via MCP.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Whisper V3</span>
+                        <span class="tech-tag">LoRA</span>
+                        <span class="tech-tag">PyTorch MPS</span>
+                        <span class="tech-tag">FastMCP</span>
+                        <span class="tech-tag">Trie</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section" id="demo">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">PRUEBA EN VIVO</span>
+                <h2 class="section-title">Simulación del Agente Escribano</h2>
+                <p class="section-description">Experimenta el flujo completo: detección de comandos, corrección automática, y generación de documentos administrativos.</p>
+            </div>
+            
+            <div class="demo-container">
+                <div class="demo-grid">
+                    <div class="demo-input">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
+                            </svg>
+                            Entrada de Audio
+                        </h3>
+                        <div class="audio-visualizer" id="audioVisualizer">
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                            <div class="audio-bar"></div>
+                        </div>
+                        <button class="record-btn" id="recordBtn" onclick="simulateTranscription()">
+                            <span>▶</span> Simular Transcripción
+                        </button>
+                        <div class="processing-indicator" id="processingIndicator" style="display: none;">
+                            <div class="spinner"></div>
+                            <span id="processingText">Procesando con Whisper...</span>
+                        </div>
+                    </div>
+                    <div class="demo-output">
+                        <h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
+                                <path d="M9.5 2A2.5 2.5 0 0 0 7 4.5v15A2.5 2.5 0 0 0 9.5 22h5a2.5 2.5 0 0 0 2.5-2.5v-15A2.5 2.5 0 0 0 14.5 2h-5Z"/>
+                                <path d="M9 10h6M9 14h4"/>
+                            </svg>
+                            Salida del Agente
+                        </h3>
+                        <div class="output-box" id="outputBox">
+                            <span style="opacity: 0.5; font-style: italic;">
+                                Presiona "Simular Transcripción" para ver el pipeline del Agente Escribano en acción...
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Laboratorio Interactivo - Micro Demos -->
+    <section class="lab-section" id="laboratorio">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">PRUÉBALO POR PARTES</span>
+                <h2 class="section-title">Laboratorio Interactivo</h2>
+                <p class="section-description">Explora cada capacidad del sistema de forma aislada. Entiende exactamente cómo funciona cada componente.</p>
+            </div>
+            
+            <!-- Tabs Navigation -->
+            <div class="lab-tabs">
+                <button class="lab-tab active" data-tab="trie" onclick="switchLabTab('trie')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3v18M8 7h8M6 11h12M8 15h8"/>
+                        <circle cx="12" cy="3" r="1" fill="currentColor"/>
+                    </svg>
+                    <span>Filtro de Verdad</span>
+                    <small>Whisper + Trie</small>
+                </button>
+                <button class="lab-tab" data-tab="commands" onclick="switchLabTab('commands')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9.5 2A2.5 2.5 0 0 0 7 4.5v15A2.5 2.5 0 0 0 9.5 22h5a2.5 2.5 0 0 0 2.5-2.5v-15A2.5 2.5 0 0 0 14.5 2h-5Z"/>
+                        <path d="M9 10h6M9 14h4"/>
+                    </svg>
+                    <span>El Comandante</span>
+                    <small>Intención y Comandos</small>
+                </button>
+                <button class="lab-tab" data-tab="mcp" onclick="switchLabTab('mcp')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <path d="M9 9h6M9 13h6M9 17h4"/>
+                    </svg>
+                    <span>El Administrativo</span>
+                    <small>Herramientas MCP</small>
+                </button>
+            </div>
+
+            <!-- Tab Content: Filtro de Verdad -->
+            <div class="lab-panel active" id="panel-trie">
+                <div class="lab-grid">
+                    <div class="lab-explanation">
+                        <div class="lab-icon-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 12l2 2 4-4"/>
+                                <circle cx="12" cy="12" r="10"/>
+                            </svg>
+                        </div>
+                        <h3>¿Cómo evitamos las alucinaciones?</h3>
+                        <p>El sistema Whisper puede confundir fonéticamente los términos médicos. Nuestro <strong>MedicalTrieLogitsProcessor</strong> actúa como un filtro determinista que solo permite palabras válidas del léxico médico.</p>
+                        <div class="lab-how-it-works">
+                            <h4>Cómo funciona:</h4>
+                            <ol>
+                                <li><span class="step-num">1</span> Whisper genera probabilidades para cada palabra</li>
+                                <li><span class="step-num">2</span> El Trie (estructura de árbol) restringe las opciones</li>
+                                <li><span class="step-num">3</span> Solo se seleccionan términos médicos válidos</li>
+                            </ol>
+                        </div>
+                        <div class="lab-message">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
+                            </svg>
+                            <span>"Corregimos la fonética antes de que llegue al reporte."</span>
+                        </div>
+                    </div>
+                    <div class="lab-demo-area">
+                        <div class="lab-demo-box">
+                            <div class="demo-audio-wave">
+                                <svg viewBox="0 0 200 40" preserveAspectRatio="none">
+                                    <path d="M0,20 Q10,5 20,20 T40,20 T60,20 T80,20 T100,20 T120,20 T140,20 T160,20 T180,20 T200,20" 
+                                          fill="none" stroke="rgba(45, 59, 45, 0.3)" stroke-width="2"/>
+                                </svg>
+                                <span class="demo-audio-label">🎤 Audio simulado: murmullo del médico</span>
+                            </div>
+                            
+                            <div class="comparison-boxes">
+                                <div class="comparison-box error" id="trie-whisper-box">
+                                    <div class="comparison-header">
+                                        <span class="comparison-icon">❌</span>
+                                        <span>Whisper Crudo</span>
+                                    </div>
+                                    <div class="comparison-content" id="trie-whisper-content">
+                                        <span class="waiting-text">Esperando simulación...</span>
+                                    </div>
+                                </div>
+                                <div class="comparison-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </div>
+                                <div class="comparison-box success" id="trie-megi-box">
+                                    <div class="comparison-header">
+                                        <span class="comparison-icon">✓</span>
+                                        <span>MEGI AI + Trie</span>
+                                    </div>
+                                    <div class="comparison-content" id="trie-megi-content">
+                                        <span class="waiting-text">Esperando simulación...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="lab-btn" onclick="simulateTrieDemo()">
+                                <span class="btn-icon">▶</span>
+                                <span>Simular Corrección Léxica</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: El Comandante -->
+            <div class="lab-panel" id="panel-commands">
+                <div class="lab-grid">
+                    <div class="lab-explanation">
+                        <div class="lab-icon-badge command-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 20V10M18 20V4M6 20v-4"/>
+                            </svg>
+                        </div>
+                        <h3>¿Cómo detectamos comandos vs dictado?</h3>
+                        <p>El agente no solo transcribe: <strong>entiende la intención</strong>. Usa un clasificador de intención que distingue entre contenido clínico y comandos de edición.</p>
+                        <div class="lab-how-it-works">
+                            <h4>Comandos soportados:</h4>
+                            <ul class="command-list">
+                                <li><code>"borra eso"</code> → Elimina última oración</li>
+                                <li><code>"corrección, quise decir..."</code> → Reemplaza texto</li>
+                                <li><code>"cambia la dosis a..."</code> → Actualiza valores</li>
+                                <li><code>"no, espera"</code> → Pausa y permite edición</li>
+                            </ul>
+                        </div>
+                        <div class="lab-message command-message">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            <span>"Edita con tu voz. Tu asistente te obedece, no solo transcribe."</span>
+                        </div>
+                    </div>
+                    <div class="lab-demo-area">
+                        <div class="lab-demo-box">
+                            <div class="command-timeline">
+                                <div class="timeline-step" id="cmd-step-1">
+                                    <div class="step-indicator">1</div>
+                                    <div class="step-content">
+                                        <div class="step-label">Texto dictado:</div>
+                                        <div class="step-text" id="cmd-text-1">Paciente alérgico a <span class="highlight-text">penicilina</span>...</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-step hidden" id="cmd-step-2">
+                                    <div class="step-indicator voice">🎤</div>
+                                    <div class="step-content">
+                                        <div class="step-label">Comando detectado:</div>
+                                        <div class="step-text command-text">"No, espera, <strong>borra alergias</strong>"</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-step hidden" id="cmd-step-3">
+                                    <div class="step-indicator action">⚡</div>
+                                    <div class="step-content">
+                                        <div class="step-label">Acción ejecutada:</div>
+                                        <div class="step-text">
+                                            <span class="action-badge">INTENT: COMMAND (Delete)</span>
+                                            <span class="action-badge action">ACTION: delete_sentence()</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-step hidden" id="cmd-step-4">
+                                    <div class="step-indicator success">✓</div>
+                                    <div class="step-content">
+                                        <div class="step-label">Resultado final:</div>
+                                        <div class="step-text result-text" id="cmd-result"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="lab-btn command-btn" onclick="simulateCommandDemo()">
+                                <span class="btn-icon">▶</span>
+                                <span>Simular Comando de Voz</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: El Administrativo -->
+            <div class="lab-panel" id="panel-mcp">
+                <div class="lab-grid">
+                    <div class="lab-explanation">
+                        <div class="lab-icon-badge mcp-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M9 9h6M9 13h6M9 17h4"/>
+                            </svg>
+                        </div>
+                        <h3>¿Cómo automatizamos lo administrativo?</h3>
+                        <p>Las <strong>Herramientas MCP</strong> extraen automáticamente códigos CIE-10, generan recetas PDF y crean un registro de auditoría inmutable.</p>
+                        <div class="lab-how-it-works">
+                            <h4>Herramientas disponibles:</h4>
+                            <ul class="tools-list">
+                                <li>
+                                    <span class="tool-icon">🏷️</span>
+                                    <span><strong>extract_cie10()</strong> - Códigos diagnósticos</span>
+                                </li>
+                                <li>
+                                    <span class="tool-icon">📄</span>
+                                    <span><strong>generate_prescription()</strong> - Receta PDF</span>
+                                </li>
+                                <li>
+                                    <span class="tool-icon">💾</span>
+                                    <span><strong>create_audit_log()</strong> - Trazabilidad forense</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="lab-message mcp-message">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                            <span>"Olvídate de buscar códigos. Nosotros lo hacemos por ti."</span>
+                        </div>
+                    </div>
+                    <div class="lab-demo-area">
+                        <div class="lab-demo-box">
+                            <div class="mcp-input-area">
+                                <div class="mcp-input-label">Texto clínico de entrada:</div>
+                                <div class="mcp-input-text" id="mcp-input-text">
+                                    "Diagnóstico de <strong>diabetes mellitus tipo 2</strong> descompensada con <strong>neuropatía diabética</strong>."
+                                </div>
+                            </div>
+                            
+                            <div class="mcp-output-area hidden" id="mcp-output-area">
+                                <div class="mcp-processing" id="mcp-processing">
+                                    <div class="mcp-spinner"></div>
+                                    <span>Ejecutando herramientas MCP...</span>
+                                </div>
+                                <div class="mcp-results hidden" id="mcp-results">
+                                    <div class="mcp-result-header">📋 Output Administrativo Automático</div>
+                                    <div class="mcp-badges" id="mcp-badges">
+                                        <!-- Badges will be inserted here -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="lab-btn mcp-btn" onclick="simulateMcpDemo()">
+                                <span class="btn-icon">▶</span>
+                                <span>Generar Códigos Automáticos</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section" id="roadmap">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">PLAN DE DESARROLLO</span>
+                <h2 class="section-title">Roadmap del MVP</h2>
+                <p class="section-description">Fases de desarrollo hacia el asistente clínico completo.</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Fase 1: Núcleo MCP</h4>
+                    <p>Servidor MCP funcional con Whisper + LoRA + Trie cargados en memoria. Herramienta de transcripción expuesta y validada.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Fase 2: Agente Escribano</h4>
+                    <p>Detección de intención (dictado vs comando). Correcciones en tiempo real. Integración con Ollama para razonamiento SOAP.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Fase 3: Herramientas Admin</h4>
+                    <p>Generación automática de códigos CIE-10, recetas PDF, y gestión de pacientes con SQLite local. Audit trail completo.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Fase 4: Data Flywheel</h4>
+                    <p>Sistema de captura de correcciones, re-entrenamiento automático de LoRA nocturno y alineación forzada con WhisperX.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">MEGI AI</div>
+            <p class="footer-text">
+                Sistema de IA Clínica Local • Agente Escribano Médico<br>
+                Desarrollado para transformar la documentación médica
+            </p>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 MEGI AI. Soberanía de datos garantizada.</span>
+            <span>Hecho con 
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; color: #c94c4c;">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                para profesionales de la salud
+            </span>
+        </div>
+    </footer>
+
+    <script>
+        // Layer card interaction
+        const layerCards = document.querySelectorAll('.layer-card');
+        const archDetail = document.getElementById('arch-detail');
+
+        const layerData = {
+            1: {
+                title: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg> Servidor MCP de ASR',
+                description: 'El núcleo de percepción acústica. Aloja el modelo Whisper Large V3 con adaptadores LoRA para la prosodia médica y el MedicalTrieLogitsProcessor para validación léxica determinista. Carga el modelo una sola vez en memoria unificada (MPS) y expone la herramienta <code>transcribir_consulta_medica</code> via MCP.',
+                tags: ['Whisper V3', 'LoRA', 'PyTorch MPS', 'FastMCP', 'Trie']
+            },
+            2: {
+                title: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M9.5 2A2.5 2.5 0 0 0 7 4.5v15A2.5 2.5 0 0 0 9.5 22h5a2.5 2.5 0 0 0 2.5-2.5v-15A2.5 2.5 0 0 0 14.5 2h-5Z"/><path d="M9 10h6M9 14h4"/></svg> Agente Escribano',
+                description: 'El cerebro del sistema. Analiza cada fragmento de audio para detectar si es <strong>dictado</strong> (contenido clínico) o <strong>comando</strong> (corrección, borrado, cambio). Utiliza clasificación de intención antes de procesar, permitiendo correcciones en tiempo real sin reiniciar la grabación.',
+                tags: ['Intent Classification', 'Command Parser', 'Real-time Correction', 'State Machine']
+            },
+            3: {
+                title: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg> Herramientas MCP Administrativas',
+                description: 'Suite de herramientas que automatizan la carga administrativa. Extracción automática de <code>códigos CIE-10</code> desde el texto clínico, generación de <code>recetas PDF</code> con firma digital, y sistema de <code>audit trail</code> inmutable que vincula audio original con texto generado para defensa legal.',
+                tags: ['CIE-10 Extractor', 'PDF Generator', 'Audit Trail', 'SQLite', 'Digital Signature']
+            }
+        };
+
+        layerCards.forEach(card => {
+            card.addEventListener('click', () => {
+                layerCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                
+                const layer = card.dataset.layer;
+                const data = layerData[layer];
+                
+                archDetail.innerHTML = `
+                    <h3>${data.title}</h3>
+                    <p>${data.description}</p>
+                    <div class="tech-tags">
+                        ${data.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+                    </div>
+                `;
+            });
+        });
+
+        // Transcription simulation
+        async function simulateTranscription() {
+            const btn = document.getElementById('recordBtn');
+            const indicator = document.getElementById('processingIndicator');
+            const processingText = document.getElementById('processingText');
+            const output = document.getElementById('outputBox');
+            const visualizer = document.getElementById('audioVisualizer');
+
+            // --- ETAPA 1: GRABACIÓN ---
+            btn.classList.add('recording');
+            btn.innerHTML = '<span>●</span> Escuchando...';
+            visualizer.style.opacity = '1';
+            
+            await sleep(2500);
+
+            // --- ETAPA 2: PROCESAMIENTO NEURO-SIMBÓLICO ---
+            btn.classList.remove('recording');
+            btn.innerHTML = '<span>⏳</span> Procesando...';
+            btn.disabled = true;
+            indicator.style.display = 'flex';
+            
+            // Paso 2.1: Whisper + Trie
+            processingText.textContent = 'Whisper V3: Decodificando audio...';
+            output.innerHTML = `<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #8a8a8a;">
+                > Ingesta de audio (16kHz mono)...<br>
+                > <span style="color: #d4a574;">MedicalTrieLogitsProcessor</span> activo: Restricción léxica habilitada.
+            </div>`;
+            await sleep(1200);
+
+            // Paso 2.2: Detección de Intención (AGENTE ACTIVO)
+            processingText.textContent = 'Agente MCP: Analizando intención...';
+            output.innerHTML += `<div style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
+                <span style="color: #666;">[Buffer Audio]: "...antecedentes de diabetes tipo 1... <strong class="command-highlight">comando: corrección, quise decir tipo 2</strong>"</span><br>
+                <span style="color: #90c695;">➜ INTENCIÓN DETECTADA: COMMAND (Correction)</span><br>
+                <span style="color: #90c695;">➜ ACCIÓN: replace_text("tipo 1", "tipo 2")</span>
+            </div>`;
+            await sleep(2000);
+
+            // Paso 2.3: Herramientas Administrativas
+            processingText.textContent = 'Ejecutando herramientas MCP...';
+            await sleep(1000);
+
+            // --- ETAPA 3: SALIDA FINAL ESTRUCTURADA ---
+            indicator.style.display = 'none';
+            btn.innerHTML = '<span>▶</span> Simular Nuevo Caso';
+            btn.disabled = false;
+
+            output.innerHTML = `
+                <div style="margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #d4a574; font-weight: 600;">📝 TRANSCRIPCIÓN FINAL (Post-Procesada)</span>
+                    <span style="font-size: 0.7rem; background: #2d3b2d; padding: 2px 6px; border-radius: 4px; color: #90c695;">● Live Audit</span>
+                </div>
+                
+                <div style="margin-bottom: 1.5rem; font-size: 0.95rem;">
+                    "Paciente masculino de 58 años con antecedentes de <span class="highlight">diabetes mellitus tipo 2</span> e <span class="highlight">hipertensión arterial</span>. Refiere dolor precordial de 3 horas de evolución. Se prescribe <span class="highlight">Ácido acetilsalicílico</span> 100mg y <span class="highlight">Atorvastatina</span> 40mg."
+                </div>
+
+                <div style="margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <span style="color: #90c695; font-weight: 600;">📋 REPORTE SOAP + HERRAMIENTAS</span>
+                </div>
+                
+                <div style="line-height: 1.8; font-size: 0.9rem;">
+                    <strong style="color: #7eb8da;">S:</strong> Dolor precordial de 3h.<br>
+                    <strong style="color: #d4a574;">O:</strong> Paciente masculino, 58 años. Signos vitales estables.<br>
+                    <strong style="color: #90c695;">A:</strong> Síndrome coronario agudo probable. Riesgo CV alto.<br>
+                    <strong style="color: #c9a4d4;">P:</strong> AAS 100mg + Atorvastatina 40mg. Referencia urgente.
+                </div>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.1);">
+                    <div style="font-size: 0.75rem; color: #8a8a8a; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">Output Administrativo Automático (MCP Tools)</div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span style="background: rgba(144, 198, 149, 0.1); color: #90c695; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(144, 198, 149, 0.2); display: flex; align-items: center; gap: 5px;">
+                            🏷️ CIE-10: <strong>E11.9, I10, R07.2</strong>
+                        </span>
+                        <span style="background: rgba(212, 165, 116, 0.1); color: #d4a574; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(212, 165, 116, 0.2); display: flex; align-items: center; gap: 5px;">
+                            📄 PDF: <strong>receta_58392.pdf</strong>
+                        </span>
+                         <span style="background: rgba(126, 184, 218, 0.1); color: #7eb8da; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(126, 184, 218, 0.2); display: flex; align-items: center; gap: 5px;">
+                            💾 Log: <strong>Audit Hash #F7A9</strong>
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Lab Tabs Functionality
+        function switchLabTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.lab-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            
+            // Update panels
+            document.querySelectorAll('.lab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById(`panel-${tabName}`).classList.add('active');
+        }
+
+        // Micro-Demo 1: Trie Correction
+        async function simulateTrieDemo() {
+            const btn = document.querySelector('#panel-trie .lab-btn');
+            const whisperContent = document.getElementById('trie-whisper-content');
+            const megiContent = document.getElementById('trie-megi-content');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Procesando...</span>';
+            
+            // Show processing
+            whisperContent.innerHTML = '<span class="waiting-text">Decodificando audio...</span>';
+            megiContent.innerHTML = '<span class="waiting-text">Aplicando Trie...</span>';
+            
+            await sleep(800);
+            
+            // Show Whisper error
+            whisperContent.innerHTML = '<span class="error-text">"Administrar para se tamol 500 miligramos cada ocho oras"</span>';
+            
+            await sleep(1200);
+            
+            // Show MEGI correction
+            megiContent.innerHTML = '<span class="success-text">"Administrar <strong>Paracetamol</strong> 500 miligramos cada ocho <strong>horas</strong>"</span>';
+            
+            await sleep(500);
+            
+            btn.disabled = false;
+            btn.innerHTML = '<span class="btn-icon">↻</span><span>Simular Otra Corrección</span>';
+        }
+
+        // Micro-Demo 2: Command Detection
+        async function simulateCommandDemo() {
+            const btn = document.querySelector('#panel-commands .lab-btn');
+            const step1 = document.getElementById('cmd-step-1');
+            const step2 = document.getElementById('cmd-step-2');
+            const step3 = document.getElementById('cmd-step-3');
+            const step4 = document.getElementById('cmd-step-4');
+            const text1 = document.getElementById('cmd-text-1');
+            const result = document.getElementById('cmd-result');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Escuchando comando...</span>';
+            
+            // Reset all steps
+            step2.classList.add('hidden');
+            step3.classList.add('hidden');
+            step4.classList.add('hidden');
+            text1.innerHTML = 'Paciente alérgico a <span class="highlight-text">penicilina</span>...';
+            
+            await sleep(1000);
+            
+            // Show command detected
+            step2.classList.remove('hidden');
+            step2.classList.add('fade-in');
+            
+            await sleep(1500);
+            
+            // Show action
+            step3.classList.remove('hidden');
+            step3.classList.add('fade-in');
+            
+            // Animate deletion
+            text1.innerHTML = '<span class="deleted-text">Paciente alérgico a penicilina...</span>';
+            
+            await sleep(1500);
+            
+            // Show result
+            step4.classList.remove('hidden');
+            step4.classList.add('fade-in');
+            result.innerHTML = '<em>(Texto eliminado correctamente)</em>';
+            
+            btn.disabled = false;
+            btn.innerHTML = '<span class="btn-icon">↻</span><span>Simular Otro Comando</span>';
+        }
+
+        // Micro-Demo 3: MCP Tools
+        async function simulateMcpDemo() {
+            const btn = document.querySelector('#panel-mcp .lab-btn');
+            const outputArea = document.getElementById('mcp-output-area');
+            const processing = document.getElementById('mcp-processing');
+            const results = document.getElementById('mcp-results');
+            const badges = document.getElementById('mcp-badges');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Ejecutando herramientas...</span>';
+            
+            // Show output area with processing
+            outputArea.classList.remove('hidden');
+            processing.classList.remove('hidden');
+            results.classList.add('hidden');
+            badges.innerHTML = '';
+            
+            await sleep(1500);
+            
+            // Hide processing, show results
+            processing.classList.add('hidden');
+            results.classList.remove('hidden');
+            
+            // Add badges one by one
+            const badgesData = [
+                { type: 'cie10', icon: '🏷️', label: 'CIE-10:', value: 'E11.9, G63.2', delay: 0 },
+                { type: 'cie10', icon: '🏷️', label: 'CIE-10:', value: 'E11.65', delay: 200 },
+                { type: 'pdf', icon: '📄', label: 'PDF:', value: 'receta_48291.pdf', delay: 400 },
+                { type: 'audit', icon: '💾', label: 'Log:', value: 'Audit Hash #B3C7', delay: 600 }
+            ];
+            
+            badgesData.forEach((badge, index) => {
+                setTimeout(() => {
+                    const badgeEl = document.createElement('span');
+                    badgeEl.className = `mcp-badge ${badge.type}`;
+                    badgeEl.style.animationDelay = `${badge.delay}ms`;
+                    badgeEl.innerHTML = `${badge.icon} ${badge.label} <code>${badge.value}</code>`;
+                    badges.appendChild(badgeEl);
+                }, badge.delay);
+            });
+            
+            await sleep(1500);
+            
+            btn.disabled = false;
+            btn.innerHTML = '<span class="btn-icon">↻</span><span>Generar Nuevos Códigos</span>';
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Modal de Actualizaciones
+        function openUpdateModal() {
+            const modal = document.getElementById('updateModal');
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeUpdateModal() {
+            const modal = document.getElementById('updateModal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('updateModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeUpdateModal();
+            }
+        });
+
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeUpdateModal();
+            }
+        });
+    </script>
+</body>
+</html>
