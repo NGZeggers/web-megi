@@ -180,6 +180,12 @@
             transform: translateY(0);
         }
 
+        .lang-selector.active .lang-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
         .lang-option {
             display: flex;
             align-items: center;
@@ -3141,6 +3147,33 @@
                 closeUpdateModal();
             }
         });
+
+        // Language selector for mobile
+        const langSelector = document.querySelector('.lang-selector');
+        if (langSelector) {
+            langSelector.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+            });
+
+            // Close selector when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!langSelector.contains(e.target)) {
+                    langSelector.classList.remove('active');
+                }
+            });
+
+            // Prevent links inside from closing dropdown immediately
+            const langOptions = langSelector.querySelectorAll('.lang-option');
+            langOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    // Allow navigation
+                    setTimeout(() => {
+                        langSelector.classList.remove('active');
+                    }, 100);
+                });
+            });
+        }
     </script>
 </body>
 </html>
