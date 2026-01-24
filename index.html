@@ -2206,6 +2206,11 @@
             }
         }
     </style>
+    
+    <!-- React, ReactDOM y Babel para JSX -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
     <!-- Modal de Actualizaciones MEGI AI -->
@@ -2276,8 +2281,7 @@
     <nav>
         <div class="nav-content">
             <a href="#" class="logo">
-                <img src="logo-megi.png" alt="MEGI AI Logo" style="width: 32px; height: 32px; object-fit: contain;">
-                <span class="logo-text">MEGI AI</span>
+                <div id="logo-animation-container"></div>
             </a>
             <div class="nav-links">
                 <a href="#arquitectura" class="nav-link">Arquitectura</a>
@@ -3173,6 +3177,193 @@
                     }, 100);
                 });
             });
+        }
+    </script>
+
+    <script type="text/babel">
+        // Componente de animation3.jsx adaptado para el navbar
+        const { useState, useEffect } = React;
+
+        function LogoAnimation() {
+            const [phase, setPhase] = useState(0);
+            const [cycleCount, setCycleCount] = useState(0);
+            const [isPlaying, setIsPlaying] = useState(true);
+
+            const totalPhases = 7;
+            const maxCycles = 2; // Número de ciclos antes de detenerse
+
+            useEffect(() => {
+                if (!isPlaying || cycleCount >= maxCycles) return;
+                
+                const delays = {
+                    0: 1200,
+                    1: 400,
+                    2: 400,
+                    3: 400,
+                    4: 400,
+                    5: 2000,
+                    6: 100,
+                };
+                
+                const timer = setTimeout(() => {
+                    setPhase((prev) => {
+                        const nextPhase = (prev + 1) % totalPhases;
+                        // Si completamos un ciclo (volvemos a fase 0), incrementar contador
+                        if (nextPhase === 0 && prev === 6) {
+                            setCycleCount(c => c + 1);
+                            // Si alcanzamos el máximo de ciclos, detener en fase 0
+                            if (cycleCount + 1 >= maxCycles) {
+                                setIsPlaying(false);
+                                return 0; // Quedarse en fase 0 (nombre completo)
+                            }
+                        }
+                        return nextPhase;
+                    });
+                }, delays[phase] || 500);
+                
+                return () => clearTimeout(timer);
+            }, [phase, isPlaying, cycleCount]);
+
+            const letters = ['m', 'e', 'g', 'i', '\u00A0', 'i', 'a'];
+
+            const collapsePhase = {
+                0: 1,
+                1: 2,
+                2: 3,
+                6: 4,
+            };
+
+            const getLetterStyle = (letter, index) => {
+                const baseStyle = {
+                    display: 'inline-block',
+                    fontFamily: "'Poppins', sans-serif",
+                    fontWeight: '700',
+                    fontSize: '1.5rem',
+                    transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                    position: 'absolute',
+                    color: 'var(--charcoal)',
+                };
+
+                const isFirstI = index === 3;
+                const isSecondI = index === 5;
+
+                // letterWidths reducidos en 30% (multiplicados por 0.9)
+                const letterWidths = [0.574, 0.378, 0.378, 0.168, 0.21, 0.168, 0.378];
+
+                // Reducido en 30% también (de 0.15 a 0.105)
+                const SPACING_INCREASE = 0.105;
+                const pairsWithMoreSpace = new Set([0, 1, 2, 5]);
+
+                const extraBetween = new Array(letterWidths.length - 1).fill(0);
+                for (const pair of pairsWithMoreSpace) {
+                    extraBetween[pair] = SPACING_INCREASE * ((letterWidths[pair] + letterWidths[pair + 1]) / 2);
+                }
+
+                const totalWidth = letterWidths.reduce((a, b) => a + b, 0) + extraBetween.reduce((a, b) => a + b, 0);
+
+                let xPos = 0;
+                for (let i = 0; i < index; i++) {
+                    xPos += letterWidths[i];
+                    if (i < extraBetween.length) xPos += extraBetween[i];
+                }
+
+                const LAYOUT_SCALE_PX = 35; // Scaled for navbar
+                const initialX = (xPos - totalWidth / 2 + letterWidths[index] / 2) * LAYOUT_SCALE_PX;
+
+                // Final centered positions for i's (scaled proportionally)
+                const adjustedCenterFirstI = 10 * (35 / 120);
+                const adjustedCenterSecondI = 70 * (35 / 120);
+
+                const shouldCollapse = collapsePhase[index] !== undefined && phase >= collapsePhase[index];
+                const firstIShouldMove = phase >= 3;
+                const secondIShouldMove = phase >= 4;
+
+                if (phase === 0 || phase === 6) {
+                    return {
+                        ...baseStyle,
+                        opacity: 1,
+                        transform: `translateX(${initialX}px) translateY(0) scale(1) rotate(0deg)`,
+                        filter: 'blur(0px)',
+                    };
+                }
+
+                if (isFirstI) {
+                    const targetX = firstIShouldMove ? adjustedCenterFirstI : initialX;
+                    return {
+                        ...baseStyle,
+                        opacity: 1,
+                        transform: `translateX(${targetX}px) translateY(0) scale(1) rotate(0deg)`,
+                        filter: 'blur(0px)',
+                        zIndex: 10,
+                    };
+                }
+
+                if (isSecondI) {
+                    const targetX = secondIShouldMove ? adjustedCenterSecondI : initialX;
+                    return {
+                        ...baseStyle,
+                        opacity: 1,
+                        transform: `translateX(${targetX}px) translateY(0) scale(1) rotate(0deg)`,
+                        filter: 'blur(0px)',
+                        zIndex: 10,
+                    };
+                }
+
+                if (index === 4) {
+                    const shouldHide = phase >= 3;
+                    return {
+                        ...baseStyle,
+                        opacity: shouldHide ? 0 : 1,
+                        transform: `translateX(${initialX}px) translateY(0) scale(${shouldHide ? 0 : 1})`,
+                    };
+                }
+
+                if (shouldCollapse) {
+                    const targetX = index < 4 ? adjustedCenterFirstI : adjustedCenterSecondI;
+
+                    return {
+                        ...baseStyle,
+                        opacity: 0,
+                        transform: `translateX(${targetX}px) translateY(0) scale(0.1) rotate(${index < 4 ? -10 : 10}deg)`,
+                        filter: 'blur(6px)',
+                    };
+                }
+
+                return {
+                    ...baseStyle,
+                    opacity: 1,
+                    transform: `translateX(${initialX}px) translateY(0) scale(1) rotate(0deg)`,
+                    filter: 'blur(0px)',
+                };
+            };
+
+            return (
+                <div style={{ 
+                    position: 'relative', 
+                    width: '120px', 
+                    height: '40px', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center' 
+                }}>
+                    <link 
+                        href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" 
+                        rel="stylesheet"
+                    />
+                    {letters.map((letter, index) => (
+                        <span key={index} style={getLetterStyle(letter, index)}>
+                            {letter}
+                        </span>
+                    ))}
+                </div>
+            );
+        }
+
+        // Renderizar el componente en el contenedor
+        const container = document.getElementById('logo-animation-container');
+        if (container) {
+            const root = ReactDOM.createRoot(container);
+            root.render(<LogoAnimation />);
         }
     </script>
 </body>
