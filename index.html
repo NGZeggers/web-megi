@@ -50,7 +50,7 @@
             right: 0;
             z-index: 100;
             padding: 1rem 3rem;
-            background: var(--cream);
+            background: var(#ffffff);
             border-bottom: 1px solid var(--border-light);
         }
 
@@ -2386,8 +2386,8 @@
                             <circle cx="12" cy="3" r="1" fill="currentColor"/>
                         </svg>
                     </div>
-                    <h3>MedicalTrieLogitsProcessor</h3>
-                    <p>Validación determinista de terminología con Trie de +400,000 términos CIE-10, fármacos y procedimientos.</p>
+                    <h3>MagnetTrieLogitsProcessor</h3>
+                    <p>El Trie ya no es un "muro" que bloquea. Usa <strong>Soft Penalties</strong> para actuar como "imán" que atrae hacia términos válidos, tolerando variaciones fonéticas.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -2420,14 +2420,25 @@
                     <h3>Soberanía de Datos</h3>
                     <p>Cero dependencia de cloud. Todo el procesamiento ocurre en tu infraestructura local con log inmutable.</p>
                 </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                    </div>
+                    <h3>Beam Search (5 Hipótesis)</h3>
+                    <p>El sistema mantiene 5 transcripciones paralelas. Si una falla fonéticamente, otra la recupera. Red de seguridad probabilística.</p>
+                </div>
                 <div class="feature-card highlight-card">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
-                            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
                         </svg>
                     </div>
-                    <h3>Data Flywheel (Aprendizaje)</h3>
-                    <p>El sistema "aprende" de tus correcciones. Si corriges manualmente una palabra, el modelo se re-entrena automáticamente para no cometer el mismo error.</p>
+                    <h3>Expansión Fonética Automática</h3>
+                    <p>El Trie incluye variantes fonéticas generadas por algoritmos (Metaphone, G2P). "Metaformina" → "Metformina" sin curación manual.</p>
                 </div>
             </div>
         </div>
@@ -2475,13 +2486,13 @@
                         </svg>
                         Servidor MCP de ASR
                     </h3>
-                    <p>El núcleo de percepción acústica. Aloja el modelo Whisper Large V3 con adaptadores LoRA para la prosodia médica y el MedicalTrieLogitsProcessor para validación léxica determinista. Carga el modelo una sola vez en memoria unificada (MPS) y expone la herramienta <code>transcribir_consulta_medica</code> via MCP.</p>
+                    <p>El núcleo de percepción acústica. Aloja el modelo Whisper Large V3 con adaptadores LoRA para la prosodia médica. Utiliza el <strong>MagnetTrieLogitsProcessor</strong> que aplica Soft Penalties (+β) para atraer la decodificación hacia el léxico validado. Incluye Beam Search (5 hipótesis) y expansión fonética automatizada (Metaphone/G2P).</p>
                     <div class="tech-tags">
                         <span class="tech-tag">Whisper V3</span>
                         <span class="tech-tag">LoRA</span>
-                        <span class="tech-tag">PyTorch MPS</span>
-                        <span class="tech-tag">FastMCP</span>
-                        <span class="tech-tag">Trie</span>
+                        <span class="tech-tag">Soft Penalties</span>
+                        <span class="tech-tag">Beam Search</span>
+                        <span class="tech-tag">Metaphone G2P</span>
                     </div>
                 </div>
             </div>
@@ -2562,8 +2573,8 @@
                         <path d="M12 3v18M8 7h8M6 11h12M8 15h8"/>
                         <circle cx="12" cy="3" r="1" fill="currentColor"/>
                     </svg>
-                    <span>Filtro de Verdad</span>
-                    <small>Whisper + Trie</small>
+                    <span>El Imán Léxico</span>
+                    <small>Soft Penalties + Beam Search</small>
                 </button>
                 <button class="lab-tab" data-tab="commands" onclick="switchLabTab('commands')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2581,9 +2592,18 @@
                     <span>El Administrativo</span>
                     <small>Herramientas MCP</small>
                 </button>
+                <button class="lab-tab" data-tab="phonetic" onclick="switchLabTab('phonetic')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
+                    </svg>
+                    <span>El Trie Inteligente</span>
+                    <small>Expansión Fonética</small>
+                </button>
             </div>
 
-            <!-- Tab Content: Filtro de Verdad -->
+            <!-- Tab Content: El Imán Léxico -->
             <div class="lab-panel active" id="panel-trie">
                 <div class="lab-grid">
                     <div class="lab-explanation">
@@ -2593,22 +2613,34 @@
                                 <circle cx="12" cy="12" r="10"/>
                             </svg>
                         </div>
-                        <h3>¿Cómo evitamos las alucinaciones?</h3>
-                        <p>El sistema Whisper puede confundir fonéticamente los términos médicos. Nuestro <strong>MedicalTrieLogitsProcessor</strong> actúa como un filtro determinista que solo permite palabras válidas del léxico médico.</p>
-                        <div class="lab-how-it-works">
-                            <h4>Cómo funciona:</h4>
+                        <h3>De "Muro" a "Imán": La Evolución del Trie</h3>
+                        <p>El sistema Whisper puede confundir fonéticamente los términos médicos. La arquitectura tradicional usaba el Trie como un <strong>"muro"</strong> que bloqueaba cualquier palabra no exacta. Ahora usamos <strong>Soft Penalties</strong> para convertirlo en un <strong>"imán"</strong> que atrae hacia el término correcto.</p>
+                        
+                        <div class="lab-how-it-works" style="background: rgba(224, 108, 117, 0.05); border-color: rgba(224, 108, 117, 0.2);">
+                            <h4 style="color: #c94c4c;">❌ Antes: Restricción Dura (El Muro)</h4>
                             <ol>
-                                <li><span class="step-num">1</span> Whisper genera probabilidades para cada palabra</li>
-                                <li><span class="step-num">2</span> El Trie (estructura de árbol) restringe las opciones</li>
-                                <li><span class="step-num">3</span> Solo se seleccionan términos médicos válidos</li>
+                                <li><span class="step-num" style="background: #c94c4c;">1</span> Whisper genera probabilidades (logits) para cada token</li>
+                                <li><span class="step-num" style="background: #c94c4c;">2</span> El Trie aplica <code style="background: rgba(224, 108, 117, 0.15); color: #c94c4c;">-∞</code> a tokens no válidos</li>
+                                <li><span class="step-num" style="background: #c94c4c;">3</span> Si pronuncias mal → El sistema <strong>choca</strong> y falla</li>
                             </ol>
                         </div>
+                        
+                        <div class="lab-how-it-works" style="background: rgba(144, 198, 149, 0.05); border-color: rgba(144, 198, 149, 0.2);">
+                            <h4 style="color: #4a9f5a;">✓ Ahora: Guía Probabilística (El Imán)</h4>
+                            <ol>
+                                <li><span class="step-num" style="background: #4a9f5a;">1</span> Whisper genera probabilidades para cada token</li>
+                                <li><span class="step-num" style="background: #4a9f5a;">2</span> El Trie suma <code style="background: rgba(144, 198, 149, 0.15); color: #4a9f5a;">+β</code> (sesgo positivo) a tokens válidos</li>
+                                <li><span class="step-num" style="background: #4a9f5a;">3</span> Beam Search mantiene 5 hipótesis paralelas</li>
+                                <li><span class="step-num" style="background: #4a9f5a;">4</span> El sistema <strong>atrae</strong> hacia el término correcto</li>
+                            </ol>
+                        </div>
+                        
                         <div class="lab-message">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
                                 <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
                             </svg>
-                            <span>"Corregimos la fonética antes de que llegue al reporte."</span>
+                            <span>"Toleramos la variabilidad humana sin perder precisión clínica."</span>
                         </div>
                     </div>
                     <div class="lab-demo-area">
@@ -2618,14 +2650,14 @@
                                     <path d="M0,20 Q10,5 20,20 T40,20 T60,20 T80,20 T100,20 T120,20 T140,20 T160,20 T180,20 T200,20" 
                                           fill="none" stroke="rgba(45, 59, 45, 0.3)" stroke-width="2"/>
                                 </svg>
-                                <span class="demo-audio-label">🎤 Audio simulado: murmullo del médico</span>
+                                <span class="demo-audio-label">🎤 Audio: Médico dice <em>"Metaformina"</em> (error de pronunciación)</span>
                             </div>
                             
                             <div class="comparison-boxes">
                                 <div class="comparison-box error" id="trie-whisper-box">
                                     <div class="comparison-header">
-                                        <span class="comparison-icon">❌</span>
-                                        <span>Whisper Crudo</span>
+                                        <span class="comparison-icon">🧱</span>
+                                        <span>Trie "Muro" (Antes)</span>
                                     </div>
                                     <div class="comparison-content" id="trie-whisper-content">
                                         <span class="waiting-text">Esperando simulación...</span>
@@ -2638,8 +2670,8 @@
                                 </div>
                                 <div class="comparison-box success" id="trie-megi-box">
                                     <div class="comparison-header">
-                                        <span class="comparison-icon">✓</span>
-                                        <span>MEGI AI + Trie</span>
+                                        <span class="comparison-icon">🧲</span>
+                                        <span>Trie "Imán" (Ahora)</span>
                                     </div>
                                     <div class="comparison-content" id="trie-megi-content">
                                         <span class="waiting-text">Esperando simulación...</span>
@@ -2649,7 +2681,7 @@
                             
                             <button class="lab-btn" onclick="simulateTrieDemo()">
                                 <span class="btn-icon">▶</span>
-                                <span>Simular Corrección Léxica</span>
+                                <span>Simular Corrección con Soft Penalties</span>
                             </button>
                         </div>
                     </div>
@@ -2798,6 +2830,60 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Tab Content: Expansión Fonética -->
+            <div class="lab-panel" id="panel-phonetic">
+                <div class="lab-grid">
+                    <div class="lab-explanation">
+                        <div class="lab-icon-badge" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                                <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>¿Cómo se vuelve "inteligente" el Trie?</h3>
+                        <p>Agregar variaciones manualmente es impráctico. En su lugar, usamos <strong>algoritmos fonéticos</strong> (Metaphone, Soundex) y <strong>modelos G2P neuronales</strong> para generar automáticamente todas las formas en que un término podría pronunciarse mal.</p>
+                        
+                        <div class="lab-how-it-works">
+                            <h4>Estrategia de Expansión:</h4>
+                            <ol>
+                                <li><span class="step-num" style="background: #9b59b6;">1</span> <strong>Hashing Fonético:</strong> Metaphone convierte "Gemfibrozilo" → <code style="font-size: 0.75rem;">JMFBRSL</code></li>
+                                <li><span class="step-num" style="background: #9b59b6;">2</span> <strong>Simulación de Errores:</strong> Reglas de seseo (z→s), yeísmo (ll→y)</li>
+                                <li><span class="step-num" style="background: #9b59b6;">3</span> <strong>G2P Neural:</strong> "Paracetamol" → <code style="font-size: 0.75rem;">/pa.ɾa.θe.ta.ˈmol/</code> → variantes</li>
+                                <li><span class="step-num" style="background: #9b59b6;">4</span> <strong>Normalización:</strong> Variante → Término canónico</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="lab-message" style="background: linear-gradient(135deg, rgba(155, 89, 182, 0.08) 0%, rgba(155, 89, 182, 0.03) 100%); border-left-color: #9b59b6;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#9b59b6" stroke-width="1.5">
+                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
+                            </svg>
+                            <span style="color: #9b59b6;">"100,000 términos × expansión automática = robustez sin curación manual."</span>
+                        </div>
+                    </div>
+                    <div class="lab-demo-area">
+                        <div class="lab-demo-box">
+                            <div style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 10px; margin-bottom: 1rem;">
+                                <div style="font-size: 0.75rem; color: rgba(245,243,238,0.5); margin-bottom: 0.5rem; text-transform: uppercase;">Término Original:</div>
+                                <div style="font-size: 1.1rem; color: var(--cream);" id="phonetic-original">Dacriocistitis</div>
+                            </div>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem; flex: 1;" id="phonetic-variants">
+                                <div style="padding: 0.75rem 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 3px solid rgba(255,255,255,0.1);">
+                                    <span style="font-size: 0.7rem; color: rgba(245,243,238,0.4); display: block; margin-bottom: 0.25rem;">Esperando simulación...</span>
+                                </div>
+                            </div>
+                            
+                            <button class="lab-btn" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); color: white;" onclick="simulatePhoneticDemo()">
+                                <span class="btn-icon">▶</span>
+                                <span>Expandir Fonéticamente</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2813,19 +2899,19 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <h4>Fase 1: Núcleo MCP</h4>
-                    <p>Servidor MCP funcional con Whisper + LoRA + Trie cargados en memoria. Herramienta de transcripción expuesta y validada.</p>
+                    <p>Servidor MCP con Whisper + LoRA + MagnetTrie usando Soft Penalties (β=+8). Beam Search con 5 hipótesis paralelas.</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Fase 2: Agente Escribano</h4>
-                    <p>Detección de intención (dictado vs comando). Correcciones en tiempo real. Integración con Ollama para razonamiento SOAP.</p>
+                    <h4>Fase 2: Trie Inteligente</h4>
+                    <p>Expansión fonética automatizada con Metaphone y modelos G2P neuronales. +400K términos con variantes generadas.</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Fase 3: Herramientas Admin</h4>
-                    <p>Generación automática de códigos CIE-10, recetas PDF, y gestión de pacientes con SQLite local. Audit trail completo.</p>
+                    <h4>Fase 3: Agente Escribano</h4>
+                    <p>Detección de intención (dictado vs comando). Correcciones en tiempo real. Integración con Ollama para SOAP.</p>
                 </div>
                 <div class="timeline-item">
                     <h4>Fase 4: Data Flywheel</h4>
-                    <p>Sistema de captura de correcciones, re-entrenamiento automático de LoRA nocturno y alineación forzada con WhisperX.</p>
+                    <p>Captura de correcciones, re-entrenamiento automático de LoRA nocturno y calibración dinámica del bias β.</p>
                 </div>
             </div>
         </div>
@@ -2859,8 +2945,8 @@
         const layerData = {
             1: {
                 title: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg> Servidor MCP de ASR',
-                description: 'El núcleo de percepción acústica. Aloja el modelo Whisper Large V3 con adaptadores LoRA para la prosodia médica y el MedicalTrieLogitsProcessor para validación léxica determinista. Carga el modelo una sola vez en memoria unificada (MPS) y expone la herramienta <code>transcribir_consulta_medica</code> via MCP.',
-                tags: ['Whisper V3', 'LoRA', 'PyTorch MPS', 'FastMCP', 'Trie']
+                description: 'El núcleo de percepción acústica. Aloja Whisper Large V3 con adaptadores LoRA. El <strong>MagnetTrieLogitsProcessor</strong> usa Soft Penalties (+β) para atraer hacia términos válidos sin bloquear. Beam Search (5 hipótesis) permite recuperación ante malas pronunciaciones. El Trie incluye variantes fonéticas generadas automáticamente via Metaphone/G2P.',
+                tags: ['Whisper V3', 'Soft Penalties', 'Beam Search', 'Metaphone', 'G2P Neural']
             },
             2: {
                 title: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M9.5 2A2.5 2.5 0 0 0 7 4.5v15A2.5 2.5 0 0 0 9.5 22h5a2.5 2.5 0 0 0 2.5-2.5v-15A2.5 2.5 0 0 0 14.5 2h-5Z"/><path d="M9 10h6M9 14h4"/></svg> Agente Escribano',
@@ -2917,7 +3003,8 @@
             processingText.textContent = 'Whisper V3: Decodificando audio...';
             output.innerHTML = `<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #8a8a8a;">
                 > Ingesta de audio (16kHz mono)...<br>
-                > <span style="color: #d4a574;">MedicalTrieLogitsProcessor</span> activo: Restricción léxica habilitada.
+                > <span style="color: #d4a574;">MagnetTrieLogitsProcessor</span> activo: Soft Penalties (β=+8.0)<br>
+                > <span style="color: #90c695;">Beam Search</span>: 5 hipótesis paralelas
             </div>`;
             await sleep(1200);
 
@@ -2941,7 +3028,7 @@
 
             output.innerHTML = `
                 <div style="margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
-                    <span style="color: #d4a574; font-weight: 600;">📝 TRANSCRIPCIÓN FINAL (Post-Procesada)</span>
+                    <span style="color: #d4a574; font-weight: 600;">📝 TRANSCRIPCIÓN FINAL (Soft Penalties + Normalización)</span>
                     <span style="font-size: 0.7rem; background: #2d3b2d; padding: 2px 6px; border-radius: 4px; color: #90c695;">● Live Audit</span>
                 </div>
                 
@@ -2996,33 +3083,70 @@
             document.getElementById(`panel-${tabName}`).classList.add('active');
         }
 
-        // Micro-Demo 1: Trie Correction
+        // Micro-Demo 1: Trie "Imán" vs "Muro"
         async function simulateTrieDemo() {
             const btn = document.querySelector('#panel-trie .lab-btn');
             const whisperContent = document.getElementById('trie-whisper-content');
             const megiContent = document.getElementById('trie-megi-content');
             
             btn.disabled = true;
-            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Procesando...</span>';
+            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Procesando audio...</span>';
             
-            // Show processing
-            whisperContent.innerHTML = '<span class="waiting-text">Decodificando audio...</span>';
-            megiContent.innerHTML = '<span class="waiting-text">Aplicando Trie...</span>';
+            // Fase 1: Mostrar el audio entrante
+            whisperContent.innerHTML = '<span class="waiting-text">Analizando: "Metaformina"...</span>';
+            megiContent.innerHTML = '<span class="waiting-text">Analizando: "Metaformina"...</span>';
             
             await sleep(800);
             
-            // Show Whisper error
-            whisperContent.innerHTML = '<span class="error-text">"Administrar para se tamol 500 miligramos cada ocho oras"</span>';
+            // Fase 2: Mostrar logits del modelo
+            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Calculando logits...</span>';
+            whisperContent.innerHTML = `
+                <div style="font-size: 0.75rem; line-height: 1.6;">
+                    <div style="color: #888; margin-bottom: 4px;">Logits originales:</div>
+                    <span style="color: #e06c75;">"Meta" = 15.0</span> (acústico ✓)<br>
+                    <span style="color: #888;">"Metf" = 10.0</span> (esperado)
+                </div>`;
+            megiContent.innerHTML = `
+                <div style="font-size: 0.75rem; line-height: 1.6;">
+                    <div style="color: #888; margin-bottom: 4px;">Logits + Soft Penalty (β=+8):</div>
+                    <span style="color: #888;">"Meta" = 15.0 + 0 = 15.0</span><br>
+                    <span style="color: #90c695;">"Metf" = 10.0 + 8.0 = <strong>18.0</strong></span> ✓
+                </div>`;
+            
+            await sleep(1500);
+            
+            // Fase 3: Mostrar resultado del Trie "Muro"
+            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Aplicando restricciones...</span>';
+            whisperContent.innerHTML = `
+                <div style="font-size: 0.8rem;">
+                    <div style="color: #e06c75; margin-bottom: 6px;">🧱 Restricción Dura aplicada:</div>
+                    <span style="text-decoration: line-through; color: #e06c75;">"Metaformina"</span>
+                    <div style="margin-top: 8px; padding: 6px; background: rgba(224,108,117,0.1); border-radius: 4px; font-size: 0.7rem;">
+                        ⚠️ ERROR: Token "Meta" bloqueado (-∞)<br>
+                        Sistema sin ruta válida → FALLO
+                    </div>
+                </div>`;
             
             await sleep(1200);
             
-            // Show MEGI correction
-            megiContent.innerHTML = '<span class="success-text">"Administrar <strong>Paracetamol</strong> 500 miligramos cada ocho <strong>horas</strong>"</span>';
+            // Fase 4: Mostrar resultado del Trie "Imán"
+            megiContent.innerHTML = `
+                <div style="font-size: 0.8rem;">
+                    <div style="color: #90c695; margin-bottom: 6px;">🧲 Beam Search (5 hipótesis):</div>
+                    <div style="font-size: 0.7rem; color: #888; margin-bottom: 6px;">
+                        H1: "Metaformina" → score: 15.0<br>
+                        <strong style="color: #90c695;">H2: "Metformina" → score: 18.0 ✓</strong>
+                    </div>
+                    <span class="success-text">"<strong>Metformina</strong> 850mg"</span>
+                    <div style="margin-top: 6px; font-size: 0.65rem; color: #4a9f5a;">
+                        ✓ Variante fonética reconocida y corregida
+                    </div>
+                </div>`;
             
             await sleep(500);
             
             btn.disabled = false;
-            btn.innerHTML = '<span class="btn-icon">↻</span><span>Simular Otra Corrección</span>';
+            btn.innerHTML = '<span class="btn-icon">↻</span><span>Probar Otra Pronunciación</span>';
         }
 
         // Micro-Demo 2: Command Detection
@@ -3115,6 +3239,74 @@
             
             btn.disabled = false;
             btn.innerHTML = '<span class="btn-icon">↻</span><span>Generar Nuevos Códigos</span>';
+        }
+
+        // Micro-Demo 4: Phonetic Expansion
+        async function simulatePhoneticDemo() {
+            const btn = document.querySelector('#panel-phonetic .lab-btn');
+            const variantsContainer = document.getElementById('phonetic-variants');
+            const originalEl = document.getElementById('phonetic-original');
+            
+            // Alternar entre diferentes términos
+            const terms = [
+                { original: 'Dacriocistitis', variants: [
+                    { method: 'Metaphone', hash: 'TKRSSTTS', variant: 'Dacriocisititis' },
+                    { method: 'Seseo', hash: 'z→s', variant: 'Dacriosistitis' },
+                    { method: 'Simplificación', hash: 'sc→s', variant: 'Dacriosititis' },
+                ]},
+                { original: 'Gemfibrozilo', variants: [
+                    { method: 'Metaphone', hash: 'JMFBRSL', variant: 'Yemfibrosilo' },
+                    { method: 'Yeísmo', hash: 'g→y', variant: 'Yemfibrozilo' },
+                    { method: 'Seseo', hash: 'z→s', variant: 'Gemfibrosilo' },
+                ]},
+                { original: 'Metformina', variants: [
+                    { method: 'Vocalización', hash: 'tf→taf', variant: 'Metaformina' },
+                    { method: 'Simplificación', hash: 'met→me', variant: 'Meformina' },
+                    { method: 'G2P Neural', hash: 'IPA', variant: 'Metforminna' },
+                ]}
+            ];
+            
+            // Obtener término aleatorio diferente al actual
+            const currentTerm = originalEl.textContent;
+            let newTermData;
+            do {
+                newTermData = terms[Math.floor(Math.random() * terms.length)];
+            } while (newTermData.original === currentTerm && terms.length > 1);
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Generando variantes...</span>';
+            
+            originalEl.textContent = newTermData.original;
+            variantsContainer.innerHTML = '<div style="padding: 0.75rem 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;"><span style="color: rgba(245,243,238,0.5);">Ejecutando Metaphone + G2P...</span></div>';
+            
+            await sleep(800);
+            
+            // Mostrar variantes una por una
+            variantsContainer.innerHTML = '';
+            
+            for (let i = 0; i < newTermData.variants.length; i++) {
+                const v = newTermData.variants[i];
+                await sleep(400);
+                
+                const variantEl = document.createElement('div');
+                variantEl.style.cssText = 'padding: 0.75rem 1rem; background: rgba(155, 89, 182, 0.1); border-radius: 8px; border-left: 3px solid #9b59b6; opacity: 0; transform: translateX(-10px); transition: all 0.3s ease;';
+                variantEl.innerHTML = `
+                    <span style="font-size: 0.7rem; color: #9b59b6; display: block; margin-bottom: 0.25rem;">${v.method} → <code style="background: rgba(155,89,182,0.2); padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.65rem;">${v.hash}</code></span>
+                    <span style="color: var(--cream); font-size: 0.95rem;">"${v.variant}" <span style="color: #90c695; font-size: 0.7rem;">→ ${newTermData.original}</span></span>
+                `;
+                variantsContainer.appendChild(variantEl);
+                
+                // Trigger animation
+                setTimeout(() => {
+                    variantEl.style.opacity = '1';
+                    variantEl.style.transform = 'translateX(0)';
+                }, 50);
+            }
+            
+            await sleep(500);
+            
+            btn.disabled = false;
+            btn.innerHTML = '<span class="btn-icon">↻</span><span>Probar Otro Término</span>';
         }
 
         // Smooth scroll for navigation
