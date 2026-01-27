@@ -2440,6 +2440,18 @@
                     <h3>Expansión Fonética Automática</h3>
                     <p>El Trie incluye variantes fonéticas generadas por algoritmos (Metaphone, G2P). "Metaformina" → "Metformina" sin curación manual.</p>
                 </div>
+                <div class="feature-card" style="border: 1px solid rgba(231, 76, 60, 0.3); background: linear-gradient(135deg, rgba(231, 76, 60, 0.05) 0%, rgba(231, 76, 60, 0.02) 100%);">
+                    <div class="feature-icon" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="23"/>
+                            <line x1="8" y1="23" x2="16" y2="23"/>
+                        </svg>
+                    </div>
+                    <h3>Voz Humana (TTS)</h3>
+                    <p>Kyutai TTS con LoRA fine-tuned. Síntesis de voz <strong>indistinguible</strong> de un humano real. Sin robots.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -2474,6 +2486,13 @@
                         <div class="layer-info">
                             <h4>Herramientas MCP</h4>
                             <p>CIE-10, Recetas PDF, Auditoría</p>
+                        </div>
+                    </div>
+                    <div class="layer-card" data-layer="4">
+                        <div class="layer-number">4</div>
+                        <div class="layer-info">
+                            <h4>TTS Humano</h4>
+                            <p>Kyutai Moshi + LoRA</p>
                         </div>
                     </div>
                 </div>
@@ -2600,6 +2619,16 @@
                     </svg>
                     <span>El Trie Inteligente</span>
                     <small>Expansión Fonética</small>
+                </button>
+                <button class="lab-tab" data-tab="tts" onclick="switchLabTab('tts')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                        <line x1="12" y1="19" x2="12" y2="23"/>
+                        <line x1="8" y1="23" x2="16" y2="23"/>
+                    </svg>
+                    <span>La Voz Humana</span>
+                    <small>Kyutai TTS + LoRA</small>
                 </button>
             </div>
 
@@ -2884,6 +2913,88 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Tab Content: TTS La Voz Humana -->
+            <div class="lab-panel" id="panel-tts">
+                <div class="lab-grid">
+                    <div class="lab-explanation">
+                        <div class="lab-icon-badge" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                <line x1="12" y1="19" x2="12" y2="23"/>
+                                <line x1="8" y1="23" x2="16" y2="23"/>
+                            </svg>
+                        </div>
+                        <h3>Síntesis de Voz Indistinguible</h3>
+                        <p>El sistema no solo transcribe, también <strong>habla</strong>. Usamos <strong>Kyutai TTS (Moshi 1.8B)</strong> con fine-tuning LoRA entrenado en voces hispanohablantes naturales. El resultado: voz sintética que <strong>no se distingue de una humana</strong>.</p>
+                        
+                        <div class="lab-how-it-works">
+                            <h4>Pipeline de Entrenamiento:</h4>
+                            <ol>
+                                <li><span class="step-num" style="background: #e74c3c;">1</span> <strong>fromPodtoCast:</strong> Dataset de podcasts con diarización + Whisper + LLM</li>
+                                <li><span class="step-num" style="background: #e74c3c;">2</span> <strong>Tokenización:</strong> Mimi Codec (32 codebooks) + Llama Tokenizer</li>
+                                <li><span class="step-num" style="background: #e74c3c;">3</span> <strong>LoRA Training:</strong> ~10M params (0.58%) sobre modelo de 1.8B</li>
+                                <li><span class="step-num" style="background: #e74c3c;">4</span> <strong>Inferencia:</strong> Texto → Audio 24kHz indistinguible</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="lab-how-it-works" style="background: rgba(231, 76, 60, 0.05); border-color: rgba(231, 76, 60, 0.2); margin-top: 1rem;">
+                            <h4 style="color: #e74c3c;">🎯 Especificaciones Técnicas:</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem;">
+                                <li style="margin-bottom: 0.5rem;">• <strong>Modelo base:</strong> Kyutai TTS (Depformer + LM)</li>
+                                <li style="margin-bottom: 0.5rem;">• <strong>Parámetros:</strong> 1.8B total, ~10M entrenados (LoRA rank=128)</li>
+                                <li style="margin-bottom: 0.5rem;">• <strong>Dataset:</strong> 27,882 samples (~10s cada uno)</li>
+                                <li style="margin-bottom: 0.5rem;">• <strong>Sample Rate:</strong> 24kHz, bfloat16</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="lab-message" style="background: linear-gradient(135deg, rgba(231, 76, 60, 0.08) 0%, rgba(231, 76, 60, 0.03) 100%); border-left-color: #e74c3c;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#e74c3c" stroke-width="1.5">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            </svg>
+                            <span style="color: #e74c3c;">"El paciente escucha instrucciones con voz humana, no robótica."</span>
+                        </div>
+                    </div>
+                    <div class="lab-demo-area">
+                        <div class="lab-demo-box">
+                            <div style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 10px; margin-bottom: 1rem;">
+                                <div style="font-size: 0.75rem; color: rgba(245,243,238,0.5); margin-bottom: 0.5rem; text-transform: uppercase;">Texto de entrada:</div>
+                                <div style="font-size: 0.95rem; color: var(--cream); line-height: 1.5;" id="tts-input-text">"Tome una tableta de Metformina de 850 miligramos con el desayuno y otra con la cena."</div>
+                            </div>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem; flex: 1;" id="tts-output-area">
+                                <div class="comparison-boxes" style="flex-direction: column;">
+                                    <div class="comparison-box error" id="tts-generic-box" style="flex: 1;">
+                                        <div class="comparison-header">
+                                            <span class="comparison-icon">🤖</span>
+                                            <span>TTS Genérico</span>
+                                        </div>
+                                        <div class="comparison-content" id="tts-generic-content">
+                                            <span class="waiting-text">Esperando simulación...</span>
+                                        </div>
+                                    </div>
+                                    <div class="comparison-box success" id="tts-megi-box" style="flex: 1; margin-top: 0.5rem;">
+                                        <div class="comparison-header">
+                                            <span class="comparison-icon">🎙️</span>
+                                            <span>MEGI AI + Kyutai LoRA</span>
+                                        </div>
+                                        <div class="comparison-content" id="tts-megi-content">
+                                            <span class="waiting-text">Esperando simulación...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="lab-btn" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white;" onclick="simulateTTSDemo()">
+                                <span class="btn-icon">▶</span>
+                                <span>Simular Síntesis de Voz</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2906,11 +3017,15 @@
                     <p>Expansión fonética automatizada con Metaphone y modelos G2P neuronales. +400K términos con variantes generadas.</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Fase 3: Agente Escribano</h4>
+                    <h4>Fase 3: La Voz Humana (TTS)</h4>
+                    <p>Kyutai TTS (Moshi 1.8B) con LoRA fine-tuned en voces hispanohablantes. Síntesis indistinguible de voz humana real.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Fase 4: Agente Escribano</h4>
                     <p>Detección de intención (dictado vs comando). Correcciones en tiempo real. Integración con Ollama para SOAP.</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Fase 4: Data Flywheel</h4>
+                    <h4>Fase 5: Data Flywheel</h4>
                     <p>Captura de correcciones, re-entrenamiento automático de LoRA nocturno y calibración dinámica del bias β.</p>
                 </div>
             </div>
@@ -2957,6 +3072,11 @@
                 title: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg> Herramientas MCP Administrativas',
                 description: 'Suite de herramientas que automatizan la carga administrativa. Extracción automática de <code>códigos CIE-10</code> desde el texto clínico, generación de <code>recetas PDF</code> con firma digital, y sistema de <code>audit trail</code> inmutable que vincula audio original con texto generado para defensa legal.',
                 tags: ['CIE-10 Extractor', 'PDF Generator', 'Audit Trail', 'SQLite', 'Digital Signature']
+            },
+            4: {
+                title: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg> TTS Voz Humana',
+                description: 'Síntesis de voz con <strong>Kyutai TTS (Moshi 1.8B)</strong> fine-tuned con LoRA en voces hispanohablantes. El modelo genera audio a 24kHz con prosodia natural, indistinguible de un humano real. Pipeline completo: <code>fromPodtoCast</code> para datasets, tokenización con Mimi Codec (32 codebooks), y entrenamiento LoRA (~10M params, 0.58%).',
+                tags: ['Kyutai Moshi', 'LoRA Fine-tuning', 'Mimi Codec', '24kHz Audio', 'fromPodtoCast']
             }
         };
 
@@ -3307,6 +3427,76 @@
             
             btn.disabled = false;
             btn.innerHTML = '<span class="btn-icon">↻</span><span>Probar Otro Término</span>';
+        }
+
+        // Micro-Demo: TTS La Voz Humana
+        async function simulateTTSDemo() {
+            const btn = document.querySelector('#panel-tts .lab-btn');
+            const genericContent = document.getElementById('tts-generic-content');
+            const megiContent = document.getElementById('tts-megi-content');
+            const inputText = document.getElementById('tts-input-text');
+            
+            const examples = [
+                {
+                    text: '"Tome una tableta de Metformina de 850 miligramos con el desayuno y otra con la cena."',
+                    generic: { quality: 'Robótico', issues: ['Entonación plana', 'Pausas artificiales', 'Pronunciación mecánica'] },
+                    megi: { quality: 'Natural', features: ['Prosodia humana', 'Énfasis natural', 'Ritmo conversacional'] }
+                },
+                {
+                    text: '"Su próxima cita es el lunes a las 10 de la mañana. Recuerde traer sus estudios de laboratorio."',
+                    generic: { quality: 'Robótico', issues: ['Sin emoción', 'Ritmo monótono', 'Acentos incorrectos'] },
+                    megi: { quality: 'Natural', features: ['Tono amable', 'Pausas naturales', 'Claridad profesional'] }
+                },
+                {
+                    text: '"El diagnóstico indica hipertensión arterial controlada. Continuaremos con el mismo tratamiento."',
+                    generic: { quality: 'Robótico', issues: ['Términos médicos forzados', 'Sin inflexión', 'Voz sintética obvia'] },
+                    megi: { quality: 'Natural', features: ['Términos fluidos', 'Voz empática', 'Indistinguible de humano'] }
+                }
+            ];
+            
+            const example = examples[Math.floor(Math.random() * examples.length)];
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Sintetizando...</span>';
+            
+            inputText.textContent = example.text;
+            genericContent.innerHTML = '<span class="waiting-text">Procesando con TTS genérico...</span>';
+            megiContent.innerHTML = '<span class="waiting-text">Procesando con Kyutai + LoRA...</span>';
+            
+            await sleep(800);
+            
+            // Mostrar resultado TTS genérico
+            genericContent.innerHTML = `
+                <div style="margin-bottom: 0.5rem;">
+                    <span style="font-size: 0.7rem; color: #c94c4c; display: block; margin-bottom: 0.5rem;">🔊 Calidad: ${example.generic.quality}</span>
+                    <div style="display: flex; gap: 0.3rem; flex-wrap: wrap;">
+                        ${example.generic.issues.map(issue => `<span style="font-size: 0.65rem; background: rgba(224, 108, 117, 0.2); color: #c94c4c; padding: 0.2rem 0.5rem; border-radius: 4px;">❌ ${issue}</span>`).join('')}
+                    </div>
+                </div>
+                <div style="font-size: 0.7rem; color: rgba(245,243,238,0.4); margin-top: 0.5rem;">
+                    <code style="background: rgba(255,255,255,0.1); padding: 0.1rem 0.3rem; border-radius: 3px;">pyttsx3 / gTTS</code>
+                </div>
+            `;
+            
+            await sleep(1000);
+            
+            // Mostrar resultado MEGI TTS
+            megiContent.innerHTML = `
+                <div style="margin-bottom: 0.5rem;">
+                    <span style="font-size: 0.7rem; color: #4a9f5a; display: block; margin-bottom: 0.5rem;">🔊 Calidad: ${example.megi.quality}</span>
+                    <div style="display: flex; gap: 0.3rem; flex-wrap: wrap;">
+                        ${example.megi.features.map(f => `<span style="font-size: 0.65rem; background: rgba(144, 198, 149, 0.2); color: #4a9f5a; padding: 0.2rem 0.5rem; border-radius: 4px;">✓ ${f}</span>`).join('')}
+                    </div>
+                </div>
+                <div style="font-size: 0.7rem; color: rgba(245,243,238,0.4); margin-top: 0.5rem;">
+                    <code style="background: rgba(255,255,255,0.1); padding: 0.1rem 0.3rem; border-radius: 3px;">Kyutai Moshi 1.8B + LoRA (rank=128)</code>
+                </div>
+            `;
+            
+            await sleep(500);
+            
+            btn.disabled = false;
+            btn.innerHTML = '<span class="btn-icon">↻</span><span>Probar Otro Ejemplo</span>';
         }
 
         // Smooth scroll for navigation
