@@ -53,7 +53,7 @@
             right: 0;
             z-index: 100;
             padding: 1rem 3rem;
-            background: var(#ffffff);
+            background: var(--cream);
             border-bottom: 1px solid var(--border-light);
         }
 
@@ -2208,6 +2208,65 @@
                 padding: 0.9rem 1.5rem;
             }
         }
+
+        /* --- actualización 2026-11 --- */
+        .status-pill { display:inline-block; font-size:0.65rem; font-weight:700; letter-spacing:0.08em;
+            text-transform:uppercase; padding:0.2rem 0.55rem; border-radius:999px; margin-bottom:0.6rem; }
+        .status-pill.done { background:rgba(74,159,90,0.12); color:#3d7f4a; }
+        .status-pill.wip { background:rgba(212,165,116,0.18); color:#8b6a3f; }
+        .status-pill.next { background:rgba(126,184,218,0.18); color:#3f6f8b; }
+        .status-pill.vision { background:rgba(45,59,45,0.1); color:var(--forest); }
+        .status-pill.dropped { background:rgba(201,76,76,0.12); color:#a54040; }
+        .timeline-date { display:block; font-family:'JetBrains Mono', monospace; font-size:0.72rem;
+            color:var(--text-muted); margin-bottom:0.35rem; }
+        .lab-note { text-align:center; font-size:0.8rem; color:var(--text-muted); margin:-1rem 0 2rem; }
+        .lab-lines { width:100%; line-height:1.7; font-size:0.8rem; }
+        .lab-lines .ok { color:#90c695; } .lab-lines .warn { color:#d4a574; }
+        .lab-lines .bad { color:#e06c75; } .lab-lines .dim { color:rgba(245,243,238,0.45); }
+        .lab-lines .hl { background:rgba(144,198,149,0.15); color:#90c695; padding:0 3px; border-radius:3px; }
+        .lab-lines .hw { background:rgba(212,165,116,0.15); color:#d4a574; padding:0 3px; border-radius:3px; }
+        .comparison-content { align-items:flex-start; }
+        .models-section { background: var(--cream-dark); padding: 6rem 3rem; }
+        .models-group { margin-top: 3rem; }
+        .models-group h3 { font-family:'Cormorant Garamond', serif; font-size:1.6rem; font-weight:600; color:var(--text-primary);
+            margin-bottom:1.25rem; display:flex; align-items:center; gap:0.75rem; }
+        .models-group h3 small { font-family:'DM Sans', sans-serif; font-size:0.75rem; font-weight:600; color:var(--text-muted);
+            letter-spacing:0.05em; }
+        .models-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; }
+        .model-card { background:var(--cream); border:1px solid var(--border-light); border-radius:14px; padding:1.25rem 1.35rem;
+            transition:all 0.3s ease; }
+        .model-card:hover { border-color:var(--forest); transform:translateY(-2px); }
+        .model-card .model-top { display:flex; justify-content:space-between; align-items:baseline; gap:0.5rem; margin-bottom:0.45rem; }
+        .model-card h4 { font-size:0.98rem; font-weight:700; color:var(--forest); font-family:'JetBrains Mono', monospace; letter-spacing:-0.01em; }
+        .model-card .model-n { font-size:0.7rem; color:var(--text-muted); white-space:nowrap; }
+        .model-card p { font-size:0.86rem; color:var(--text-secondary); line-height:1.55; }
+        .model-tag { display:inline-block; margin-top:0.7rem; font-size:0.62rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+            padding:0.18rem 0.5rem; border-radius:999px; }
+        .model-tag.live { background:rgba(74,159,90,0.12); color:#3d7f4a; }
+        .model-tag.beta { background:rgba(212,165,116,0.18); color:#8b6a3f; }
+        @media (max-width: 1024px) { .models-grid { grid-template-columns:repeat(2, 1fr); } }
+        @media (max-width: 640px) { .models-grid { grid-template-columns:1fr; } .models-section { padding: 4rem 1rem; } }
+        .timeline-item.featured { border:2px solid var(--forest); background:#fff; box-shadow:0 10px 28px rgba(45,59,45,0.12); }
+        .timeline-item.featured h4 { font-weight:800; color:var(--forest); }
+        .timeline-item.featured p { font-weight:600; color:var(--text-primary); }
+        .team-section { background: var(--cream); padding: 6rem 3rem; border-top: 1px solid var(--border-light); }
+        .team-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:2rem; margin-top:3rem; }
+        .team-card { background:#fff; border:1px solid var(--border-light); border-radius:16px; overflow:hidden;
+            text-align:center; transition:all 0.3s ease; }
+        .team-card:hover { border-color:var(--forest); transform:translateY(-4px); box-shadow:0 12px 30px rgba(45,59,45,0.08); }
+        .team-photo { width:100%; aspect-ratio:1/1; object-fit:cover; display:block; background:#fff; }
+        .team-info { padding:1.25rem 1rem 1.5rem; border-top:1px solid var(--border-light); }
+        .team-info h4 { font-family:'Cormorant Garamond', serif; font-size:1.35rem; font-weight:600; color:var(--text-primary); line-height:1.2; }
+        .team-role { display:inline-block; margin-top:0.5rem; font-size:0.7rem; font-weight:700; letter-spacing:0.1em;
+            text-transform:uppercase; color:var(--forest); background:rgba(45,59,45,0.07); padding:0.25rem 0.7rem; border-radius:999px; }
+        .team-link { display:flex; justify-content:center; align-items:center; gap:0.35rem; margin-top:0.85rem; font-size:0.8rem;
+            color:var(--text-secondary); text-decoration:none; }
+        .team-link:hover { color:var(--forest); }
+        .team-link svg { width:15px; height:15px; }
+        @media (max-width: 1024px) { .team-grid { grid-template-columns:repeat(2, 1fr); } }
+        @media (max-width: 768px) { .team-section { padding: 4rem 1rem; } }
+        @media (max-width: 480px) { .team-grid { gap:1rem; } .team-info h4 { font-size:1.1rem; } }
+        .demo-disclaimer { font-size:0.72rem; color:#8a8a8a; margin-top:1rem; font-style:italic; }
     </style>
     
     <!-- React, ReactDOM y Babel para JSX -->
@@ -2216,66 +2275,40 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
+<body>
     <!-- Modal de Actualizaciones MEGI AI -->
     <div class="update-modal-overlay" id="updateModal">
         <div class="update-modal">
             <button class="update-modal-close" onclick="closeUpdateModal()">✕</button>
-            
-            <span class="update-modal-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2L6 10h6l-1 10 9-12h-6l1-6z"/>
-                </svg>
-                Próximamente
-            </span>
-            
-            <h2 class="update-modal-title">Estamos trabajando en<br>grandes actualizaciones</h2>
-            <p class="update-modal-subtitle">MEGI AI evoluciona para transformar la experiencia médica.</p>
-            
+            <span class="update-modal-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L6 10h6l-1 10 9-12h-6l1-6z"/></svg> Próximamente</span>
+            <h2 class="update-modal-title">Lo que viene<br>en MEGI</h2>
+            <p class="update-modal-subtitle">MEGI sigue creciendo para acompañar al médico en toda la consulta.</p>
             <div class="update-features-list">
                 <div class="update-feature-item">
-                    <div class="update-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                        </svg>
-                    </div>
+                    <div class="update-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
                     <div class="update-feature-content">
-                        <h4>Voz Ultra-Realista <span class="update-feature-tag">IA Generativa</span></h4>
-                        <p>Síntesis de voz indistinguible de la humana. Interacción natural y empática con pacientes.</p>
+                        <h4>Voz propia en español <span class="update-feature-tag">Voz IA</span></h4>
+                        <p>MEGI hablará con el paciente: indicaciones y recordatorios con una voz natural en español.</p>
                     </div>
                 </div>
-                
                 <div class="update-feature-item">
-                    <div class="update-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/>
-                            <path d="M12 8a4 4 0 1 0 0 8"/>
-                        </svg>
-                    </div>
+                    <div class="update-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.5"/><path d="M14 10h5M14 14h3"/></svg></div>
                     <div class="update-feature-content">
-                        <h4>Reconocimiento Visual de Medicamentos <span class="update-feature-tag">Visión IA</span></h4>
-                        <p>Identifica fármacos mediante la cámara. Detecta nombre, dosis y posibles interacciones al instante.</p>
+                        <h4>Identificadores por voz <span class="update-feature-tag">Captura</span></h4>
+                        <p>CURP, NSS, RFC e INE dictados en voz y capturados sin teclear.</p>
                     </div>
                 </div>
-                
                 <div class="update-feature-item">
-                    <div class="update-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="3" width="20" height="14" rx="2"/>
-                            <path d="M8 21h8M12 17v4"/>
-                        </svg>
-                    </div>
+                    <div class="update-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M12 9v6M9 12h6"/></svg></div>
                     <div class="update-feature-content">
-                        <h4>Pre-Consulta Interactiva <span class="update-feature-tag">UX Avanzada</span></h4>
-                        <p>Pantalla inteligente que guía al paciente antes de la consulta, recopilando síntomas e historial de forma conversacional.</p>
+                        <h4>Despliegue hospitalario <span class="update-feature-tag">Escala</span></h4>
+                        <p>De consultorio a hospital: varios médicos, varias áreas, el mismo expediente seguro.</p>
                     </div>
                 </div>
             </div>
-            
             <div class="update-modal-footer">
                 <p>Mejorando la experiencia médica, un paso a la vez.</p>
-                <a href="#demo" class="update-modal-cta" onclick="closeUpdateModal()">Ver Demo Actual</a>
+                <a href="#demo" class="update-modal-cta" onclick="closeUpdateModal()">Ver demo actual</a>
             </div>
         </div>
     </div>
@@ -2292,6 +2325,7 @@
                 <a href="#demo" class="nav-link">Demo</a>
                 <a href="#laboratorio" class="nav-link">Laboratorio</a>
                 <a href="#roadmap" class="nav-link">Roadmap</a>
+                <a href="#equipo" class="nav-link">Equipo</a>
                 <div class="lang-selector">
                     <svg style="width: 14px; height: 14px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
@@ -2300,14 +2334,8 @@
                     <span>ES</span>
                     <span style="font-size: 0.7rem;">▾</span>
                     <div class="lang-dropdown">
-                        <a href="#" class="lang-option active">
-                            <span>🇲🇽</span>
-                            <span>Español</span>
-                        </a>
-                        <a href="preconsulta-ng-laboratorio-en.html" class="lang-option">
-                            <span>🇺🇸</span>
-                            <span>Ingles</span>
-                        </a>
+                        <a href="#" class="lang-option active"><span>🇲🇽</span><span>Español</span></a>
+                        <a href="preconsulta-ng-laboratorio-en.html" class="lang-option"><span>🇺🇸</span><span>Inglés</span></a>
                     </div>
                 </div>
                 <a href="#" class="nav-cta" onclick="openUpdateModal(); return false;">Próximamente</a>
@@ -2323,16 +2351,15 @@
                 <div class="corner-decoration corner-tr"></div>
                 <div class="corner-decoration corner-bl"></div>
                 <div class="corner-decoration corner-br"></div>
-                
                 <div class="hero-image-container">
-                    <img src="fondo-pagina.jpg" alt="IA y Medicina" class="hero-bg-image">
+                    <img src="fondo-pagina.jpg" alt="MEGI AI" class="hero-bg-image">
                     <div class="hero-content-overlay">
-                        <span class="hero-badge">AGENTE ESCRIBANO MÉDICO V2.0</span>
+                        <span class="hero-badge">MEGI MEDICAL v2.1 · EN PRODUCCIÓN</span>
                         <h1 class="hero-title">Conectando la <em>inteligencia artificial</em> con la práctica médica.</h1>
-                        <p class="hero-description">Transformamos la voz del médico en documentación clínica estructurada con latencia &lt;2s, procesamiento 100% local y un agente que entiende comandos como "borra eso" o "cambia la dosis".</p>
+                        <p class="hero-description">MEGI escucha la consulta en español mexicano, la transcribe con nuestro propio motor de voz médico y arma la nota SOAP, los códigos CIE-10 y la receta en el equipo del consultorio. Lo que no puede confirmar, lo marca para revisión: nunca lo inventa.</p>
                         <div class="hero-buttons">
-                            <a href="#demo" class="btn-primary">Ver Demostración</a>
-                            <a href="#arquitectura" class="btn-secondary">Documentación Técnica</a>
+                            <a href="#demo" class="btn-primary">Ver demostración</a>
+                            <a href="#arquitectura" class="btn-secondary">Cómo funciona</a>
                         </div>
                     </div>
                 </div>
@@ -2344,20 +2371,20 @@
     <section class="stats-section">
         <div class="stats-container">
             <div class="stat-item">
-                <div class="stat-value">&lt;2s</div>
-                <div class="stat-label">Latencia de Transcripción</div>
+                <div class="stat-value">2–3 s</div>
+                <div class="stat-label">Del audio dictado al texto</div>
             </div>
             <div class="stat-item">
                 <div class="stat-value">100%</div>
-                <div class="stat-label">Procesamiento Local</div>
+                <div class="stat-label">Local: audio, modelos y expediente</div>
             </div>
             <div class="stat-item">
-                <div class="stat-value">400k+</div>
-                <div class="stat-label">Términos Médicos en Trie</div>
+                <div class="stat-value">+30</div>
+                <div class="stat-label">Modelos de IA propios trabajando juntos</div>
             </div>
             <div class="stat-item">
-                <div class="stat-value">Audit</div>
-                <div class="stat-label">Trazabilidad Forense (Audio vs Texto)</div>
+                <div class="stat-value">+8</div>
+                <div class="stat-label">Módulos clínicos integrados</div>
             </div>
         </div>
     </section>
@@ -2367,93 +2394,54 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-badge">CAPACIDADES PRINCIPALES</span>
-                <h2 class="section-title">Arquitectura Neuro-Simbólica</h2>
-                <p class="section-description">Combinamos el poder de los modelos neuronales con la precisión del procesamiento simbólico para un agente médico que entiende, corrige y aprende.</p>
+                <h2 class="section-title">Tecnología propia para la consulta</h2>
+                <p class="section-description">Un motor de voz entrenado para la consulta mexicana y capas de verificación que revisan todo antes de que llegue al expediente.</p>
             </div>
-            
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
-                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                            <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
-                        </svg>
-                    </div>
-                    <h3>Whisper V3 + LoRA</h3>
-                    <p>Modelo de transcripción fine-tuned con adaptadores LoRA especializados en prosodia médica hispanohablante.</p>
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg></div>
+                    <h3>MEGI Medical v2.1</h3>
+                    <p>Nuestro motor de reconocimiento de voz, entrenado con consultas reales en español mexicano. Transcribe en vivo mientras el médico atiende.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
-                            <path d="M12 3v18M8 7h8M6 11h12M8 15h8"/>
-                            <circle cx="12" cy="3" r="1" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <h3>MagnetTrieLogitsProcessor</h3>
-                    <p>El Trie ya no es un "muro" que bloquea. Usa <strong>Soft Penalties</strong> para actuar como "imán" que atrae hacia términos válidos, tolerando variaciones fonéticas.</p>
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div>
+                    <h3>Normalizador clínico</h3>
+                    <p>Convierte la forma hablada a la escrita: «quinientos miligramos cada doce horas» → «500 mg cada 12 h». El texto original se conserva.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
-                            <rect x="7" y="11" width="10" height="8" rx="1"/>
-                            <path d="M9 11V7a3 3 0 0 1 6 0v4"/>
-                            <circle cx="12" cy="15" r="1" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <h3>Servidor MCP</h3>
-                    <p>Arquitectura de contexto de modelo que permite integración seamless con cualquier LLM compatible.</p>
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                    <h3>Detectar y auditar, no inventar</h3>
+                    <p>Cada término, medicamento o dato dudoso se señala para revisión, con su evidencia. MEGI nunca rellena huecos por su cuenta.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
-                            <path d="M9.5 2A2.5 2.5 0 0 0 7 4.5v15A2.5 2.5 0 0 0 9.5 22h5a2.5 2.5 0 0 0 2.5-2.5v-15A2.5 2.5 0 0 0 14.5 2h-5Z"/>
-                            <path d="M9 10h6M9 14h4"/>
-                        </svg>
-                    </div>
-                    <h3>Agente Activo (Comandos)</h3>
-                    <p>No solo transcribe: entiende intención. Detecta comandos como "borra eso", "corrección" y ejecuta acciones en tiempo real.</p>
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.5"/><path d="M14 10h5M14 14h3"/></svg></div>
+                    <h3>Identificadores dictados</h3>
+                    <p>CURP, NSS, RFC e INE dictados en voz, con validación de estructura y dígito verificador. Si una letra es ambigua, pregunta.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
-                            <rect x="3" y="11" width="18" height="11" rx="2"/>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                        </svg>
-                    </div>
-                    <h3>Soberanía de Datos</h3>
-                    <p>Cero dependencia de cloud. Todo el procesamiento ocurre en tu infraestructura local con log inmutable.</p>
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+                    <h3>Escriba SOAP local</h3>
+                    <p>Redacta la nota SOAP, sugiere CIE-10 y receta, y produce documentos imprimibles con la cédula de cada médico, sin salir del consultorio.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-                        </svg>
-                    </div>
-                    <h3>Beam Search (5 Hipótesis)</h3>
-                    <p>El sistema mantiene 5 transcripciones paralelas. Si una falla fonéticamente, otra la recupera. Red de seguridad probabilística.</p>
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M20 17v5H6.5A2.5 2.5 0 0 1 4 19.5"/></svg></div>
+                    <h3>Evidencia con cita</h3>
+                    <p>Consulta Guías de Práctica Clínica y más de 139 mil textos de fichas FDA en español, con una tabla de contraindicaciones de 2,248 fármacos.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                            <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <h3>Expansión Fonética Automática</h3>
-                    <p>El Trie incluye variantes fonéticas generadas por algoritmos (Metaphone, G2P). "Metaformina" → "Metformina" sin curación manual.</p>
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg></div>
+                    <h3>Estudios del paciente</h3>
+                    <p>Lee radiografías, ECG, laboratorios, ecografías de mama y tiroides y RM de cráneo, y entrega un pre-diagnóstico para revisión médica.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
-                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                            <line x1="12" y1="19" x2="12" y2="23"/>
-                            <line x1="8" y1="23" x2="16" y2="23"/>
-                        </svg>
-                    </div>
-                    <h3>Voz Humana (TTS)</h3>
-                    <p>Kyutai TTS con LoRA fine-tuned. Síntesis de voz <strong>indistinguible</strong> de un humano real. Sin robots.</p>
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2"/><circle cx="5" cy="18" r="1"/></svg></div>
+                    <h3>Pre-consulta y «Falta preguntar»</h3>
+                    <p>La pre-consulta se arma por edad, historial y motivo de la visita. Durante la consulta, MEGI recuerda en vivo lo que aún no se ha preguntado.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+                    <h3>Soberanía y seguridad</h3>
+                    <p>Sin nube. Separación por hospital y por médico, llaves de acceso para cuentas privilegiadas, bitácora inalterable y sin borrado clínico.</p>
                 </div>
             </div>
         </div>
@@ -2465,56 +2453,138 @@
             <div class="section-header" style="color: var(--cream);">
                 <span class="section-badge" style="background: rgba(245, 243, 238, 0.1); color: var(--cream);">DISEÑO DEL SISTEMA</span>
                 <h2 class="section-title" style="color: var(--cream);">Capas de la Arquitectura</h2>
-                <p class="section-description" style="color: rgba(245, 243, 238, 0.7);">Haz clic en cada capa para explorar los componentes técnicos.</p>
+                <p class="section-description" style="color: rgba(245, 243, 238, 0.7);">Haz clic en cada capa para explorar los componentes.</p>
             </div>
-            
             <div class="arch-grid">
                 <div class="arch-visual">
                     <div class="layer-card active" data-layer="1">
                         <div class="layer-number">1</div>
                         <div class="layer-info">
-                            <h4>Servidor MCP de ASR</h4>
-                            <p>Percepción acústica y transcripción</p>
+                            <h4>Motor de voz</h4>
+                            <p>MEGI Medical v2.1</p>
                         </div>
                     </div>
                     <div class="layer-card" data-layer="2">
                         <div class="layer-number">2</div>
                         <div class="layer-info">
-                            <h4>Agente Escribano</h4>
-                            <p>Detección de intención y comandos</p>
+                            <h4>Verificación</h4>
+                            <p>Del habla a texto clínico confiable</p>
                         </div>
                     </div>
                     <div class="layer-card" data-layer="3">
                         <div class="layer-number">3</div>
                         <div class="layer-info">
-                            <h4>Herramientas MCP</h4>
-                            <p>CIE-10, Recetas PDF, Auditoría</p>
+                            <h4>Escriba clínico</h4>
+                            <p>SOAP, CIE-10, receta y evidencia</p>
                         </div>
                     </div>
                     <div class="layer-card" data-layer="4">
                         <div class="layer-number">4</div>
                         <div class="layer-info">
-                            <h4>TTS Humano</h4>
-                            <p>Kyutai Moshi + LoRA</p>
+                            <h4>Estudios y especialidades</h4>
+                            <p>Radiología, eco, ECG, labs, anestesia</p>
                         </div>
                     </div>
                 </div>
-                
                 <div class="arch-detail" id="arch-detail">
-                    <h3>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;">
-                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                            <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
-                        </svg>
-                        Servidor MCP de ASR
-                    </h3>
-                    <p>El núcleo de percepción acústica. Aloja el modelo Whisper Large V3 con adaptadores LoRA para la prosodia médica. Utiliza el <strong>MagnetTrieLogitsProcessor</strong> que aplica Soft Penalties (+β) para atraer la decodificación hacia el léxico validado. Incluye Beam Search (5 hipótesis) y expansión fonética automatizada (Metaphone/G2P).</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Whisper V3</span>
-                        <span class="tech-tag">LoRA</span>
-                        <span class="tech-tag">Soft Penalties</span>
-                        <span class="tech-tag">Beam Search</span>
-                        <span class="tech-tag">Metaphone G2P</span>
+                    <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg> Motor de voz</h3>
+                    <p>Nuestro motor de reconocimiento de voz médico, entrenado con audio clínico auditado en español mexicano. Corre dentro del consultorio, transcribe en vivo y confirma cada palabra antes de pasarla a la nota.</p>
+                    <div class="tech-tags"><span class="tech-tag">MEGI Medical v2.1</span><span class="tech-tag">Español mexicano</span><span class="tech-tag">Tiempo real</span><span class="tech-tag">100% local</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section class="models-section" id="modelos">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">NUESTROS MODELOS</span>
+                <h2 class="section-title">La familia de modelos MEGI</h2>
+                <p class="section-description">Más de 30 modelos de IA, cada uno especializado en una tarea y todos corriendo dentro del consultorio.</p>
+            </div>
+            <div class="models-group">
+                <h3>Voz y lenguaje <small>5 modelos</small></h3>
+                <div class="models-grid">
+                    <div class="model-card">
+                        <div class="model-top"><h4>MEGI Medical v2.1</h4><span class="model-n"></span></div>
+                        <p>Motor de voz médico: transcribe la consulta en español mexicano en tiempo real.</p>
+                        <span class="model-tag live">En consulta</span>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-top"><h4>Detector de voz</h4><span class="model-n"></span></div>
+                        <p>Detecta cuándo hay voz y cuándo silencio para transcribir sin cortar frases.</p>
+                        <span class="model-tag live">En consulta</span>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-top"><h4>Huella de voz</h4><span class="model-n"></span></div>
+                        <p>Reconoce la voz del médico y la separa de la del paciente.</p>
+                        <span class="model-tag live">En consulta</span>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-top"><h4>Megi-LLM</h4><span class="model-n"></span></div>
+                        <p>Escriba clínico local: nota SOAP, hechos clínicos, receta e informes.</p>
+                        <span class="model-tag live">En consulta</span>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-top"><h4>Buscador de evidencia</h4><span class="model-n"></span></div>
+                        <p>Búsqueda semántica en Guías de Práctica Clínica y 260 mil fragmentos de fichas FDA.</p>
+                        <span class="model-tag live">En consulta</span>
+                    </div>
+                </div>
+            </div>
+            <div class="models-group">
+                <h3>Imagen médica <small>+15 modelos</small></h3>
+                <div class="models-grid">
+                    <div class="model-card">
+                        <div class="model-top"><h4>Megi_tipo_estudio</h4><span class="model-n"></span></div>
+                        <p>Reconoce qué estudio subió el paciente: tórax, columna, abdomen o ECG, con abstención.</p>
+                        <span class="model-tag live">En consulta</span>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-top"><h4>Megi Tórax</h4><span class="model-n">3 modelos</span></div>
+                        <p>20 hallazgos en radiografía de tórax y localizadores de nódulo y neumotórax.</p>
+                        <span class="model-tag live">En consulta</span>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-top"><h4>Megi Columna</h4><span class="model-n">+6 modelos</span></div>
+                        <p>Región y proyección, puntos vertebrales, ángulos y curvatura cervical y lumbar.</p>
+                        <span class="model-tag live">En consulta</span>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-top"><h4>Megi Abdomen</h4><span class="model-n">3 modelos</span></div>
+                        <p>Búsqueda y localización de cálculos urinarios en placa simple.</p>
+                        <span class="model-tag beta">Beta</span>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-top"><h4>Megi Eco</h4><span class="model-n">3 modelos</span></div>
+                        <p>Segmenta y mide nódulos en ecografía de mama y tiroides.</p>
+                        <span class="model-tag beta">Beta</span>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-top"><h4>Megi Resonancia</h4><span class="model-n">8 modelos</span></div>
+                        <p>RM de cráneo: tumor y metástasis, infarto agudo, lesiones de esclerosis múltiple y mapa anatómico.</p>
+                        <span class="model-tag beta">Beta</span>
+                    </div>
+                </div>
+            </div>
+            <div class="models-group">
+                <h3>Cardiología y anestesia <small>+10 modelos</small></h3>
+                <div class="models-grid">
+                    <div class="model-card">
+                        <div class="model-top"><h4>Megi ECG v0.5</h4><span class="model-n"></span></div>
+                        <p>Lectura de ECG de 12 derivaciones: 38 hallazgos con mediciones y criterios con nombre.</p>
+                        <span class="model-tag beta">Beta</span>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-top"><h4>Eco desde ECG</h4><span class="model-n">2 modelos</span></div>
+                        <p>Estima desde el ECG lo que vería un ecocardiograma: FEVI baja, cavidades dilatadas, hipertrofia.</p>
+                        <span class="model-tag beta">Beta</span>
+                    </div>
+                    <div class="model-card">
+                        <div class="model-top"><h4>Anestesio</h4><span class="model-n">+8 modelos</span></div>
+                        <p>Mesa del anestesiólogo: hipotensión, tendencia de BIS, calidad del ECG de monitor, ST, extubación y electrolitos.</p>
+                        <span class="model-tag beta">Beta</span>
                     </div>
                 </div>
             </div>
@@ -2526,20 +2596,13 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-badge">PRUEBA EN VIVO</span>
-                <h2 class="section-title">Simulación del Agente Escribano</h2>
-                <p class="section-description">Experimenta el flujo completo: detección de comandos, corrección automática, y generación de documentos administrativos.</p>
+                <h2 class="section-title">Simulación de una consulta</h2>
+                <p class="section-description">El recorrido completo: audio → transcripción → normalización → nota SOAP → CIE-10, receta y lo que falta preguntar.</p>
             </div>
-            
             <div class="demo-container">
                 <div class="demo-grid">
                     <div class="demo-input">
-                        <h3>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
-                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
-                            </svg>
-                            Entrada de Audio
-                        </h3>
+                        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg> Entrada de audio</h3>
                         <div class="audio-visualizer" id="audioVisualizer">
                             <div class="audio-bar"></div>
                             <div class="audio-bar"></div>
@@ -2553,25 +2616,17 @@
                             <div class="audio-bar"></div>
                         </div>
                         <button class="record-btn" id="recordBtn" onclick="simulateTranscription()">
-                            <span>▶</span> Simular Transcripción
+                            <span>▶</span> Simular consulta
                         </button>
                         <div class="processing-indicator" id="processingIndicator" style="display: none;">
                             <div class="spinner"></div>
-                            <span id="processingText">Procesando con Whisper...</span>
+                            <span id="processingText">MEGI Medical v2.1: transcribiendo...</span>
                         </div>
                     </div>
                     <div class="demo-output">
-                        <h3>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
-                                <path d="M9.5 2A2.5 2.5 0 0 0 7 4.5v15A2.5 2.5 0 0 0 9.5 22h5a2.5 2.5 0 0 0 2.5-2.5v-15A2.5 2.5 0 0 0 14.5 2h-5Z"/>
-                                <path d="M9 10h6M9 14h4"/>
-                            </svg>
-                            Salida del Agente
-                        </h3>
+                        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Salida de MEGI</h3>
                         <div class="output-box" id="outputBox">
-                            <span style="opacity: 0.5; font-style: italic;">
-                                Presiona "Simular Transcripción" para ver el pipeline del Agente Escribano en acción...
-                            </span>
+                            <span style="opacity: 0.5; font-style: italic;">Presiona «Simular consulta» para ver el recorrido de MEGI...</span>
                         </div>
                     </div>
                 </div>
@@ -2585,414 +2640,282 @@
             <div class="section-header">
                 <span class="section-badge">PRUÉBALO POR PARTES</span>
                 <h2 class="section-title">Laboratorio Interactivo</h2>
-                <p class="section-description">Explora cada capacidad del sistema de forma aislada. Entiende exactamente cómo funciona cada componente.</p>
+                <p class="section-description">Cada capa del sistema, aislada. Así se ve lo que hace cada componente.</p>
             </div>
-            
-            <!-- Tabs Navigation -->
+            <p class="lab-note">Simulaciones ilustrativas con datos ficticios.</p>
             <div class="lab-tabs">
-                <button class="lab-tab active" data-tab="trie" onclick="switchLabTab('trie')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 3v18M8 7h8M6 11h12M8 15h8"/>
-                        <circle cx="12" cy="3" r="1" fill="currentColor"/>
-                    </svg>
-                    <span>El Imán Léxico</span>
-                    <small>Soft Penalties + Beam Search</small>
+                <button class="lab-tab active" data-tab="norm" onclick="switchLabTab('norm')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+                    <span>Del habla a la nota</span>
+                    <small>Normalizador clínico</small>
                 </button>
-                <button class="lab-tab" data-tab="commands" onclick="switchLabTab('commands')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9.5 2A2.5 2.5 0 0 0 7 4.5v15A2.5 2.5 0 0 0 9.5 22h5a2.5 2.5 0 0 0 2.5-2.5v-15A2.5 2.5 0 0 0 14.5 2h-5Z"/>
-                        <path d="M9 10h6M9 14h4"/>
-                    </svg>
-                    <span>El Comandante</span>
-                    <small>Intención y Comandos</small>
+                <button class="lab-tab" data-tab="cov" onclick="switchLabTab('cov')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2"/><circle cx="5" cy="18" r="1"/></svg>
+                    <span>Falta preguntar</span>
+                    <small>Banderas rojas en vivo</small>
                 </button>
-                <button class="lab-tab" data-tab="mcp" onclick="switchLabTab('mcp')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/>
-                        <path d="M9 9h6M9 13h6M9 17h4"/>
-                    </svg>
-                    <span>El Administrativo</span>
-                    <small>Herramientas MCP</small>
+                <button class="lab-tab" data-tab="rx" onclick="switchLabTab('rx')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg>
+                    <span>Rayos X</span>
+                    <small>Megi Tórax</small>
                 </button>
-                <button class="lab-tab" data-tab="phonetic" onclick="switchLabTab('phonetic')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                        <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
-                    </svg>
-                    <span>El Trie Inteligente</span>
-                    <small>Expansión Fonética</small>
+                <button class="lab-tab" data-tab="ecg" onclick="switchLabTab('ecg')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    <span>Electrocardiograma</span>
+                    <small>Megi ECG</small>
                 </button>
-                <button class="lab-tab" data-tab="tts" onclick="switchLabTab('tts')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                        <line x1="12" y1="19" x2="12" y2="23"/>
-                        <line x1="8" y1="23" x2="16" y2="23"/>
-                    </svg>
-                    <span>La Voz Humana</span>
-                    <small>Kyutai TTS + LoRA</small>
+                <button class="lab-tab" data-tab="lab" onclick="switchLabTab('lab')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2h6M10 2v6L4 19a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 19L14 8V2"/><path d="M7 15h10"/></svg>
+                    <span>Laboratorio</span>
+                    <small>Resultados + guías</small>
+                </button>
+                <button class="lab-tab" data-tab="contra" onclick="switchLabTab('contra')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 20.5a5 5 0 0 1-7-7l10-10a5 5 0 0 1 7 7z"/><path d="M8.5 8.5l7 7"/></svg>
+                    <span>Contraindicaciones</span>
+                    <small>Receta segura</small>
                 </button>
             </div>
 
-            <!-- Tab Content: El Imán Léxico -->
-            <div class="lab-panel active" id="panel-trie">
+            <div class="lab-panel active" id="panel-norm">
                 <div class="lab-grid">
                     <div class="lab-explanation">
-                        <div class="lab-icon-badge">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M9 12l2 2 4-4"/>
-                                <circle cx="12" cy="12" r="10"/>
-                            </svg>
-                        </div>
-                        <h3>De "Muro" a "Imán": La Evolución del Trie</h3>
-                        <p>El sistema Whisper puede confundir fonéticamente los términos médicos. La arquitectura tradicional usaba el Trie como un <strong>"muro"</strong> que bloqueaba cualquier palabra no exacta. Ahora usamos <strong>Soft Penalties</strong> para convertirlo en un <strong>"imán"</strong> que atrae hacia el término correcto.</p>
-                        
-                        <div class="lab-how-it-works" style="background: rgba(224, 108, 117, 0.05); border-color: rgba(224, 108, 117, 0.2);">
-                            <h4 style="color: #c94c4c;">❌ Antes: Restricción Dura (El Muro)</h4>
+                        <div class="lab-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div>
+                        <h3>¿Cómo pasa el dictado a texto clínico?</h3>
+                        <p>El médico habla en palabras; el expediente se escribe en cifras y unidades. El <strong>normalizador</strong> lo convierte al instante y siempre igual: misma entrada, misma salida.</p>
+                        <div class="lab-how-it-works">
+                            <h4>Qué normaliza:</h4>
                             <ol>
-                                <li><span class="step-num" style="background: #c94c4c;">1</span> Whisper genera probabilidades (logits) para cada token</li>
-                                <li><span class="step-num" style="background: #c94c4c;">2</span> El Trie aplica <code style="background: rgba(224, 108, 117, 0.15); color: #c94c4c;">-∞</code> a tokens no válidos</li>
-                                <li><span class="step-num" style="background: #c94c4c;">3</span> Si pronuncias mal → El sistema <strong>choca</strong> y falla</li>
+                                <li><span class="step-num">1</span> Números y edades: «treinta y cuatro años» → 34 años</li>
+                                <li><span class="step-num">2</span> Dosis y unidades: «quinientos miligramos» → 500 mg</li>
+                                <li><span class="step-num">3</span> Frecuencias: «cada doce horas» → c/12 h</li>
+                                <li><span class="step-num">4</span> El texto hablado original queda guardado</li>
                             </ol>
                         </div>
-                        
-                        <div class="lab-how-it-works" style="background: rgba(144, 198, 149, 0.05); border-color: rgba(144, 198, 149, 0.2);">
-                            <h4 style="color: #4a9f5a;">✓ Ahora: Guía Probabilística (El Imán)</h4>
-                            <ol>
-                                <li><span class="step-num" style="background: #4a9f5a;">1</span> Whisper genera probabilidades para cada token</li>
-                                <li><span class="step-num" style="background: #4a9f5a;">2</span> El Trie suma <code style="background: rgba(144, 198, 149, 0.15); color: #4a9f5a;">+β</code> (sesgo positivo) a tokens válidos</li>
-                                <li><span class="step-num" style="background: #4a9f5a;">3</span> Beam Search mantiene 5 hipótesis paralelas</li>
-                                <li><span class="step-num" style="background: #4a9f5a;">4</span> El sistema <strong>atrae</strong> hacia el término correcto</li>
-                            </ol>
-                        </div>
-                        
-                        <div class="lab-message">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
-                            </svg>
-                            <span>"Toleramos la variabilidad humana sin perder precisión clínica."</span>
-                        </div>
+                        <div class="lab-message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg><span>«Lo que dijiste, como se escribe en el expediente.»</span></div>
                     </div>
                     <div class="lab-demo-area">
                         <div class="lab-demo-box">
-                            <div class="demo-audio-wave">
-                                <svg viewBox="0 0 200 40" preserveAspectRatio="none">
-                                    <path d="M0,20 Q10,5 20,20 T40,20 T60,20 T80,20 T100,20 T120,20 T140,20 T160,20 T180,20 T200,20" 
-                                          fill="none" stroke="rgba(45, 59, 45, 0.3)" stroke-width="2"/>
-                                </svg>
-                                <span class="demo-audio-label">🎤 Audio: Médico dice <em>"Metaformina"</em> (error de pronunciación)</span>
-                            </div>
-                            
                             <div class="comparison-boxes">
-                                <div class="comparison-box error" id="trie-whisper-box">
-                                    <div class="comparison-header">
-                                        <span class="comparison-icon">🧱</span>
-                                        <span>Trie "Muro" (Antes)</span>
-                                    </div>
-                                    <div class="comparison-content" id="trie-whisper-content">
-                                        <span class="waiting-text">Esperando simulación...</span>
-                                    </div>
+                                <div class="comparison-box error">
+                                    <div class="comparison-header"><span class="comparison-icon">🎤</span><span>Entrada</span></div>
+                                    <div class="comparison-content" id="lab-in-norm"><span class="waiting-text">Esperando simulación...</span></div>
                                 </div>
                                 <div class="comparison-arrow">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                                    </svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                 </div>
-                                <div class="comparison-box success" id="trie-megi-box">
-                                    <div class="comparison-header">
-                                        <span class="comparison-icon">🧲</span>
-                                        <span>Trie "Imán" (Ahora)</span>
-                                    </div>
-                                    <div class="comparison-content" id="trie-megi-content">
-                                        <span class="waiting-text">Esperando simulación...</span>
-                                    </div>
+                                <div class="comparison-box success">
+                                    <div class="comparison-header"><span class="comparison-icon">✓</span><span>Salida de MEGI</span></div>
+                                    <div class="comparison-content" id="lab-out-norm"><span class="waiting-text">Esperando simulación...</span></div>
                                 </div>
                             </div>
-                            
-                            <button class="lab-btn" onclick="simulateTrieDemo()">
+                            <button class="lab-btn" id="lab-btn-norm" onclick="runLab('norm')">
                                 <span class="btn-icon">▶</span>
-                                <span>Simular Corrección con Soft Penalties</span>
+                                <span>Normalizar dictado</span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tab Content: El Comandante -->
-            <div class="lab-panel" id="panel-commands">
+            <div class="lab-panel" id="panel-cov">
                 <div class="lab-grid">
                     <div class="lab-explanation">
-                        <div class="lab-icon-badge command-badge">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 20V10M18 20V4M6 20v-4"/>
-                            </svg>
-                        </div>
-                        <h3>¿Cómo detectamos comandos vs dictado?</h3>
-                        <p>El agente no solo transcribe: <strong>entiende la intención</strong>. Usa un clasificador de intención que distingue entre contenido clínico y comandos de edición.</p>
+                        <div class="lab-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2"/><circle cx="5" cy="18" r="1"/></svg></div>
+                        <h3>¿Qué falta preguntar en esta consulta?</h3>
+                        <p>El <strong>motivo de consulta</strong> activa la lista de preguntas y banderas rojas de las Guías de Práctica Clínica. MEGI la cruza en vivo contra lo que ya se dijo y deja arriba lo pendiente.</p>
                         <div class="lab-how-it-works">
-                            <h4>Comandos soportados:</h4>
-                            <ul class="command-list">
-                                <li><code>"borra eso"</code> → Elimina última oración</li>
-                                <li><code>"corrección, quise decir..."</code> → Reemplaza texto</li>
-                                <li><code>"cambia la dosis a..."</code> → Actualiza valores</li>
-                                <li><code>"no, espera"</code> → Pausa y permite edición</li>
-                            </ul>
-                        </div>
-                        <div class="lab-message command-message">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                            </svg>
-                            <span>"Edita con tu voz. Tu asistente te obedece, no solo transcribe."</span>
-                        </div>
-                    </div>
-                    <div class="lab-demo-area">
-                        <div class="lab-demo-box">
-                            <div class="command-timeline">
-                                <div class="timeline-step" id="cmd-step-1">
-                                    <div class="step-indicator">1</div>
-                                    <div class="step-content">
-                                        <div class="step-label">Texto dictado:</div>
-                                        <div class="step-text" id="cmd-text-1">Paciente alérgico a <span class="highlight-text">penicilina</span>...</div>
-                                    </div>
-                                </div>
-                                <div class="timeline-step hidden" id="cmd-step-2">
-                                    <div class="step-indicator voice">🎤</div>
-                                    <div class="step-content">
-                                        <div class="step-label">Comando detectado:</div>
-                                        <div class="step-text command-text">"No, espera, <strong>borra alergias</strong>"</div>
-                                    </div>
-                                </div>
-                                <div class="timeline-step hidden" id="cmd-step-3">
-                                    <div class="step-indicator action">⚡</div>
-                                    <div class="step-content">
-                                        <div class="step-label">Acción ejecutada:</div>
-                                        <div class="step-text">
-                                            <span class="action-badge">INTENT: COMMAND (Delete)</span>
-                                            <span class="action-badge action">ACTION: delete_sentence()</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="timeline-step hidden" id="cmd-step-4">
-                                    <div class="step-indicator success">✓</div>
-                                    <div class="step-content">
-                                        <div class="step-label">Resultado final:</div>
-                                        <div class="step-text result-text" id="cmd-result"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <button class="lab-btn command-btn" onclick="simulateCommandDemo()">
-                                <span class="btn-icon">▶</span>
-                                <span>Simular Comando de Voz</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tab Content: El Administrativo -->
-            <div class="lab-panel" id="panel-mcp">
-                <div class="lab-grid">
-                    <div class="lab-explanation">
-                        <div class="lab-icon-badge mcp-badge">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                <path d="M9 9h6M9 13h6M9 17h4"/>
-                            </svg>
-                        </div>
-                        <h3>¿Cómo automatizamos lo administrativo?</h3>
-                        <p>Las <strong>Herramientas MCP</strong> extraen automáticamente códigos CIE-10, generan recetas PDF y crean un registro de auditoría inmutable.</p>
-                        <div class="lab-how-it-works">
-                            <h4>Herramientas disponibles:</h4>
-                            <ul class="tools-list">
-                                <li>
-                                    <span class="tool-icon">🏷️</span>
-                                    <span><strong>extract_cie10()</strong> - Códigos diagnósticos</span>
-                                </li>
-                                <li>
-                                    <span class="tool-icon">📄</span>
-                                    <span><strong>generate_prescription()</strong> - Receta PDF</span>
-                                </li>
-                                <li>
-                                    <span class="tool-icon">💾</span>
-                                    <span><strong>create_audit_log()</strong> - Trazabilidad forense</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="lab-message mcp-message">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14 2 14 8 20 8"/>
-                                <line x1="16" y1="13" x2="8" y2="13"/>
-                                <line x1="16" y1="17" x2="8" y2="17"/>
-                            </svg>
-                            <span>"Olvídate de buscar códigos. Nosotros lo hacemos por ti."</span>
-                        </div>
-                    </div>
-                    <div class="lab-demo-area">
-                        <div class="lab-demo-box">
-                            <div class="mcp-input-area">
-                                <div class="mcp-input-label">Texto clínico de entrada:</div>
-                                <div class="mcp-input-text" id="mcp-input-text">
-                                    "Diagnóstico de <strong>diabetes mellitus tipo 2</strong> descompensada con <strong>neuropatía diabética</strong>."
-                                </div>
-                            </div>
-                            
-                            <div class="mcp-output-area hidden" id="mcp-output-area">
-                                <div class="mcp-processing" id="mcp-processing">
-                                    <div class="mcp-spinner"></div>
-                                    <span>Ejecutando herramientas MCP...</span>
-                                </div>
-                                <div class="mcp-results hidden" id="mcp-results">
-                                    <div class="mcp-result-header">📋 Output Administrativo Automático</div>
-                                    <div class="mcp-badges" id="mcp-badges">
-                                        <!-- Badges will be inserted here -->
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <button class="lab-btn mcp-btn" onclick="simulateMcpDemo()">
-                                <span class="btn-icon">▶</span>
-                                <span>Generar Códigos Automáticos</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tab Content: Expansión Fonética -->
-            <div class="lab-panel" id="panel-phonetic">
-                <div class="lab-grid">
-                    <div class="lab-explanation">
-                        <div class="lab-icon-badge" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                                <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
-                            </svg>
-                        </div>
-                        <h3>¿Cómo se vuelve "inteligente" el Trie?</h3>
-                        <p>Agregar variaciones manualmente es impráctico. En su lugar, usamos <strong>algoritmos fonéticos</strong> (Metaphone, Soundex) y <strong>modelos G2P neuronales</strong> para generar automáticamente todas las formas en que un término podría pronunciarse mal.</p>
-                        
-                        <div class="lab-how-it-works">
-                            <h4>Estrategia de Expansión:</h4>
+                            <h4>Cómo decide:</h4>
                             <ol>
-                                <li><span class="step-num" style="background: #9b59b6;">1</span> <strong>Hashing Fonético:</strong> Metaphone convierte "Gemfibrozilo" → <code style="font-size: 0.75rem;">JMFBRSL</code></li>
-                                <li><span class="step-num" style="background: #9b59b6;">2</span> <strong>Simulación de Errores:</strong> Reglas de seseo (z→s), yeísmo (ll→y)</li>
-                                <li><span class="step-num" style="background: #9b59b6;">3</span> <strong>G2P Neural:</strong> "Paracetamol" → <code style="font-size: 0.75rem;">/pa.ɾa.θe.ta.ˈmol/</code> → variantes</li>
-                                <li><span class="step-num" style="background: #9b59b6;">4</span> <strong>Normalización:</strong> Variante → Término canónico</li>
+                                <li><span class="step-num">1</span> El motivo (escrito o dictado) elige la plantilla</li>
+                                <li><span class="step-num">2</span> Una pregunta se da por hecha cuando se escucha en la consulta</li>
+                                <li><span class="step-num">3</span> Una bandera roja necesita dos pistas distintas: mencionar «brazo» no basta</li>
+                                <li><span class="step-num">4</span> Las alarmas pendientes van siempre primero</li>
                             </ol>
                         </div>
-                        
-                        <div class="lab-message" style="background: linear-gradient(135deg, rgba(155, 89, 182, 0.08) 0%, rgba(155, 89, 182, 0.03) 100%); border-left-color: #9b59b6;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="#9b59b6" stroke-width="1.5">
-                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
-                                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
-                            </svg>
-                            <span style="color: #9b59b6;">"100,000 términos × expansión automática = robustez sin curación manual."</span>
-                        </div>
+                        <div class="lab-message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2"/><circle cx="5" cy="18" r="1"/></svg><span>«Prefiere recordarte de más que dejar pasar una alarma.»</span></div>
                     </div>
                     <div class="lab-demo-area">
                         <div class="lab-demo-box">
-                            <div style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 10px; margin-bottom: 1rem;">
-                                <div style="font-size: 0.75rem; color: rgba(245,243,238,0.5); margin-bottom: 0.5rem; text-transform: uppercase;">Término Original:</div>
-                                <div style="font-size: 1.1rem; color: var(--cream);" id="phonetic-original">Dacriocistitis</div>
-                            </div>
-                            
-                            <div style="display: flex; flex-direction: column; gap: 0.75rem; flex: 1;" id="phonetic-variants">
-                                <div style="padding: 0.75rem 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 3px solid rgba(255,255,255,0.1);">
-                                    <span style="font-size: 0.7rem; color: rgba(245,243,238,0.4); display: block; margin-bottom: 0.25rem;">Esperando simulación...</span>
+                            <div class="comparison-boxes">
+                                <div class="comparison-box error">
+                                    <div class="comparison-header"><span class="comparison-icon">🎤</span><span>Entrada</span></div>
+                                    <div class="comparison-content" id="lab-in-cov"><span class="waiting-text">Esperando simulación...</span></div>
+                                </div>
+                                <div class="comparison-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </div>
+                                <div class="comparison-box success">
+                                    <div class="comparison-header"><span class="comparison-icon">✓</span><span>Salida de MEGI</span></div>
+                                    <div class="comparison-content" id="lab-out-cov"><span class="waiting-text">Esperando simulación...</span></div>
                                 </div>
                             </div>
-                            
-                            <button class="lab-btn" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); color: white;" onclick="simulatePhoneticDemo()">
+                            <button class="lab-btn" id="lab-btn-cov" onclick="runLab('cov')">
                                 <span class="btn-icon">▶</span>
-                                <span>Expandir Fonéticamente</span>
+                                <span>Revisar cobertura</span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tab Content: TTS La Voz Humana -->
-            <div class="lab-panel" id="panel-tts">
+            <div class="lab-panel" id="panel-rx">
                 <div class="lab-grid">
                     <div class="lab-explanation">
-                        <div class="lab-icon-badge" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                                <line x1="12" y1="19" x2="12" y2="23"/>
-                                <line x1="8" y1="23" x2="16" y2="23"/>
-                            </svg>
-                        </div>
-                        <h3>Síntesis de Voz Indistinguible</h3>
-                        <p>El sistema no solo transcribe, también <strong>habla</strong>. Usamos <strong>Kyutai TTS (Moshi 1.8B)</strong> con fine-tuning LoRA entrenado en voces hispanohablantes naturales. El resultado: voz sintética que <strong>no se distingue de una humana</strong>.</p>
-                        
+                        <div class="lab-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg></div>
+                        <h3>¿Qué ve MEGI en una radiografía de tórax?</h3>
+                        <p><strong>Megi Tórax</strong> revisa 20 hallazgos con umbrales calibrados y marca en la placa dónde los encontró. Cuando no está seguro lo dice: separa lo <strong>presente</strong> de lo <strong>posible</strong>. Si la placa no es de tórax o no es valorable, se abstiene.</p>
                         <div class="lab-how-it-works">
-                            <h4>Pipeline de Entrenamiento:</h4>
+                            <h4>Qué hace:</h4>
                             <ol>
-                                <li><span class="step-num" style="background: #e74c3c;">1</span> <strong>fromPodtoCast:</strong> Dataset de podcasts con diarización + Whisper + LLM</li>
-                                <li><span class="step-num" style="background: #e74c3c;">2</span> <strong>Tokenización:</strong> Mimi Codec (32 codebooks) + Llama Tokenizer</li>
-                                <li><span class="step-num" style="background: #e74c3c;">3</span> <strong>LoRA Training:</strong> ~10M params (0.58%) sobre modelo de 1.8B</li>
-                                <li><span class="step-num" style="background: #e74c3c;">4</span> <strong>Inferencia:</strong> Texto → Audio 24kHz indistinguible</li>
+                                <li><span class="step-num">1</span> Megi_tipo_estudio reconoce el estudio y la proyección</li>
+                                <li><span class="step-num">2</span> 20 hallazgos: cardiomegalia, derrame, consolidación, nódulo, neumotórax…</li>
+                                <li><span class="step-num">3</span> Mapa de localización sobre la placa</li>
+                                <li><span class="step-num">4</span> También: Megi Columna y Megi Abdomen</li>
                             </ol>
                         </div>
-                        
-                        <div class="lab-how-it-works" style="background: rgba(231, 76, 60, 0.05); border-color: rgba(231, 76, 60, 0.2); margin-top: 1rem;">
-                            <h4 style="color: #e74c3c;">🎯 Especificaciones Técnicas:</h4>
-                            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem;">
-                                <li style="margin-bottom: 0.5rem;">• <strong>Modelo base:</strong> Kyutai TTS (Depformer + LM)</li>
-                                <li style="margin-bottom: 0.5rem;">• <strong>Parámetros:</strong> 1.8B total, ~10M entrenados (LoRA rank=128)</li>
-                                <li style="margin-bottom: 0.5rem;">• <strong>Dataset:</strong> 27,882 samples (~10s cada uno)</li>
-                                <li style="margin-bottom: 0.5rem;">• <strong>Sample Rate:</strong> 24kHz, bfloat16</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="lab-message" style="background: linear-gradient(135deg, rgba(231, 76, 60, 0.08) 0%, rgba(231, 76, 60, 0.03) 100%); border-left-color: #e74c3c;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="#e74c3c" stroke-width="1.5">
-                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                            </svg>
-                            <span style="color: #e74c3c;">"El paciente escucha instrucciones con voz humana, no robótica."</span>
-                        </div>
+                        <div class="lab-message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M7 12h10"/></svg><span>«Una segunda lectura en segundos, siempre para revisión del médico.»</span></div>
                     </div>
                     <div class="lab-demo-area">
                         <div class="lab-demo-box">
-                            <div style="padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 10px; margin-bottom: 1rem;">
-                                <div style="font-size: 0.75rem; color: rgba(245,243,238,0.5); margin-bottom: 0.5rem; text-transform: uppercase;">Texto de entrada:</div>
-                                <div style="font-size: 0.95rem; color: var(--cream); line-height: 1.5;" id="tts-input-text">"Tome una tableta de Metformina de 850 miligramos con el desayuno y otra con la cena."</div>
-                            </div>
-                            
-                            <div style="display: flex; flex-direction: column; gap: 0.75rem; flex: 1;" id="tts-output-area">
-                                <div class="comparison-boxes" style="flex-direction: column;">
-                                    <div class="comparison-box error" id="tts-generic-box" style="flex: 1;">
-                                        <div class="comparison-header">
-                                            <span class="comparison-icon">🤖</span>
-                                            <span>TTS Genérico</span>
-                                        </div>
-                                        <div class="comparison-content" id="tts-generic-content">
-                                            <span class="waiting-text">Esperando simulación...</span>
-                                        </div>
-                                    </div>
-                                    <div class="comparison-box success" id="tts-megi-box" style="flex: 1; margin-top: 0.5rem;">
-                                        <div class="comparison-header">
-                                            <span class="comparison-icon">🎙️</span>
-                                            <span>MEGI AI + Kyutai LoRA</span>
-                                        </div>
-                                        <div class="comparison-content" id="tts-megi-content">
-                                            <span class="waiting-text">Esperando simulación...</span>
-                                        </div>
-                                    </div>
+                            <div class="comparison-boxes">
+                                <div class="comparison-box error">
+                                    <div class="comparison-header"><span class="comparison-icon">🎤</span><span>Entrada</span></div>
+                                    <div class="comparison-content" id="lab-in-rx"><span class="waiting-text">Esperando simulación...</span></div>
+                                </div>
+                                <div class="comparison-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </div>
+                                <div class="comparison-box success">
+                                    <div class="comparison-header"><span class="comparison-icon">✓</span><span>Salida de MEGI</span></div>
+                                    <div class="comparison-content" id="lab-out-rx"><span class="waiting-text">Esperando simulación...</span></div>
                                 </div>
                             </div>
-                            
-                            <button class="lab-btn" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white;" onclick="simulateTTSDemo()">
+                            <button class="lab-btn" id="lab-btn-rx" onclick="runLab('rx')">
                                 <span class="btn-icon">▶</span>
-                                <span>Simular Síntesis de Voz</span>
+                                <span>Analizar radiografía</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lab-panel" id="panel-ecg">
+                <div class="lab-grid">
+                    <div class="lab-explanation">
+                        <div class="lab-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                        <h3>¿Cómo lee MEGI un electrocardiograma?</h3>
+                        <p><strong>Megi ECG</strong> trabaja en tres capas: <strong>mide</strong> cada intervalo, <strong>clasifica</strong> 38 hallazgos con una red entrenada en cientos de miles de ECG y <strong>cruza</strong> ambas: si la red dice «bloqueo AV», el PR medido tiene que confirmarlo. Ya funciona en su mesa de lectura y se está integrando a la consulta.</p>
+                        <div class="lab-how-it-works">
+                            <h4>Qué entrega:</h4>
+                            <ol>
+                                <li><span class="step-num">1</span> Lee foto o PDF del papel, o el archivo del electrocardiógrafo</li>
+                                <li><span class="step-num">2</span> FC, PR, QRS, QT/QTc y eje sobre el latido mediano</li>
+                                <li><span class="step-num">3</span> Hallazgos «presentes» y «posibles», con criterios con nombre (Sgarbossa…)</li>
+                                <li><span class="step-num">4</span> Avisa si la foto baja la confianza en ST y QT</li>
+                            </ol>
+                        </div>
+                        <div class="lab-message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span>«Cada diagnóstico viene con la medición que lo respalda.»</span></div>
+                    </div>
+                    <div class="lab-demo-area">
+                        <div class="lab-demo-box">
+                            <div class="comparison-boxes">
+                                <div class="comparison-box error">
+                                    <div class="comparison-header"><span class="comparison-icon">🎤</span><span>Entrada</span></div>
+                                    <div class="comparison-content" id="lab-in-ecg"><span class="waiting-text">Esperando simulación...</span></div>
+                                </div>
+                                <div class="comparison-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </div>
+                                <div class="comparison-box success">
+                                    <div class="comparison-header"><span class="comparison-icon">✓</span><span>Salida de MEGI</span></div>
+                                    <div class="comparison-content" id="lab-out-ecg"><span class="waiting-text">Esperando simulación...</span></div>
+                                </div>
+                            </div>
+                            <button class="lab-btn" id="lab-btn-ecg" onclick="runLab('ecg')">
+                                <span class="btn-icon">▶</span>
+                                <span>Leer electrocardiograma</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lab-panel" id="panel-lab">
+                <div class="lab-grid">
+                    <div class="lab-explanation">
+                        <div class="lab-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2h6M10 2v6L4 19a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 19L14 8V2"/><path d="M7 15h10"/></svg></div>
+                        <h3>¿Qué pasa cuando el paciente trae sus laboratorios?</h3>
+                        <p>El PDF, la foto o el archivo se leen solos: MEGI reconoce cada analito, lo compara con la referencia del propio laboratorio y busca en las <strong>Guías de Práctica Clínica del IMSS</strong> lo que dicen esos valores.</p>
+                        <div class="lab-how-it-works">
+                            <h4>Qué hace:</h4>
+                            <ol>
+                                <li><span class="step-num">1</span> Lee PDF con texto, foto del resultado o CSV</li>
+                                <li><span class="step-num">2</span> Usa el rango del laboratorio cuando viene impreso</li>
+                                <li><span class="step-num">3</span> Busca las guías relacionadas y responde citándolas</li>
+                                <li><span class="step-num">4</span> Todo entra al pre-diagnóstico de la consulta</li>
+                            </ol>
+                        </div>
+                        <div class="lab-message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2h6M10 2v6L4 19a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 19L14 8V2"/><path d="M7 15h10"/></svg><span>«Los valores fuera de rango, con la guía al lado.»</span></div>
+                    </div>
+                    <div class="lab-demo-area">
+                        <div class="lab-demo-box">
+                            <div class="comparison-boxes">
+                                <div class="comparison-box error">
+                                    <div class="comparison-header"><span class="comparison-icon">🎤</span><span>Entrada</span></div>
+                                    <div class="comparison-content" id="lab-in-lab"><span class="waiting-text">Esperando simulación...</span></div>
+                                </div>
+                                <div class="comparison-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </div>
+                                <div class="comparison-box success">
+                                    <div class="comparison-header"><span class="comparison-icon">✓</span><span>Salida de MEGI</span></div>
+                                    <div class="comparison-content" id="lab-out-lab"><span class="waiting-text">Esperando simulación...</span></div>
+                                </div>
+                            </div>
+                            <button class="lab-btn" id="lab-btn-lab" onclick="runLab('lab')">
+                                <span class="btn-icon">▶</span>
+                                <span>Leer laboratorio</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lab-panel" id="panel-contra">
+                <div class="lab-grid">
+                    <div class="lab-explanation">
+                        <div class="lab-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 20.5a5 5 0 0 1-7-7l10-10a5 5 0 0 1 7 7z"/><path d="M8.5 8.5l7 7"/></svg></div>
+                        <h3>¿Es segura esta receta para este paciente?</h3>
+                        <p>Antes de imprimir, la receta se cruza con una <strong>tabla de contraindicaciones de 2,248 fármacos</strong> construida desde las fichas FDA, con severidad y la cita de dónde sale cada alerta.</p>
+                        <div class="lab-how-it-works">
+                            <h4>Qué revisa:</h4>
+                            <ol>
+                                <li><span class="step-num">1</span> Fármaco + condición del paciente (embarazo, insuficiencia renal…)</li>
+                                <li><span class="step-num">2</span> Interacciones entre los fármacos de la receta</li>
+                                <li><span class="step-num">3</span> Solo alertas de alta confianza</li>
+                                <li><span class="step-num">4</span> Cada alerta trae su fuente para verificarla</li>
+                            </ol>
+                        </div>
+                        <div class="lab-message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 20.5a5 5 0 0 1-7-7l10-10a5 5 0 0 1 7 7z"/><path d="M8.5 8.5l7 7"/></svg><span>«La alerta llega con su evidencia, no como caja negra.»</span></div>
+                    </div>
+                    <div class="lab-demo-area">
+                        <div class="lab-demo-box">
+                            <div class="comparison-boxes">
+                                <div class="comparison-box error">
+                                    <div class="comparison-header"><span class="comparison-icon">🎤</span><span>Entrada</span></div>
+                                    <div class="comparison-content" id="lab-in-contra"><span class="waiting-text">Esperando simulación...</span></div>
+                                </div>
+                                <div class="comparison-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </div>
+                                <div class="comparison-box success">
+                                    <div class="comparison-header"><span class="comparison-icon">✓</span><span>Salida de MEGI</span></div>
+                                    <div class="comparison-content" id="lab-out-contra"><span class="waiting-text">Esperando simulación...</span></div>
+                                </div>
+                            </div>
+                            <button class="lab-btn" id="lab-btn-contra" onclick="runLab('contra')">
+                                <span class="btn-icon">▶</span>
+                                <span>Verificar receta</span>
                             </button>
                         </div>
                     </div>
@@ -3005,31 +2928,127 @@
     <section class="timeline-section" id="roadmap">
         <div class="section-container">
             <div class="section-header">
-                <span class="section-badge">PLAN DE DESARROLLO</span>
-                <h2 class="section-title">Roadmap del MVP</h2>
-                <p class="section-description">Fases de desarrollo hacia el asistente clínico completo.</p>
+                <span class="section-badge">NUESTRO CAMINO</span>
+                <h2 class="section-title">Roadmap</h2>
+                <p class="section-description">De la idea a la consulta real, y lo que sigue.</p>
             </div>
-            
             <div class="timeline">
                 <div class="timeline-item">
-                    <h4>Fase 1: Núcleo MCP</h4>
-                    <p>Servidor MCP con Whisper + LoRA + MagnetTrie usando Soft Penalties (β=+8). Beam Search con 5 hipótesis paralelas.</p>
+                    <span class="status-pill done">Logrado</span>
+                    <span class="timeline-date">2025</span>
+                    <h4>La idea</h4>
+                    <p>Nace MEGI: documentar la consulta sin quitarle tiempo al paciente, con todo dentro del consultorio.</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Fase 2: Trie Inteligente</h4>
-                    <p>Expansión fonética automatizada con Metaphone y modelos G2P neuronales. +400K términos con variantes generadas.</p>
+                    <span class="status-pill done">Logrado</span>
+                    <span class="timeline-date">ene–jun 2026</span>
+                    <h4>Motor de voz propio</h4>
+                    <p>Corpus médico propio en español mexicano y primeras versiones de MEGI Medical, con verificación y auditoría desde el inicio.</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Fase 3: La Voz Humana (TTS)</h4>
-                    <p>Kyutai TTS (Moshi 1.8B) con LoRA fine-tuned en voces hispanohablantes. Síntesis indistinguible de voz humana real.</p>
+                    <span class="status-pill done">Logrado</span>
+                    <span class="timeline-date">sep 2026</span>
+                    <h4>MEGI Medical v2.1 en producción</h4>
+                    <p>Nuestro motor de voz médico, entrenado con audio clínico auditado, funcionando en consulta.</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Fase 4: Agente Escribano</h4>
-                    <p>Detección de intención (dictado vs comando). Correcciones en tiempo real. Integración con Ollama para SOAP.</p>
+                    <span class="status-pill done">Logrado</span>
+                    <span class="timeline-date">ago–oct 2026</span>
+                    <h4>Plataforma clínica completa</h4>
+                    <p>Varios médicos, pre-consulta por motivo, «Falta preguntar», estudios y radiología, anestesia y respaldo verificado.</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Fase 5: Data Flywheel</h4>
-                    <p>Captura de correcciones, re-entrenamiento automático de LoRA nocturno y calibración dinámica del bias β.</p>
+                    <span class="status-pill wip">En curso</span>
+                    <span class="timeline-date">nov 2026</span>
+                    <h4>Identificadores por voz</h4>
+                    <p>CURP, NSS, RFC e INE dictados con aún más precisión.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="status-pill wip">En curso</span>
+                    <span class="timeline-date">nov 2026</span>
+                    <h4>Voz propia</h4>
+                    <p>MEGI hablará con el paciente con una voz natural en español.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="status-pill next">Siguiente</span>
+                    <span class="timeline-date">2027</span>
+                    <h4>Hospitales</h4>
+                    <p>Despliegue en hospitales con seguridad de grado hospitalario.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="status-pill next">Siguiente</span>
+                    <span class="timeline-date">2027</span>
+                    <h4>Colonoscopias</h4>
+                    <p>Un nuevo módulo de imagen: apoyo al endoscopista para detectar y documentar pólipos durante el estudio.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="status-pill next">Siguiente</span>
+                    <span class="timeline-date">2027</span>
+                    <h4>Gasometrías</h4>
+                    <p>Interpretación automática de gasometrías, ajustada a la altitud de las ciudades de México.</p>
+                </div>
+                <div class="timeline-item featured">
+                    <span class="status-pill next">Siguiente</span>
+                    <span class="timeline-date">2027</span>
+                    <h4>MEGI IA para el paciente</h4>
+                    <p>MEGI llega al paciente: su pre-consulta, sus indicaciones y sus estudios, en su celular y en lenguaje claro.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="status-pill vision">Visión</span>
+                    <span class="timeline-date">Largo plazo</span>
+                    <h4>Motores MEGI para otras industrias</h4>
+                    <p>Nuestros motores que escuchan, entienden y hablan con lenguaje especializado, llevados a cualquier industria que viva de consultas e interpretaciones: despachos legales, atención al cliente, veterinaria y más.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="status-pill vision">Visión</span>
+                    <span class="timeline-date">Largo plazo</span>
+                    <h4>Del español de México al mundo</h4>
+                    <p>Primero Latinoamérica y el mercado hispanohablante de EE. UU.; después, cualquier idioma y región. Lo difícil ya está construido: adaptar los motores a un nuevo idioma o acento es cuestión de días de entrenamiento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="equipo">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">NOSOTROS</span>
+                <h2 class="section-title">El equipo</h2>
+                <p class="section-description">Quienes construimos MEGI.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <img class="team-photo" src="equipo/david.jpg" alt="David Medina">
+                    <div class="team-info">
+                        <h4>David Medina</h4>
+                        <span class="team-role">CEO</span>
+                        <a class="team-link" href="https://www.linkedin.com/in/david-medina-castellanos-35a485272" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img class="team-photo" src="equipo/alberto.jpg" alt="Alberto Campos de la Torre">
+                    <div class="team-info">
+                        <h4>Alberto Campos de la Torre</h4>
+                        <span class="team-role">COO</span>
+                        <a class="team-link" href="https://www.linkedin.com/in/albertocamposdelatorre" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img class="team-photo" src="equipo/raul.jpg" alt="Raúl Jaime Garcia Espejo">
+                    <div class="team-info">
+                        <h4>Raúl Jaime Garcia Espejo</h4>
+                        <span class="team-role">CTO</span>
+                        <a class="team-link" href="https://www.linkedin.com/in/ra%C3%BAl-jaime-garcia-espejo" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img class="team-photo" src="equipo/julio.jpg" alt="Julio Cesar Castañeda Duran">
+                    <div class="team-info">
+                        <h4>Julio Cesar Castañeda Duran</h4>
+                        <span class="team-role">Investigación</span>
+                        <a class="team-link" href="https://www.linkedin.com/in/julio-casta%C3%B1eda-1792062a5" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3039,14 +3058,11 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo">MEGI AI - Medical Engine for Generative Intelligence</div>
-            <p class="footer-text">
-                Sistema de IA Clínica Local • Agente Escribano Médico<br>
-                Desarrollado para transformar la documentación médica
-            </p>
+            <p class="footer-text">Sistema de IA Clínica Local • Motor de voz médico y escriba clínico<br>Desarrollado para transformar la documentación médica</p>
         </div>
         <div class="footer-bottom">
-            <span>© 2025 MEGI AI. Soberanía de datos garantizada.</span>
-            <span>Hecho con 
+            <span>© 2026 MEGI AI. Soberanía de datos garantizada.</span>
+            <span>Hecho con
                 <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; color: #c94c4c;">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                 </svg>
@@ -3056,52 +3072,25 @@
     </footer>
 
     <script>
-        // Layer card interaction
+        const LAYERS = {"1": {"title": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" style=\"width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;\"><path d=\"M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z\"/><path d=\"M19 10v2a7 7 0 0 1-14 0v-2M12 19v3\"/></svg> Motor de voz", "description": "Nuestro motor de reconocimiento de voz médico, entrenado con audio clínico auditado en español mexicano. Corre dentro del consultorio, transcribe en vivo y confirma cada palabra antes de pasarla a la nota.", "tags": ["MEGI Medical v2.1", "Español mexicano", "Tiempo real", "100% local"]}, "2": {"title": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" style=\"width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/><path d=\"M9 12l2 2 4-4\"/></svg> Verificación", "description": "Normalización de cifras, dosis y unidades, reconocimiento de entidades clínicas, captura de identificadores con dígito verificador y búsqueda de evidencia. Todo queda registrado como <strong>evento auditable</strong>.", "tags": ["Normalizador", "Entidades clínicas", "Identificadores", "Auditoría"]}, "3": {"title": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" style=\"width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;\"><path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"/><polyline points=\"14 2 14 8 20 8\"/><line x1=\"16\" y1=\"13\" x2=\"8\" y2=\"13\"/><line x1=\"16\" y1=\"17\" x2=\"8\" y2=\"17\"/></svg> Escriba clínico", "description": "Genera la nota SOAP desde lo dicho en consulta, sugiere códigos CIE-10, arma la receta y la cruza contra contraindicaciones. Las guías clínicas se consultan al momento, con su cita.", "tags": ["SOAP", "CIE-10", "Receta", "Guías clínicas", "Contraindicaciones"]}, "4": {"title": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" style=\"width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;\"><path d=\"M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2\"/><path d=\"M7 12h10\"/></svg> Estudios y especialidades", "description": "Módulos especializados que trabajan junto al expediente: Typesafe clasifica cada estudio, el visor radiológico une RX, eco y RM de cráneo, MEGI Eco analiza mama y tiroides, y Anestesio acompaña al anestesiólogo.", "tags": ["Typesafe", "MEGI Eco", "Visor radiológico", "ECG", "Anestesio"]}};
+        const LAB = {"norm": {"inp": "<div class=\"lab-lines\">«paciente femenina de treinta y cuatro años, metformina quinientos miligramos cada doce horas, presión de ciento treinta sobre ochenta»</div>", "steps": ["<span class=\"dim\">› leyendo la forma hablada…</span>", "<span class=\"dim\">› números compuestos → cifras</span>", "<span class=\"dim\">› unidades y frecuencias → abreviaturas clínicas</span>"], "out": "<div class=\"lab-lines\">Paciente femenina de <span class=\"hl\">34 años</span>, metformina <span class=\"hl\">500 mg</span> <span class=\"hl\">c/12 h</span>, TA <span class=\"hl\">130/80</span>.<br><br><span class=\"dim\">texto original conservado · 4 cambios registrados</span></div>", "btn": "Normalizar dictado"}, "cov": {"inp": "<div class=\"lab-lines\"><span class=\"dim\">Motivo:</span> dolor torácico<br><br>«…me duele el pecho desde hace tres horas, como una opresión. Soy hipertenso y diabético. No me falta el aire…»</div>", "steps": ["<span class=\"dim\">› plantilla: dolor torácico (GPC)</span>", "<span class=\"dim\">› cruzando con lo confirmado en la consulta…</span>"], "out": "<div class=\"lab-lines\"><span class=\"bad\">● ALARMA</span> Descartar síndrome coronario: irradiación a brazo o mandíbula, diaforesis, náusea, relación con el esfuerzo<br><br><span class=\"bad\">● ALARMA</span> Disnea, síncope o palpitaciones; signos de TEP <span class=\"dim\">(1 de 2 pistas)</span><br><br><span class=\"warn\">○</span> Tomar TA en ambos brazos, FC, saturación y valorar ECG<br><br><span class=\"ok\">✓ Factores de riesgo cardiovascular</span> <span class=\"dim\">— hipertens, diabet</span></div>", "btn": "Revisar cobertura"}, "rx": {"inp": "<div class=\"lab-lines\">🩻 rx_torax.dcm<br><span class=\"dim\">DICOM · subido por QR desde el celular</span></div>", "steps": ["<span class=\"dim\">› Megi_tipo_estudio → radiografía de tórax · PA</span>", "<span class=\"dim\">› Megi Tórax: 20 hallazgos con umbral calibrado…</span>", "<span class=\"dim\">› generando mapa de localización</span>"], "out": "<div class=\"lab-lines\"><span class=\"dim\">Proyección:</span> PA<br><br><span class=\"bad\">● Presente</span> Cardiomegalia <span class=\"dim\">(91 %)</span><br><span class=\"warn\">○ Posible, no concluyente</span> Derrame pleural derecho <span class=\"dim\">(38 %)</span><br><span class=\"ok\">✓</span> Sin neumotórax, nódulo ni consolidación por encima de umbral<br><br><span class=\"dim\">Mapa de localización listo · pendiente de revisión médica</span></div>", "btn": "Analizar radiografía"}, "ecg": {"inp": "<div class=\"lab-lines\">📷 ecg_12_derivaciones.jpg<br><span class=\"dim\">foto del papel térmico · 3×4 + tira de ritmo</span><br><br><span class=\"dim\">Paciente: 67 años, masculino</span></div>", "steps": ["<span class=\"dim\">› digitalizando: cuadrícula y pulso de 1 mV</span>", "<span class=\"dim\">› midiendo sobre el latido mediano de 12 derivaciones…</span>", "<span class=\"dim\">› clasificador: 38 hallazgos calibrados</span>", "<span class=\"dim\">› cruce medición ↔ clasificador</span>"], "out": "<div class=\"lab-lines\">FC <span class=\"hl\">52 lpm</span> · PR <span class=\"hw\">236 ms</span> · QRS 98 ms · QTc 441 ms · Eje +45°<br><br><span class=\"bad\">● Presente</span> Bradicardia sinusal<br><span class=\"bad\">● Presente</span> Bloqueo AV de primer grado <span class=\"ok\">✓ PR 236 ms lo confirma</span><br><span class=\"ok\">✓</span> Sin criterios de elevación del ST<br><br><span class=\"dim\">Entrada por foto: confianza reducida en ST y QT</span></div>", "btn": "Leer electrocardiograma"}, "lab": {"inp": "<div class=\"lab-lines\">📄 resultados_laboratorio.pdf<br><span class=\"dim\">química sanguínea + HbA1c · 2 páginas</span></div>", "steps": ["<span class=\"dim\">› extrayendo analitos y rangos de referencia…</span>", "<span class=\"dim\">› buscando en GPC IMSS…</span>"], "out": "<div class=\"lab-lines\">9 analitos reconocidos<br><br><span class=\"warn\">↑ Glucosa 168 mg/dL</span> <span class=\"dim\">(ALTO, ref. 70–99 del laboratorio)</span><br><span class=\"warn\">↑ HbA1c 8.1 %</span> <span class=\"dim\">(ALTO, ref. &lt; 5.7)</span><br><span class=\"warn\">↑ Triglicéridos 212 mg/dL</span> <span class=\"dim\">(ALTO, ref. &lt; 150)</span><br><br><span class=\"dim\">GPC IMSS:</span> Diagnóstico y tratamiento farmacológico de la diabetes mellitus tipo 2 en el primer nivel de atención</div>", "btn": "Leer laboratorio"}, "contra": {"inp": "<div class=\"lab-lines\"><span class=\"dim\">Receta:</span> warfarina, ibuprofeno<br><span class=\"dim\">Condiciones:</span> embarazo<br><br><span class=\"dim\">(caso ficticio)</span></div>", "steps": ["<span class=\"dim\">› normalizando nombres de fármacos…</span>", "<span class=\"dim\">› consultando tabla de contraindicaciones…</span>"], "out": "<div class=\"lab-lines\"><span class=\"bad\">● ALTA</span> warfarina + embarazo<br><span class=\"dim\">&nbsp;&nbsp;contraindicada · ficha FDA, Contraindicaciones</span><br><br><span class=\"warn\">● MODERADA</span> warfarina + ibuprofeno<br><span class=\"dim\">&nbsp;&nbsp;riesgo de sangrado · ficha FDA, Interacciones</span></div>", "btn": "Verificar receta"}};
+        const DEMO = {"steps": [["MEGI Medical v2.1: transcribiendo...", "> Escuchando la consulta · cada frase confirmada queda como segmento citable [S1…S5]"], ["Normalizando...", "> «ochocientos cincuenta» → <span style=\"color:#90c695;\">850 mg</span> · «ciento cincuenta y ocho sobre noventa y cuatro» → <span style=\"color:#90c695;\">158/94</span>"], ["Extrayendo hechos clínicos...", "> síntomas presentes y <span style=\"color:#90c695;\">negados</span> · signos vitales · medicamentos con su rol"], ["Redactando nota SOAP...", "> cada línea cita el segmento de donde sale · receta cruzada con contraindicaciones"]], "final_t": "📝 TRANSCRIPCIÓN CONFIRMADA", "audit": "● Auditado", "text": "<span style=\"color:#7eb8da;\">[S1]</span> «Me duele el pecho desde hace tres horas, como una opresión.»<br><span style=\"color:#7eb8da;\">[S2]</span> «Soy hipertenso y diabético; tomo metformina de 850 cada 12 horas.»<br><span style=\"color:#7eb8da;\">[S3]</span> «No me falta el aire. En la mañana me tomé un ibuprofeno.»<br><span style=\"color:#7eb8da;\">[S4]</span> <span style=\"color:#d4a574;\">Médico:</span> «TA 158/94, FC 92, saturación 96 %.»<br><span style=\"color:#7eb8da;\">[S5]</span> <span style=\"color:#d4a574;\">Médico:</span> «Le doy aspirina de 100 y lo envío a urgencias con un electro.»", "soap_t": "📋 NOTA SOAP (con citas)", "soap": "<strong style=\"color:#7eb8da;\">S:</strong> Dolor torácico opresivo de 3 h de evolución <span style=\"color:#7eb8da;\">[S1]</span>. HAS y DM2 <span style=\"color:#7eb8da;\">[S2]</span>. Niega disnea <span style=\"color:#7eb8da;\">[S3]</span>.<br><strong style=\"color:#d4a574;\">O:</strong> TA 158/94 mmHg, FC 92 lpm, SpO₂ 96 % <span style=\"color:#7eb8da;\">[S4]</span>.<br><strong style=\"color:#90c695;\">A:</strong> Dolor torácico, probable síndrome coronario agudo. Diferenciales: disección aórtica, TEP.<br><strong style=\"color:#c9a4d4;\">P:</strong> AAS 100 mg VO. ECG y envío a urgencias <span style=\"color:#7eb8da;\">[S5]</span>.<br><br><span style=\"font-size:0.8rem;color:#8a8a8a;\">Medicamentos:</span> <span style=\"font-size:0.8rem;\">Metformina 850 mg c/12 h VO <em style=\"color:#8a8a8a;\">habitual</em> · Ibuprofeno <em style=\"color:#8a8a8a;\">automedicación</em> · AAS 100 mg VO <em style=\"color:#8a8a8a;\">indicado</em></span>", "adm_t": "Salida administrativa", "badges": [["#90c695", "144, 198, 149", "🏷️ CIE-10: <strong>R07.2 · I10 · E11.9</strong>"], ["#d4a574", "212, 165, 116", "⚠️ Ibuprofeno + AAS: <strong>interacción</strong> (ficha FDA)"], ["#e06c75", "224, 108, 117", "❓ Falta preguntar: <strong>irradiación, diaforesis</strong>"]], "disc": "Simulación ilustrativa con paciente ficticio. Todo lo generado requiere revisión y firma del médico."};
+        const UI = {"listening": "Escuchando...", "processing": "Procesando...", "again": "Simular de nuevo", "running": "Procesando..."};
+
         const layerCards = document.querySelectorAll('.layer-card');
         const archDetail = document.getElementById('arch-detail');
-
-        const layerData = {
-            1: {
-                title: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg> Servidor MCP de ASR',
-                description: 'El núcleo de percepción acústica. Aloja Whisper Large V3 con adaptadores LoRA. El <strong>MagnetTrieLogitsProcessor</strong> usa Soft Penalties (+β) para atraer hacia términos válidos sin bloquear. Beam Search (5 hipótesis) permite recuperación ante malas pronunciaciones. El Trie incluye variantes fonéticas generadas automáticamente via Metaphone/G2P.',
-                tags: ['Whisper V3', 'Soft Penalties', 'Beam Search', 'Metaphone', 'G2P Neural']
-            },
-            2: {
-                title: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M9.5 2A2.5 2.5 0 0 0 7 4.5v15A2.5 2.5 0 0 0 9.5 22h5a2.5 2.5 0 0 0 2.5-2.5v-15A2.5 2.5 0 0 0 14.5 2h-5Z"/><path d="M9 10h6M9 14h4"/></svg> Agente Escribano',
-                description: 'El cerebro del sistema. Analiza cada fragmento de audio para detectar si es <strong>dictado</strong> (contenido clínico) o <strong>comando</strong> (corrección, borrado, cambio). Utiliza clasificación de intención antes de procesar, permitiendo correcciones en tiempo real sin reiniciar la grabación.',
-                tags: ['Intent Classification', 'Command Parser', 'Real-time Correction', 'State Machine']
-            },
-            3: {
-                title: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg> Herramientas MCP Administrativas',
-                description: 'Suite de herramientas que automatizan la carga administrativa. Extracción automática de <code>códigos CIE-10</code> desde el texto clínico, generación de <code>recetas PDF</code> con firma digital, y sistema de <code>audit trail</code> inmutable que vincula audio original con texto generado para defensa legal.',
-                tags: ['CIE-10 Extractor', 'PDF Generator', 'Audit Trail', 'SQLite', 'Digital Signature']
-            },
-            4: {
-                title: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-right: 8px;"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg> TTS Voz Humana',
-                description: 'Síntesis de voz con <strong>Kyutai TTS (Moshi 1.8B)</strong> fine-tuned con LoRA en voces hispanohablantes. El modelo genera audio a 24kHz con prosodia natural, indistinguible de un humano real. Pipeline completo: <code>fromPodtoCast</code> para datasets, tokenización con Mimi Codec (32 codebooks), y entrenamiento LoRA (~10M params, 0.58%).',
-                tags: ['Kyutai Moshi', 'LoRA Fine-tuning', 'Mimi Codec', '24kHz Audio', 'fromPodtoCast']
-            }
-        };
-
         layerCards.forEach(card => {
             card.addEventListener('click', () => {
                 layerCards.forEach(c => c.classList.remove('active'));
                 card.classList.add('active');
-                
-                const layer = card.dataset.layer;
-                const data = layerData[layer];
-                
-                archDetail.innerHTML = `
-                    <h3>${data.title}</h3>
-                    <p>${data.description}</p>
-                    <div class="tech-tags">
-                        ${data.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
-                    </div>
-                `;
+                const data = LAYERS[card.dataset.layer];
+                archDetail.innerHTML = `<h3>${data.title}</h3><p>${data.description}</p>
+                    <div class="tech-tags">${data.tags.map(t => `<span class="tech-tag">${t}</span>`).join('')}</div>`;
             });
         });
 
-        // Transcription simulation
+        function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+
         async function simulateTranscription() {
             const btn = document.getElementById('recordBtn');
             const indicator = document.getElementById('processingIndicator');
@@ -3109,414 +3098,70 @@
             const output = document.getElementById('outputBox');
             const visualizer = document.getElementById('audioVisualizer');
 
-            // --- ETAPA 1: GRABACIÓN ---
             btn.classList.add('recording');
-            btn.innerHTML = '<span>●</span> Escuchando...';
+            btn.innerHTML = '<span>●</span> ' + UI.listening;
             visualizer.style.opacity = '1';
-            
-            await sleep(2500);
+            await sleep(2200);
 
-            // --- ETAPA 2: PROCESAMIENTO NEURO-SIMBÓLICO ---
             btn.classList.remove('recording');
-            btn.innerHTML = '<span>⏳</span> Procesando...';
+            btn.innerHTML = '<span>⏳</span> ' + UI.processing;
             btn.disabled = true;
             indicator.style.display = 'flex';
-            
-            // Paso 2.1: Whisper + Trie
-            processingText.textContent = 'Whisper V3: Decodificando audio...';
-            output.innerHTML = `<div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #8a8a8a;">
-                > Ingesta de audio (16kHz mono)...<br>
-                > <span style="color: #d4a574;">MagnetTrieLogitsProcessor</span> activo: Soft Penalties (β=+8.0)<br>
-                > <span style="color: #90c695;">Beam Search</span>: 5 hipótesis paralelas
-            </div>`;
-            await sleep(1200);
+            output.innerHTML = '';
+            for (const [label, html] of DEMO.steps) {
+                processingText.textContent = label;
+                output.innerHTML += `<div style="margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #8a8a8a;">${html}</div>`;
+                await sleep(1300);
+            }
 
-            // Paso 2.2: Detección de Intención (AGENTE ACTIVO)
-            processingText.textContent = 'Agente MCP: Analizando intención...';
-            output.innerHTML += `<div style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">
-                <span style="color: #666;">[Buffer Audio]: "...antecedentes de diabetes tipo 1... <strong class="command-highlight">comando: corrección, quise decir tipo 2</strong>"</span><br>
-                <span style="color: #90c695;">➜ INTENCIÓN DETECTADA: COMMAND (Correction)</span><br>
-                <span style="color: #90c695;">➜ ACCIÓN: replace_text("tipo 1", "tipo 2")</span>
-            </div>`;
-            await sleep(2000);
-
-            // Paso 2.3: Herramientas Administrativas
-            processingText.textContent = 'Ejecutando herramientas MCP...';
-            await sleep(1000);
-
-            // --- ETAPA 3: SALIDA FINAL ESTRUCTURADA ---
             indicator.style.display = 'none';
-            btn.innerHTML = '<span>▶</span> Simular Nuevo Caso';
+            btn.innerHTML = '<span>▶</span> ' + UI.again;
             btn.disabled = false;
-
+            const badges = DEMO.badges.map(([col, rgb, txt]) =>
+                `<span style="background: rgba(${rgb}, 0.1); color: ${col}; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(${rgb}, 0.2);">${txt}</span>`).join('');
             output.innerHTML = `
                 <div style="margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
-                    <span style="color: #d4a574; font-weight: 600;">📝 TRANSCRIPCIÓN FINAL (Soft Penalties + Normalización)</span>
-                    <span style="font-size: 0.7rem; background: #2d3b2d; padding: 2px 6px; border-radius: 4px; color: #90c695;">● Live Audit</span>
+                    <span style="color: #d4a574; font-weight: 600;">${DEMO.final_t}</span>
+                    <span style="font-size: 0.7rem; background: #2d3b2d; padding: 2px 6px; border-radius: 4px; color: #90c695;">${DEMO.audit}</span>
                 </div>
-                
-                <div style="margin-bottom: 1.5rem; font-size: 0.95rem;">
-                    "Paciente masculino de 58 años con antecedentes de <span class="highlight">diabetes mellitus tipo 2</span> e <span class="highlight">hipertensión arterial</span>. Refiere dolor precordial de 3 horas de evolución. Se prescribe <span class="highlight">Ácido acetilsalicílico</span> 100mg y <span class="highlight">Atorvastatina</span> 40mg."
-                </div>
-
+                <div style="margin-bottom: 1.5rem; font-size: 0.95rem;">${DEMO.text}</div>
                 <div style="margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <span style="color: #90c695; font-weight: 600;">📋 REPORTE SOAP + HERRAMIENTAS</span>
+                    <span style="color: #90c695; font-weight: 600;">${DEMO.soap_t}</span>
                 </div>
-                
-                <div style="line-height: 1.8; font-size: 0.9rem;">
-                    <strong style="color: #7eb8da;">S:</strong> Dolor precordial de 3h.<br>
-                    <strong style="color: #d4a574;">O:</strong> Paciente masculino, 58 años. Signos vitales estables.<br>
-                    <strong style="color: #90c695;">A:</strong> Síndrome coronario agudo probable. Riesgo CV alto.<br>
-                    <strong style="color: #c9a4d4;">P:</strong> AAS 100mg + Atorvastatina 40mg. Referencia urgente.
-                </div>
-
+                <div style="line-height: 1.8; font-size: 0.9rem;">${DEMO.soap}</div>
                 <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.1);">
-                    <div style="font-size: 0.75rem; color: #8a8a8a; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">Output Administrativo Automático (MCP Tools)</div>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <span style="background: rgba(144, 198, 149, 0.1); color: #90c695; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(144, 198, 149, 0.2); display: flex; align-items: center; gap: 5px;">
-                            🏷️ CIE-10: <strong>E11.9, I10, R07.2</strong>
-                        </span>
-                        <span style="background: rgba(212, 165, 116, 0.1); color: #d4a574; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(212, 165, 116, 0.2); display: flex; align-items: center; gap: 5px;">
-                            📄 PDF: <strong>receta_58392.pdf</strong>
-                        </span>
-                         <span style="background: rgba(126, 184, 218, 0.1); color: #7eb8da; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(126, 184, 218, 0.2); display: flex; align-items: center; gap: 5px;">
-                            💾 Log: <strong>Audit Hash #F7A9</strong>
-                        </span>
-                    </div>
+                    <div style="font-size: 0.75rem; color: #8a8a8a; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">${DEMO.adm_t}</div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">${badges}</div>
                 </div>
-            `;
+                <div class="demo-disclaimer">${DEMO.disc}</div>`;
         }
 
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        // Lab Tabs Functionality
         function switchLabTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.lab-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-            
-            // Update panels
-            document.querySelectorAll('.lab-panel').forEach(panel => {
-                panel.classList.remove('active');
-            });
-            document.getElementById(`panel-${tabName}`).classList.add('active');
+            document.querySelectorAll('.lab-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tabName));
+            document.querySelectorAll('.lab-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + tabName));
         }
 
-        // Micro-Demo 1: Trie "Imán" vs "Muro"
-        async function simulateTrieDemo() {
-            const btn = document.querySelector('#panel-trie .lab-btn');
-            const whisperContent = document.getElementById('trie-whisper-content');
-            const megiContent = document.getElementById('trie-megi-content');
-            
+        async function runLab(key) {
+            const d = LAB[key];
+            const btn = document.getElementById('lab-btn-' + key);
+            const inp = document.getElementById('lab-in-' + key);
+            const out = document.getElementById('lab-out-' + key);
             btn.disabled = true;
-            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Procesando audio...</span>';
-            
-            // Fase 1: Mostrar el audio entrante
-            whisperContent.innerHTML = '<span class="waiting-text">Analizando: "Metaformina"...</span>';
-            megiContent.innerHTML = '<span class="waiting-text">Analizando: "Metaformina"...</span>';
-            
-            await sleep(800);
-            
-            // Fase 2: Mostrar logits del modelo
-            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Calculando logits...</span>';
-            whisperContent.innerHTML = `
-                <div style="font-size: 0.75rem; line-height: 1.6;">
-                    <div style="color: #888; margin-bottom: 4px;">Logits originales:</div>
-                    <span style="color: #e06c75;">"Meta" = 15.0</span> (acústico ✓)<br>
-                    <span style="color: #888;">"Metf" = 10.0</span> (esperado)
-                </div>`;
-            megiContent.innerHTML = `
-                <div style="font-size: 0.75rem; line-height: 1.6;">
-                    <div style="color: #888; margin-bottom: 4px;">Logits + Soft Penalty (β=+8):</div>
-                    <span style="color: #888;">"Meta" = 15.0 + 0 = 15.0</span><br>
-                    <span style="color: #90c695;">"Metf" = 10.0 + 8.0 = <strong>18.0</strong></span> ✓
-                </div>`;
-            
-            await sleep(1500);
-            
-            // Fase 3: Mostrar resultado del Trie "Muro"
-            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Aplicando restricciones...</span>';
-            whisperContent.innerHTML = `
-                <div style="font-size: 0.8rem;">
-                    <div style="color: #e06c75; margin-bottom: 6px;">🧱 Restricción Dura aplicada:</div>
-                    <span style="text-decoration: line-through; color: #e06c75;">"Metaformina"</span>
-                    <div style="margin-top: 8px; padding: 6px; background: rgba(224,108,117,0.1); border-radius: 4px; font-size: 0.7rem;">
-                        ⚠️ ERROR: Token "Meta" bloqueado (-∞)<br>
-                        Sistema sin ruta válida → FALLO
-                    </div>
-                </div>`;
-            
-            await sleep(1200);
-            
-            // Fase 4: Mostrar resultado del Trie "Imán"
-            megiContent.innerHTML = `
-                <div style="font-size: 0.8rem;">
-                    <div style="color: #90c695; margin-bottom: 6px;">🧲 Beam Search (5 hipótesis):</div>
-                    <div style="font-size: 0.7rem; color: #888; margin-bottom: 6px;">
-                        H1: "Metaformina" → score: 15.0<br>
-                        <strong style="color: #90c695;">H2: "Metformina" → score: 18.0 ✓</strong>
-                    </div>
-                    <span class="success-text">"<strong>Metformina</strong> 850mg"</span>
-                    <div style="margin-top: 6px; font-size: 0.65rem; color: #4a9f5a;">
-                        ✓ Variante fonética reconocida y corregida
-                    </div>
-                </div>`;
-            
-            await sleep(500);
-            
-            btn.disabled = false;
-            btn.innerHTML = '<span class="btn-icon">↻</span><span>Probar Otra Pronunciación</span>';
-        }
-
-        // Micro-Demo 2: Command Detection
-        async function simulateCommandDemo() {
-            const btn = document.querySelector('#panel-commands .lab-btn');
-            const step1 = document.getElementById('cmd-step-1');
-            const step2 = document.getElementById('cmd-step-2');
-            const step3 = document.getElementById('cmd-step-3');
-            const step4 = document.getElementById('cmd-step-4');
-            const text1 = document.getElementById('cmd-text-1');
-            const result = document.getElementById('cmd-result');
-            
-            btn.disabled = true;
-            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Escuchando comando...</span>';
-            
-            // Reset all steps
-            step2.classList.add('hidden');
-            step3.classList.add('hidden');
-            step4.classList.add('hidden');
-            text1.innerHTML = 'Paciente alérgico a <span class="highlight-text">penicilina</span>...';
-            
-            await sleep(1000);
-            
-            // Show command detected
-            step2.classList.remove('hidden');
-            step2.classList.add('fade-in');
-            
-            await sleep(1500);
-            
-            // Show action
-            step3.classList.remove('hidden');
-            step3.classList.add('fade-in');
-            
-            // Animate deletion
-            text1.innerHTML = '<span class="deleted-text">Paciente alérgico a penicilina...</span>';
-            
-            await sleep(1500);
-            
-            // Show result
-            step4.classList.remove('hidden');
-            step4.classList.add('fade-in');
-            result.innerHTML = '<em>(Texto eliminado correctamente)</em>';
-            
-            btn.disabled = false;
-            btn.innerHTML = '<span class="btn-icon">↻</span><span>Simular Otro Comando</span>';
-        }
-
-        // Micro-Demo 3: MCP Tools
-        async function simulateMcpDemo() {
-            const btn = document.querySelector('#panel-mcp .lab-btn');
-            const outputArea = document.getElementById('mcp-output-area');
-            const processing = document.getElementById('mcp-processing');
-            const results = document.getElementById('mcp-results');
-            const badges = document.getElementById('mcp-badges');
-            
-            btn.disabled = true;
-            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Ejecutando herramientas...</span>';
-            
-            // Show output area with processing
-            outputArea.classList.remove('hidden');
-            processing.classList.remove('hidden');
-            results.classList.add('hidden');
-            badges.innerHTML = '';
-            
-            await sleep(1500);
-            
-            // Hide processing, show results
-            processing.classList.add('hidden');
-            results.classList.remove('hidden');
-            
-            // Add badges one by one
-            const badgesData = [
-                { type: 'cie10', icon: '🏷️', label: 'CIE-10:', value: 'E11.9, G63.2', delay: 0 },
-                { type: 'cie10', icon: '🏷️', label: 'CIE-10:', value: 'E11.65', delay: 200 },
-                { type: 'pdf', icon: '📄', label: 'PDF:', value: 'receta_48291.pdf', delay: 400 },
-                { type: 'audit', icon: '💾', label: 'Log:', value: 'Audit Hash #B3C7', delay: 600 }
-            ];
-            
-            badgesData.forEach((badge, index) => {
-                setTimeout(() => {
-                    const badgeEl = document.createElement('span');
-                    badgeEl.className = `mcp-badge ${badge.type}`;
-                    badgeEl.style.animationDelay = `${badge.delay}ms`;
-                    badgeEl.innerHTML = `${badge.icon} ${badge.label} <code>${badge.value}</code>`;
-                    badges.appendChild(badgeEl);
-                }, badge.delay);
-            });
-            
-            await sleep(1500);
-            
-            btn.disabled = false;
-            btn.innerHTML = '<span class="btn-icon">↻</span><span>Generar Nuevos Códigos</span>';
-        }
-
-        // Micro-Demo 4: Phonetic Expansion
-        async function simulatePhoneticDemo() {
-            const btn = document.querySelector('#panel-phonetic .lab-btn');
-            const variantsContainer = document.getElementById('phonetic-variants');
-            const originalEl = document.getElementById('phonetic-original');
-            
-            // Alternar entre diferentes términos
-            const terms = [
-                { original: 'Dacriocistitis', variants: [
-                    { method: 'Metaphone', hash: 'TKRSSTTS', variant: 'Dacriocisititis' },
-                    { method: 'Seseo', hash: 'z→s', variant: 'Dacriosistitis' },
-                    { method: 'Simplificación', hash: 'sc→s', variant: 'Dacriosititis' },
-                ]},
-                { original: 'Gemfibrozilo', variants: [
-                    { method: 'Metaphone', hash: 'JMFBRSL', variant: 'Yemfibrosilo' },
-                    { method: 'Yeísmo', hash: 'g→y', variant: 'Yemfibrozilo' },
-                    { method: 'Seseo', hash: 'z→s', variant: 'Gemfibrosilo' },
-                ]},
-                { original: 'Metformina', variants: [
-                    { method: 'Vocalización', hash: 'tf→taf', variant: 'Metaformina' },
-                    { method: 'Simplificación', hash: 'met→me', variant: 'Meformina' },
-                    { method: 'G2P Neural', hash: 'IPA', variant: 'Metforminna' },
-                ]}
-            ];
-            
-            // Obtener término aleatorio diferente al actual
-            const currentTerm = originalEl.textContent;
-            let newTermData;
-            do {
-                newTermData = terms[Math.floor(Math.random() * terms.length)];
-            } while (newTermData.original === currentTerm && terms.length > 1);
-            
-            btn.disabled = true;
-            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Generando variantes...</span>';
-            
-            originalEl.textContent = newTermData.original;
-            variantsContainer.innerHTML = '<div style="padding: 0.75rem 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;"><span style="color: rgba(245,243,238,0.5);">Ejecutando Metaphone + G2P...</span></div>';
-            
-            await sleep(800);
-            
-            // Mostrar variantes una por una
-            variantsContainer.innerHTML = '';
-            
-            for (let i = 0; i < newTermData.variants.length; i++) {
-                const v = newTermData.variants[i];
-                await sleep(400);
-                
-                const variantEl = document.createElement('div');
-                variantEl.style.cssText = 'padding: 0.75rem 1rem; background: rgba(155, 89, 182, 0.1); border-radius: 8px; border-left: 3px solid #9b59b6; opacity: 0; transform: translateX(-10px); transition: all 0.3s ease;';
-                variantEl.innerHTML = `
-                    <span style="font-size: 0.7rem; color: #9b59b6; display: block; margin-bottom: 0.25rem;">${v.method} → <code style="background: rgba(155,89,182,0.2); padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.65rem;">${v.hash}</code></span>
-                    <span style="color: var(--cream); font-size: 0.95rem;">"${v.variant}" <span style="color: #90c695; font-size: 0.7rem;">→ ${newTermData.original}</span></span>
-                `;
-                variantsContainer.appendChild(variantEl);
-                
-                // Trigger animation
-                setTimeout(() => {
-                    variantEl.style.opacity = '1';
-                    variantEl.style.transform = 'translateX(0)';
-                }, 50);
+            btn.innerHTML = '<span class="btn-icon">⏳</span><span>' + UI.running + '</span>';
+            inp.innerHTML = d.inp;
+            out.innerHTML = '<div class="lab-lines"></div>';
+            const box = out.firstChild;
+            for (const s of d.steps) {
+                await sleep(800);
+                box.innerHTML += s + '<br>';
             }
-            
-            await sleep(500);
-            
+            await sleep(900);
+            out.innerHTML = d.out;
             btn.disabled = false;
-            btn.innerHTML = '<span class="btn-icon">↻</span><span>Probar Otro Término</span>';
+            btn.innerHTML = '<span class="btn-icon">↻</span><span>' + d.btn + '</span>';
         }
 
-        // Micro-Demo: TTS La Voz Humana
-        async function simulateTTSDemo() {
-            const btn = document.querySelector('#panel-tts .lab-btn');
-            const genericContent = document.getElementById('tts-generic-content');
-            const megiContent = document.getElementById('tts-megi-content');
-            const inputText = document.getElementById('tts-input-text');
-            
-            const examples = [
-                {
-                    text: '"Tome una tableta de Metformina de 850 miligramos con el desayuno y otra con la cena."',
-                    generic: { quality: 'Robótico', issues: ['Entonación plana', 'Pausas artificiales', 'Pronunciación mecánica'] },
-                    megi: { quality: 'Natural', features: ['Prosodia humana', 'Énfasis natural', 'Ritmo conversacional'] }
-                },
-                {
-                    text: '"Su próxima cita es el lunes a las 10 de la mañana. Recuerde traer sus estudios de laboratorio."',
-                    generic: { quality: 'Robótico', issues: ['Sin emoción', 'Ritmo monótono', 'Acentos incorrectos'] },
-                    megi: { quality: 'Natural', features: ['Tono amable', 'Pausas naturales', 'Claridad profesional'] }
-                },
-                {
-                    text: '"El diagnóstico indica hipertensión arterial controlada. Continuaremos con el mismo tratamiento."',
-                    generic: { quality: 'Robótico', issues: ['Términos médicos forzados', 'Sin inflexión', 'Voz sintética obvia'] },
-                    megi: { quality: 'Natural', features: ['Términos fluidos', 'Voz empática', 'Indistinguible de humano'] }
-                }
-            ];
-            
-            const example = examples[Math.floor(Math.random() * examples.length)];
-            
-            btn.disabled = true;
-            btn.innerHTML = '<span class="btn-icon">⏳</span><span>Sintetizando...</span>';
-            
-            inputText.textContent = example.text;
-            genericContent.innerHTML = '<span class="waiting-text">Procesando con TTS genérico...</span>';
-            megiContent.innerHTML = '<span class="waiting-text">Procesando con Kyutai + LoRA...</span>';
-            
-            await sleep(800);
-            
-            // Mostrar resultado TTS genérico
-            genericContent.innerHTML = `
-                <div style="margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.7rem; color: #c94c4c; display: block; margin-bottom: 0.5rem;">🔊 Calidad: ${example.generic.quality}</span>
-                    <div style="display: flex; gap: 0.3rem; flex-wrap: wrap;">
-                        ${example.generic.issues.map(issue => `<span style="font-size: 0.65rem; background: rgba(224, 108, 117, 0.2); color: #c94c4c; padding: 0.2rem 0.5rem; border-radius: 4px;">❌ ${issue}</span>`).join('')}
-                    </div>
-                </div>
-                <div style="font-size: 0.7rem; color: rgba(245,243,238,0.4); margin-top: 0.5rem;">
-                    <code style="background: rgba(255,255,255,0.1); padding: 0.1rem 0.3rem; border-radius: 3px;">pyttsx3 / gTTS</code>
-                </div>
-            `;
-            
-            await sleep(1000);
-            
-            // Mostrar resultado MEGI TTS
-            megiContent.innerHTML = `
-                <div style="margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.7rem; color: #4a9f5a; display: block; margin-bottom: 0.5rem;">🔊 Calidad: ${example.megi.quality}</span>
-                    <div style="display: flex; gap: 0.3rem; flex-wrap: wrap;">
-                        ${example.megi.features.map(f => `<span style="font-size: 0.65rem; background: rgba(144, 198, 149, 0.2); color: #4a9f5a; padding: 0.2rem 0.5rem; border-radius: 4px;">✓ ${f}</span>`).join('')}
-                    </div>
-                </div>
-                <div style="font-size: 0.7rem; color: rgba(245,243,238,0.4); margin-top: 0.5rem;">
-                    <code style="background: rgba(255,255,255,0.1); padding: 0.1rem 0.3rem; border-radius: 3px;">Kyutai Moshi 1.8B + LoRA (rank=128)</code>
-                </div>
-            `;
-            
-            await sleep(500);
-            
-            btn.disabled = false;
-            btn.innerHTML = '<span class="btn-icon">↻</span><span>Probar Otro Ejemplo</span>';
-        }
-
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Modal de Actualizaciones
-        function openUpdateModal() {
+function openUpdateModal() {
             const modal = document.getElementById('updateModal');
             document.body.style.overflow = 'hidden';
             // Forzar reflow para que la transición funcione
