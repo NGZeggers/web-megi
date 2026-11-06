@@ -403,7 +403,7 @@
             max-width: 1800px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 2rem;
         }
 
@@ -434,6 +434,12 @@
             margin-top: 0.75rem;
             letter-spacing: 0.02em;
         }
+
+        .stat-partner { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.9rem; }
+        .stat-partner .stat-label { margin-top:0; font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; }
+        .stat-partner img { height:72px; width:auto; display:block; }
+        @media (max-width: 1024px) { .stat-partner { grid-column: 1 / -1; } }
+        @media (max-width: 768px) { .stat-partner { grid-column: auto; } .stat-partner img { height:60px; } }
 
         /* Features Section */
         .features-section {
@@ -2403,6 +2409,10 @@
             <div class="stat-item">
                 <div class="stat-value">8+</div>
                 <div class="stat-label">Integrated clinical modules</div>
+            </div>
+            <div class="stat-item stat-partner">
+                <div class="stat-label">Inception</div>
+                <img src="nvidia-logo.png" alt="NVIDIA">
             </div>
         </div>
     </section>
